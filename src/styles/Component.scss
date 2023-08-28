@@ -1,0 +1,25 @@
+.nav {
+    &--bar {
+      background-color: rgb(248, 92, 1);
+      padding: 10px;
+    }
+  
+    &--list {
+      list-style: none;
+      display: flex;
+    }
+  
+    &--list li {
+      margin-right: 20px;
+    }
+  
+    &--list li a {
+      color: white;
+      text-decoration: none;
+    }
+  
+    &--list li a:hover {
+      text-decoration: underline;
+    }
+  }
+  
