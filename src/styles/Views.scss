@@ -1,0 +1,35 @@
+.home {
+  &--header-text {
+    color: white;
+    padding: 20px 0 20px 0;
+    font-style: oblique;
+    font-weight: 900;
+    font-family: "Roboto Mono", monospace;
+    color: rgb(248, 92, 1);
+    text-shadow: 2px 2px rgb(247, 185, 114);
+  }
+  &--header-title {
+    font-size: 60px;
+  }
+  &--header-message {
+    font-size: 20px;
+  }
+  &--header-image {
+    background-image: url("../../public/header.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+  }
+  &--footer {
+    position: fixed;
+    background-color: gray;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px;
+    text-align: center;
+    font-size: smaller;
+  }
+}
