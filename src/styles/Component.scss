@@ -1,25 +1,140 @@
 .nav {
-    &--bar {
-      background-color: rgb(248, 92, 1);
-      padding: 10px;
-    }
-  
-    &--list {
-      list-style: none;
-      display: flex;
-    }
-  
-    &--list li {
-      margin-right: 20px;
-    }
-  
-    &--list li a {
-      color: white;
-      text-decoration: none;
-    }
-  
-    &--list li a:hover {
-      text-decoration: underline;
-    }
+  &--bar {
+    background-color: rgb(248, 92, 1);
+    padding: 10px;
   }
-  
+
+  &--list {
+    list-style: none;
+    display: flex;
+  }
+
+  &--list li {
+    margin-right: 20px;
+  }
+
+  &--list li a {
+    color: white;
+    text-decoration: none;
+  }
+
+  &--list li a:hover {
+    text-decoration: underline;
+  }
+}
+
+.data-display {
+  &--card-grid {
+    flex-shrink: 0;
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    margin-left: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  &--img-height {
+    height: 150px;
+  }
+  &--color {
+    color: rgb(248, 92, 1);
+  }
+  &--image-enlarged {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+  }
+}
+
+.page-content {
+  &--page-padding {
+    padding: 20px;
+  }
+}
+
+.page-title {
+  &--title {
+    font-family: "Suwannaphum", serif;
+    font-style: italic;
+    font-size: 24px;
+    background-color: #ff6600;
+  }
+}
+
+.scroll-box {
+  &--scroll-box {
+    width: auto;
+    height: 380px;
+    overflow: auto;
+    border: 1px solid #ff6600;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &--card-arr {
+    display: flex;
+    overflow-x: scroll;
+    width: 100%;
+  }
+  &--padding-top {
+    padding-top: 20px;
+  }
+}
+
+.fade-in {
+  animation: fadeIn ease 10s;
+  -webkit-animation: fadeIn ease 10s;
+  -moz-animation: fadeIn ease 10s;
+  -o-animation: fadeIn ease 10s;
+  -ms-animation: fadeIn ease 10s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
