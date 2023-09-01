@@ -1,4 +1,4 @@
-export interface dramaInterface {
+export interface trendingInterface {
   adult: boolean;
   backdrop_path: string;
   id: number;
@@ -108,5 +108,5 @@ export interface DramaDetailsInteface{
 }
 
 export interface DetailsProps {
-  selectedData: dramaInterface;
+  selectedData: trendingInterface;
 }

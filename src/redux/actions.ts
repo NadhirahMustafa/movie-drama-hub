@@ -1,8 +1,8 @@
-import { dramaInterface } from "../interface/interface";
+import { trendingInterface } from "../interface/interface";
 import { GetSelectedDataAction } from "../interface/redux.interface";
 
 export const setSelectedData = (
-  selectedData: dramaInterface
+  selectedData: trendingInterface
 ): GetSelectedDataAction => ({
   type: "SET_SELECTED_DATA",
   payload: selectedData,

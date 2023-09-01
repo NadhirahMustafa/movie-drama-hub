@@ -8,17 +8,17 @@ const DataDisplay: React.FC<DataDisplayProps> = ({
   src,
   title,
   key,
-  dataDrama,
-  dataMovie,
-  onClickDataDrama,
-  onClickDataMovie,
+  dataTrending: dataTrending,
+  dataPopular,
+  onClickDataTrending,
+  onClickDataPopular,
 }) => {
   const handleClick = () => {
     let functOption = null;
-    if (dataDrama) {
-      functOption = onClickDataDrama ? onClickDataDrama(dataDrama) : null;
-    } else if (dataMovie) {
-      functOption = onClickDataMovie ? onClickDataMovie(dataMovie) : null;
+    if (dataTrending) {
+      functOption = onClickDataTrending ? onClickDataTrending(dataTrending) : null;
+    } else if (dataPopular) {
+      functOption = onClickDataPopular ? onClickDataPopular(dataPopular) : null;
     }
     return functOption;
   };

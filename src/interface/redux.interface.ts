@@ -1,11 +1,11 @@
-import { dramaInterface } from "./interface";
+import { trendingInterface } from "./interface";
 
 export interface DataState {
-  selectedData: dramaInterface;
+  selectedData: trendingInterface;
 }
 export interface GetSelectedDataAction {
   type: "SET_SELECTED_DATA";
-  payload: dramaInterface;
+  payload: trendingInterface;
 }
 
 export type selectedDataAction = GetSelectedDataAction;
