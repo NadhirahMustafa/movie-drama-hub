@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@mui/material";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { getTrending } from "../services/api.service";
-import { movieInterface } from "../interface/interface";
+import { dramaInterface } from "../interface/interface";
+import { setSelectedData } from "../redux/actions";
 import { common, trending } from "../constant/message";
+import { router, mediaType } from "../constant/constants";
 import DataDisplay from "../components/DataDisplay";
 import PageTitle from "../components/PageTitle";
 import ScrollBox from "../components/ScrollBox";
 import PageContent from "../components/PageContent";
 
 const Trending: React.FC = () => {
-  const [trendingList, setTrendingList] = useState<movieInterface[]>([]);
+  const [trendingList, setTrendingList] = useState<dramaInterface[]>([]);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const fetchTrendingList = async () => {
     let res = await getTrending();
@@ -24,16 +30,28 @@ const Trending: React.FC = () => {
     fetchTrendingList();
   }, []);
 
+  const onClickCell = (c: dramaInterface) => {
+    dispatch(setSelectedData(c));
+    if (c.media_type === mediaType.DRAMA){
+      navigate(router.DRAMA_DETAILS);
+
+    } else {
+      navigate(router.MOVIE_DETAILS);
+    }
+    
+  };
+
   return (
     <PageContent>
       <PageTitle title={trending.title} />
       <ScrollBox>
-        {trendingList.map((row: movieInterface, index: number) => (
+        {trendingList.map((row: dramaInterface, index: number) => (
           <DataDisplay
             src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
-            alt="image not found"
             title={row.title || row.original_name}
             key={index}
+            dataDrama={row}
+            onClickDataDrama={onClickCell}
           />
         ))}
       </ScrollBox>

@@ -1,4 +1,4 @@
-import { movieInterface, MovieDetailsInterface } from "../interface/interface";
+import { dramaInterface, movieInterface, MovieDetailsInterface, DramaDetailsInteface } from "../interface/interface";
 
 const fetchHeader = {
   method: "GET",
@@ -10,7 +10,7 @@ const fetchHeader = {
 };
 
 export const getTrending = () => {
-  return new Promise<movieInterface[]>((resolve, reject) => {
+  return new Promise<dramaInterface[]>((resolve, reject) => {
     fetch(
       "https://api.themoviedb.org/3/trending/all/day?language=en-US",
       fetchHeader
@@ -73,6 +73,18 @@ export const getMovieDetails = (id: number) => {
   return new Promise<MovieDetailsInterface>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getDramaDetails = (id: number) => {
+  return new Promise<DramaDetailsInteface>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/tv/${id}?language=en-US`,
       fetchHeader
     )
       .then((res) => res.json())

@@ -1,5 +1,7 @@
 export const common = {
     alertMessage: 'Something Wrong on The Server, Please Try Again',
+    imgNotFound: 'image not found',
+    back: 'Back'
 };
 
 export const home = {
@@ -16,4 +18,21 @@ export const popular = {
     title: `All time favourite`,
     movie: `Movies`,
     drama: `Drama`
+}
+
+export const commonDetails = {
+    tagline: 'Tagline: ',
+    overview: 'Overview: ',
+    genre: 'Genre: ',
+    language: 'Language: ',
+}
+
+export const movieDetailsConst = {
+    release_date: 'Release date: ',
+    runtime: 'Runtime: ',
+}
+
+export const dramaDetailsConst = {
+    first_air_date: 'First air date: ',
+    episode_run_time: 'Episode runtime: ',
 }
