@@ -1,8 +1,20 @@
+import { trendingInterface, popularMoviesInterface, popularDramaInterface } from "./interface";
+
 export interface DataDisplayProps {
   src: string;
-  alt: string;
   title: string;
-  key: number;
+  dataTrending?: trendingInterface;
+  dataPopularMovie?: popularMoviesInterface;
+  dataPopularDrama?: popularDramaInterface;
+  onClickTrending?: (c:trendingInterface) => void;
+  onClickPopularMovie?: (c:popularMoviesInterface) => void;
+  onClickPopularDrama?: (c:popularDramaInterface) => void;
+}
+
+export interface DataListProps {
+  src: string;
+  title: string;
+  subtitle: string;
 }
 
 export interface ComponentProps {

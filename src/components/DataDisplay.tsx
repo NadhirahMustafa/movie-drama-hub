@@ -1,14 +1,37 @@
 import React from "react";
 import { Grid, Button } from "@mui/material";
 import { DataDisplayProps } from "../interface/component.interface";
+import { common } from "../constant/message";
 import "../styles/Component.scss";
 
-const DataDisplay: React.FC<DataDisplayProps> = ({ src, alt, title, key }) => {
+const DataDisplay: React.FC<DataDisplayProps> = ({
+  src,
+  title,
+  
+  dataTrending,
+  dataPopularMovie,
+  dataPopularDrama,
+  onClickTrending,
+  onClickPopularMovie,
+  onClickPopularDrama,
+}) => {
+  const handleClick = () => {
+    let functOption = null;
+    if (dataTrending) {
+      functOption = onClickTrending ? onClickTrending(dataTrending) : null;
+    } else if (dataPopularMovie) {
+      functOption = onClickPopularMovie ? onClickPopularMovie(dataPopularMovie) : null;
+    } else if (dataPopularDrama) {
+      functOption = onClickPopularDrama ? onClickPopularDrama(dataPopularDrama) : null
+    }
+    return functOption;
+  };
+
   return (
-    <Grid key={key} className="data-display--card-grid">
+    <Grid className="data-display--card-grid">
       <Grid>
         <Button
-          key={key}
+          onClick={handleClick}
           onMouseEnter={(e) =>
             e.currentTarget.classList.add("data-display--image-enlarged")
           }
@@ -21,7 +44,7 @@ const DataDisplay: React.FC<DataDisplayProps> = ({ src, alt, title, key }) => {
               <img
                 className="fade-in"
                 src={src}
-                alt={alt}
+                alt={common.imgNotFound}
                 width={100}
                 loading="lazy"
               />

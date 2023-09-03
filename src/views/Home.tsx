@@ -4,6 +4,7 @@ import { home } from "../constant/message";
 import Trending from "./Trending";
 import "../styles/Views.scss";
 import Popular from "./Popular";
+import OnAir from "./OnAir";
 
 const Home: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const Home: React.FC = () => {
           {home.header_message}
         </Grid>
       </Grid>
-
+<OnAir />
       <Trending />
       <Popular />
 
