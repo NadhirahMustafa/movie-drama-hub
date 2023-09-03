@@ -1,4 +1,4 @@
-import { trendingInterface, movieInterface, MovieDetailsInterface, DramaDetailsInteface } from "../interface/interface";
+import { trendingInterface, movieInterface, MovieDetailsInterface, DramaDetailsInteface, popularDramaInterface, popularMoviesInterface } from "../interface/interface";
 
 const fetchHeader = {
   method: "GET",
@@ -22,7 +22,7 @@ export const getTrending = () => {
 };
 
 export const getPopularMovies = () => {
-  return new Promise<movieInterface[]>((resolve, reject) => {
+  return new Promise<popularMoviesInterface[]>((resolve, reject) => {
     fetch(
       "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
       fetchHeader
@@ -34,7 +34,7 @@ export const getPopularMovies = () => {
 };
 
 export const getPopularDrama = () => {
-  return new Promise<movieInterface[]>((resolve, reject) => {
+  return new Promise<popularDramaInterface[]>((resolve, reject) => {
     fetch(
       "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
       fetchHeader

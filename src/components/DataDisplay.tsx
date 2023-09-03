@@ -7,24 +7,28 @@ import "../styles/Component.scss";
 const DataDisplay: React.FC<DataDisplayProps> = ({
   src,
   title,
-  key,
-  dataTrending: dataTrending,
-  dataPopular,
-  onClickDataTrending,
-  onClickDataPopular,
+  
+  dataTrending,
+  dataPopularMovie,
+  dataPopularDrama,
+  onClickTrending,
+  onClickPopularMovie,
+  onClickPopularDrama,
 }) => {
   const handleClick = () => {
     let functOption = null;
     if (dataTrending) {
-      functOption = onClickDataTrending ? onClickDataTrending(dataTrending) : null;
-    } else if (dataPopular) {
-      functOption = onClickDataPopular ? onClickDataPopular(dataPopular) : null;
+      functOption = onClickTrending ? onClickTrending(dataTrending) : null;
+    } else if (dataPopularMovie) {
+      functOption = onClickPopularMovie ? onClickPopularMovie(dataPopularMovie) : null;
+    } else if (dataPopularDrama) {
+      functOption = onClickPopularDrama ? onClickPopularDrama(dataPopularDrama) : null
     }
     return functOption;
   };
 
   return (
-    <Grid key={key} className="data-display--card-grid">
+    <Grid className="data-display--card-grid">
       <Grid>
         <Button
           onClick={handleClick}

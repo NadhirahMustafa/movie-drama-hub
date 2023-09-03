@@ -51,7 +51,7 @@ const Trending: React.FC = () => {
             title={row.title || row.original_name}
             key={index}
             dataTrending={row}
-            onClickDataTrending={onClickCell}
+            onClickTrending={onClickCell}
           />
         ))}
       </ScrollBox>

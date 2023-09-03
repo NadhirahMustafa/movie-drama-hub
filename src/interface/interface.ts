@@ -17,6 +17,39 @@ export interface trendingInterface {
   vote_count: number;
 }
 
+export interface popularMoviesInterface {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: [];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count:number;
+}
+
+export interface popularDramaInterface {
+  backdrop_path: string;  
+  first_air_date: string;
+  genre_ids: [];
+  id: number;  
+  name: string;
+  origin_country: [];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  vote_average: number;
+  vote_count:number;
+}
+
 export interface movieInterface {
   adult: boolean;
   backdrop_path: string;
@@ -109,4 +142,8 @@ export interface DramaDetailsInteface{
 
 export interface DetailsProps {
   selectedData: trendingInterface;
+}
+
+export interface PopularMoviesProps {
+  popularMovieList: popularMoviesInterface[]
 }

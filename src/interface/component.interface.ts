@@ -1,13 +1,14 @@
-import { movieInterface, trendingInterface } from "./interface";
+import { trendingInterface, popularMoviesInterface, popularDramaInterface } from "./interface";
 
 export interface DataDisplayProps {
   src: string;
   title: string;
-  key: number;
   dataTrending?: trendingInterface;
-  dataPopular?: movieInterface;
-  onClickDataTrending?: (c:trendingInterface) => void;
-  onClickDataPopular?: (c:movieInterface) => void;
+  dataPopularMovie?: popularMoviesInterface;
+  dataPopularDrama?: popularDramaInterface;
+  onClickTrending?: (c:trendingInterface) => void;
+  onClickPopularMovie?: (c:popularMoviesInterface) => void;
+  onClickPopularDrama?: (c:popularDramaInterface) => void;
 }
 
 export interface ComponentProps {

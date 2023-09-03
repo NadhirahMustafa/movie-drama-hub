@@ -1,28 +1,38 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Grid, Button } from "@mui/material";
 import { getPopularMovies, getPopularDrama } from "../services/api.service";
-import { movieInterface } from "../interface/interface";
+import {
+  popularMoviesInterface,
+  popularDramaInterface,
+} from "../interface/interface";
+import { setSelectedDramaData, setSelectedMovieData } from "../redux/actions";
 import { common, popular } from "../constant/message";
-import { showTypeConstant } from "../constant/constants";
+import { router, showTypeConstant } from "../constant/constants";
 import DataDisplay from "../components/DataDisplay";
 import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";
 import PageContent from "../components/PageContent";
 
 const Popular: React.FC = () => {
-  const [popularMovieList, setPopularMovieList] = useState<movieInterface[]>(
-    []
-  );
-  const [popularDramaList, setPopularDramaList] = useState<movieInterface[]>(
-    []
-  );
-  const [list, setList] = useState<movieInterface[]>([]);
+  const [popularMovieList, setPopularMovieList] = useState<
+    popularMoviesInterface[]
+  >([]);
+  const [popularDramaList, setPopularDramaList] = useState<
+    popularDramaInterface[]
+  >([]);
+  const [list1, setList1] = useState<popularMoviesInterface[]>([]);
+  const [list2, setList2] = useState<popularDramaInterface[]>([]);
   const [showType, setShowType] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const fetchPopularMovies = async () => {
     let res = await getPopularMovies();
     if (res) {
-      setList(res);
+      setList1(res);
       setPopularMovieList(res);
       setShowType(showTypeConstant.MOVIE);
     } else {
@@ -48,13 +58,25 @@ const Popular: React.FC = () => {
   }, []);
 
   const handleMovieList = () => {
-    setList(popularMovieList);
+    setList1(popularMovieList);
     setShowType(showTypeConstant.MOVIE);
   };
 
   const handleDramaList = () => {
-    setList(popularDramaList);
+    setList2(popularDramaList);
     setShowType(showTypeConstant.DRAMA);
+  };
+
+  const onClickCellMovie = (c: popularMoviesInterface) => {
+    console.log("selected popular: ", c);
+    dispatch(setSelectedMovieData(c));
+    navigate(router.MOVIE_DETAILS);
+  };
+
+  const onClickCellDrama = (c: popularDramaInterface) => {
+    console.log("selected popular: ", c);
+    dispatch(setSelectedDramaData(c));
+    navigate(router.DRAMA_DETAILS);
   };
 
   const renderShowType = (
@@ -90,18 +112,27 @@ const Popular: React.FC = () => {
 
   return (
     <PageContent>
-      <PageTitle title={popular.title}>
-        {renderShowType}
-      </PageTitle>
+      <PageTitle title={popular.title}>{renderShowType}</PageTitle>
       <ScrollBox>
-        {list.map((row: movieInterface, index: number) => (
-          <DataDisplay
-            src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
-            alt="image not found"
-            title={row.title || row.original_name}
-            key={index}
-          />
-        ))}
+        {showType === showTypeConstant.MOVIE
+          ? list1.map((row: popularMoviesInterface, index: number) => (
+              <DataDisplay
+                src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
+                title={row.title}
+                key={index}
+                dataPopularMovie={row}
+                onClickPopularMovie={() => onClickCellMovie(row)}
+              />
+            ))
+          : list2.map((row: popularDramaInterface, index: number) => (
+              <DataDisplay
+                src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
+                title={row.original_name}
+                key={index}
+                dataPopularDrama={row}
+                onClickPopularDrama={() => onClickCellDrama(row)}
+              />
+            ))}
       </ScrollBox>
     </PageContent>
   );
