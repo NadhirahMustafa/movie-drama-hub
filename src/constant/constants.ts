@@ -12,3 +12,10 @@ export const mediaType = {
     MOVIE: 'movie',
     DRAMA: 'tv'
 }
+
+export const crew = {
+    DIRECTOR: 'Director',
+    WRITER: 'Writer',
+    EXEC_PRODUCER: 'Executive Producer',
+    PRODUCER: 'Producer'
+}

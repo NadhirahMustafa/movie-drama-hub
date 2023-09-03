@@ -1,4 +1,7 @@
 .common {
+  &--padding{
+    padding: 20px;
+  }
   &--padding-top {
     padding-top: 20px;
   }
@@ -75,4 +78,31 @@
 ::-webkit-scrollbar-thumb {
   background-color: #ff9900;
   border-radius: 50px;
+}
+
+.details{
+  &--display-flex{
+    display: flex;
+    justify-content: center;
+  }
+  &--justify {
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    z-index: 99;
+  }
+  &--padding-top {
+    padding-top: 20px;
+  }
+  &--emphasize {
+    font-size: 24px;
+    font-weight: bolder;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    color: rgb(68, 67, 67);
+    padding-bottom: 20px;
+  }
+  &--absolute{
+    position: absolute;
+  }
 }

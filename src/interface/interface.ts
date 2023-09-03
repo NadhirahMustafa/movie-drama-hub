@@ -31,14 +31,14 @@ export interface popularMoviesInterface {
   title: string;
   video: boolean;
   vote_average: number;
-  vote_count:number;
+  vote_count: number;
 }
 
 export interface popularDramaInterface {
-  backdrop_path: string;  
+  backdrop_path: string;
   first_air_date: string;
   genre_ids: [];
-  id: number;  
+  id: number;
   name: string;
   origin_country: [];
   original_language: string;
@@ -47,7 +47,7 @@ export interface popularDramaInterface {
   popularity: number;
   poster_path: string;
   vote_average: number;
-  vote_count:number;
+  vote_count: number;
 }
 
 export interface movieInterface {
@@ -112,7 +112,23 @@ export interface MovieDetailsInterface {
   vote_count: number;
 }
 
-export interface DramaDetailsInteface{
+export interface NextEpisodeInterface {
+  id: number;
+  name: string;
+  overview: string;
+  vote_average: number;
+  vote_count: number;
+  air_date: string;
+  episode_number: number;
+  episode_type: string;
+  production_code: string;
+  runtime: string;
+  season_number: number;
+  show_id: number;
+  still_path: string;
+}
+
+export interface DramaDetailsInteface {
   adult: boolean;
   backdrop_path: string;
   created_by: [];
@@ -122,7 +138,7 @@ export interface DramaDetailsInteface{
   last_air_date: string;
   last_episode_to_air: {};
   name: string;
-  next_episode_to_air: {};
+  next_episode_to_air: NextEpisodeInterface;
   networks: [];
   original_language: string;
   original_name: string;
@@ -145,5 +161,60 @@ export interface DetailsProps {
 }
 
 export interface PopularMoviesProps {
-  popularMovieList: popularMoviesInterface[]
+  popularMovieList: popularMoviesInterface[];
+}
+
+export interface MovieCastDetailsInterface {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+}
+
+export interface CrewDetailsInterface {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  credit_id: string;
+  department: string;
+  job: string;
+}
+
+export interface MovieCreditDetailsInterface {
+  id: number;
+  cast: MovieCastDetailsInterface[];
+  crew: CrewDetailsInterface[];
+}
+
+export interface DramaCastDetailsInterface {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  character: string;
+  credit_id: string;
+  order: number;
+}
+
+export interface DramaCreditDetailsInterface {
+  id: number;
+  cast: DramaCastDetailsInterface[];
+  crew: CrewDetailsInterface[];
 }
