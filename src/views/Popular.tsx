@@ -68,13 +68,11 @@ const Popular: React.FC = () => {
   };
 
   const onClickCellMovie = (c: popularMoviesInterface) => {
-    console.log("selected popular: ", c);
     dispatch(setSelectedMovieData(c));
     navigate(router.MOVIE_DETAILS);
   };
 
   const onClickCellDrama = (c: popularDramaInterface) => {
-    console.log("selected popular: ", c);
     dispatch(setSelectedDramaData(c));
     navigate(router.DRAMA_DETAILS);
   };

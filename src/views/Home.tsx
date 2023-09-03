@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { home } from "../constant/message";
 import Trending from "./Trending";
 import "../styles/Views.scss";
-import PopularPage from "./Popular";
+import Popular from "./Popular";
 
 const Home: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
       </Grid>
 
       <Trending />
-      <PopularPage />
+      <Popular />
 
       <Grid className="common--padding-top">
         <Grid className="home--footer">{home.footer}</Grid>
