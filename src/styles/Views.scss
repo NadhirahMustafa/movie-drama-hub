@@ -41,7 +41,7 @@
   }
   &--footer {
     position: fixed;
-    background-color: gray;
+    background-color: rgb(248, 92, 1);
     bottom: 0;
     left: 0;
     right: 0;
@@ -68,6 +68,13 @@
 .popular{
   &--button {
     color: antiquewhite;
+  }
+}
+
+.now-playing {
+  &--card-arr {
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 

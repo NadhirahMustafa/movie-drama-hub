@@ -1,4 +1,4 @@
-import { trendingInterface, popularMoviesInterface, popularDramaInterface } from "./interface";
+import { trendingInterface, popularMoviesInterface, popularDramaInterface, movieInterface } from "./interface";
 
 export interface DataDisplayProps {
   src: string;
@@ -24,4 +24,14 @@ export interface ComponentProps {
 export interface PageTitleProps {
   children?: React.ReactNode;
   title: string;
+}
+
+export interface ButtonDataProps {
+  viewType: string;
+  src: string;
+  title: string;
+  dataMovie?: movieInterface;
+  dataDrama?: popularDramaInterface;
+  onClickMovie?: (c: movieInterface) => void;
+  onClickDrama?: (c: popularDramaInterface) => void;
 }

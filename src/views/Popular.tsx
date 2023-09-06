@@ -1,42 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Grid, Button } from "@mui/material";
 import { getPopularMovies, getPopularDrama } from "../services/api.service";
 import {
   popularMoviesInterface,
   popularDramaInterface,
 } from "../interface/interface";
-import { setSelectedDramaData, setSelectedMovieData } from "../redux/actions";
-import { common, popular } from "../constant/message";
-import { router, showTypeConstant } from "../constant/constants";
+import { setSelectedDramaData, setSelectedMovieData } from "../actions/DataActions";
 import DataDisplay from "../components/DataDisplay";
 import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";
 import PageContent from "../components/PageContent";
+import { RouterConst, ShowTypeConst } from "../constant/constants";
+import { CommonTxt, PopularTxt } from "../constant/text";
 
 const Popular: React.FC = () => {
-  const [popularMovieList, setPopularMovieList] = useState<
-    popularMoviesInterface[]
-  >([]);
-  const [popularDramaList, setPopularDramaList] = useState<
-    popularDramaInterface[]
-  >([]);
-  const [list1, setList1] = useState<popularMoviesInterface[]>([]);
-  const [list2, setList2] = useState<popularDramaInterface[]>([]);
-  const [showType, setShowType] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [popularMovieList, setPopularMovieList] = useState<popularMoviesInterface[]>([]);
+  const [popularDramaList, setPopularDramaList] = useState<popularDramaInterface[]>([]);
+  const [movieList, setMovieList] = useState<popularMoviesInterface[]>([]);
+  const [dramaList, setDramaList] = useState<popularDramaInterface[]>([]);
+  const [showType, setShowType] = useState("");
+
   const fetchPopularMovies = async () => {
     let res = await getPopularMovies();
     if (res) {
-      setList1(res);
+      setMovieList(res);
       setPopularMovieList(res);
-      setShowType(showTypeConstant.MOVIE);
+      setShowType(ShowTypeConst.MOVIE);
     } else {
-      alert(common.alertMessage);
+      alert(CommonTxt.alertMessage);
     }
   };
 
@@ -49,7 +46,7 @@ const Popular: React.FC = () => {
     if (res) {
       setPopularDramaList(res);
     } else {
-      alert(common.alertMessage);
+      alert(CommonTxt.alertMessage);
     }
   };
 
@@ -58,23 +55,23 @@ const Popular: React.FC = () => {
   }, []);
 
   const handleMovieList = () => {
-    setList1(popularMovieList);
-    setShowType(showTypeConstant.MOVIE);
+    setMovieList(popularMovieList);
+    setShowType(ShowTypeConst.MOVIE);
   };
 
   const handleDramaList = () => {
-    setList2(popularDramaList);
-    setShowType(showTypeConstant.DRAMA);
+    setDramaList(popularDramaList);
+    setShowType(ShowTypeConst.DRAMA);
   };
 
   const onClickCellMovie = (c: popularMoviesInterface) => {
     dispatch(setSelectedMovieData(c));
-    navigate(router.MOVIE_DETAILS);
+    navigate(RouterConst.MOVIE_DETAILS);
   };
 
   const onClickCellDrama = (c: popularDramaInterface) => {
     dispatch(setSelectedDramaData(c));
-    navigate(router.DRAMA_DETAILS);
+    navigate(RouterConst.DRAMA_DETAILS);
   };
 
   const renderShowType = (
@@ -83,12 +80,12 @@ const Popular: React.FC = () => {
         <Button onClick={handleMovieList}>
           <p
             className={`popular--button ${
-              showType === showTypeConstant.MOVIE
+              showType === ShowTypeConst.MOVIE
                 ? "common--button-active "
                 : ""
             }`}
           >
-            {popular.movie}
+            {PopularTxt.movie}
           </p>
         </Button>
       </Grid>
@@ -96,12 +93,12 @@ const Popular: React.FC = () => {
         <Button onClick={handleDramaList}>
           <p
             className={`popular--button ${
-              showType === showTypeConstant.DRAMA
+              showType === ShowTypeConst.DRAMA
                 ? "common--button-active "
                 : ""
             }`}
           >
-            {popular.drama}
+            {PopularTxt.drama}
           </p>
         </Button>
       </Grid>
@@ -110,10 +107,10 @@ const Popular: React.FC = () => {
 
   return (
     <PageContent>
-      <PageTitle title={popular.title}>{renderShowType}</PageTitle>
+      <PageTitle title={PopularTxt.title}>{renderShowType}</PageTitle>
       <ScrollBox>
-        {showType === showTypeConstant.MOVIE
-          ? list1.map((row: popularMoviesInterface, index: number) => (
+        {showType === ShowTypeConst.MOVIE
+          ? movieList.map((row: popularMoviesInterface, index: number) => (
               <DataDisplay
                 src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
                 title={row.title}
@@ -122,7 +119,7 @@ const Popular: React.FC = () => {
                 onClickPopularMovie={() => onClickCellMovie(row)}
               />
             ))
-          : list2.map((row: popularDramaInterface, index: number) => (
+          : dramaList.map((row: popularDramaInterface, index: number) => (
               <DataDisplay
                 src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
                 title={row.original_name}

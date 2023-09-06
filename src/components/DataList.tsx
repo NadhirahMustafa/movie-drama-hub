@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import { DataListProps } from "../interface/component.interface";
-import { common } from "../constant/message";
+import { CommonTxt } from "../constant/text";
 import "../styles/Component.scss";
 
 const DataList: React.FC<DataListProps> = ({ src, title, subtitle }) => {
@@ -21,14 +21,14 @@ const DataList: React.FC<DataListProps> = ({ src, title, subtitle }) => {
               <img
                 className="fade-in"
                 src={src}
-                alt={common.imgNotFound}
+                alt={CommonTxt.imgNotFound}
                 width={100}
                 loading="lazy"
               />
             </Grid>
             <Grid>
-              <p className="data-display--color"><b>{title}</b></p>
-              <p className="data-display--color">{subtitle}</p>
+              <Grid className="data-display--color"><b>{title}</b></Grid>
+              <Grid className="data-display--color">{subtitle}</Grid>
             </Grid>
           </Grid>
         </Grid>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Grid } from "@mui/material";
-import { getMovieDetails, getMovieCreditDetails } from "../services/api.service";
+import {
+  getMovieDetails,
+  getMovieCreditDetails,
+} from "../services/api.service";
 import {
   DetailsProps,
   genresInterface,
@@ -12,54 +15,27 @@ import {
   MovieCastDetailsInterface,
 } from "../interface/interface";
 import { RootState } from "../reducers/rootReducer";
-import { common, commonDetails, movieDetailsConst } from "../constant/message";
-import { crew } from "../constant/constants";
 import BackButton from "../components/BackButton";
-import "../styles/Views.scss";
 import PageTitle from "../components/PageTitle";
 import ScrollBox from "../components/ScrollBox";
 import DataList from "../components/DataList";
+import { CrewConst } from "../constant/constants";
+import { MovieDetailsInit, MovieCreditInit } from "../constant/initialize";
+import { CommonTxt, CommonDetailsTxt, MovieDetailsTxt } from "../constant/text";
+import "../styles/Views.scss";
 
 const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
-  const [details, setDetails] = useState<MovieDetailsInterface>({
-    adult: false,
-    backdrop_path: "",
-    belongs_to_collection: {},
-    budget: 0,
-    genres: [],
-    homepage: "",
-    id: 0,
-    imdb_id: "",
-    original_language: "",
-    original_title: "",
-    overview: "",
-    popularity: 0,
-    poster_path: "",
-    production_companies: [],
-    production_countries: [],
-    release_date: "",
-    revenue: 0,
-    runtime: 0,
-    spoken_languages: [],
-    status: "",
-    tagline: "",
-    title: "",
-    video: false,
-    vote_average: 0,
-    vote_count: 0,
-  });
-  const [credit, setCredit] = useState<MovieCreditDetailsInterface>({
-    id: 0,
-    cast: [],
-    crew: [],
-  });
+  const [details, setDetails] =
+    useState<MovieDetailsInterface>(MovieDetailsInit);
+  const [credit, setCredit] =
+    useState<MovieCreditDetailsInterface>(MovieCreditInit);
 
   const fetchMovieDetails = async () => {
     let res = await getMovieDetails(selectedData.id);
     if (res) {
       setDetails(res);
     } else {
-      alert(common.alertMessage);
+      alert(CommonTxt.alertMessage);
     }
   };
 
@@ -72,7 +48,7 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     if (res) {
       setCredit(res);
     } else {
-      alert(common.alertMessage);
+      alert(CommonTxt.alertMessage);
     }
   };
 
@@ -93,6 +69,139 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     opacity: 0.3,
   };
 
+  const renderLeftColumn = (
+    <>
+      <Grid>
+        <b>{MovieDetailsTxt.release_date}</b>
+        <Grid>{details.release_date}</Grid>
+      </Grid>
+
+      <Grid className="details--padding-top">
+        <b>{CommonDetailsTxt.genre}</b>
+        <Grid>
+          {details.genres?.map((x: genresInterface, index: number) =>
+            index === details.genres.length - 1 ? `${x.name}` : `${x.name}, `
+          )}
+        </Grid>
+      </Grid>
+
+      <Grid className="details--padding-top">
+        <b>{CommonDetailsTxt.director}</b>
+        <Grid>
+          {credit.crew
+            .filter((x: CrewDetailsInterface) => x.job === CrewConst.DIRECTOR)
+            ?.map((y: CrewDetailsInterface, index: number) => (
+              <Grid>{y.name}</Grid>
+            ))}
+        </Grid>
+      </Grid>
+
+      {credit.crew.find(
+        (x: CrewDetailsInterface) => x.job === CrewConst.WRITER
+      ) && (
+        <Grid className="details--padding-top">
+          <b>{CommonDetailsTxt.writer}</b>
+          <Grid>
+            {credit.crew
+              .filter((x: CrewDetailsInterface) => x.job === CrewConst.WRITER)
+              ?.map((y: CrewDetailsInterface, index: number) => (
+                <Grid>{y.name}</Grid>
+              ))}
+          </Grid>
+        </Grid>
+      )}
+    </>
+  );
+
+  const renderRightColumn = (
+    <>
+      <Grid>
+        <b>{MovieDetailsTxt.runtime}</b>
+        <Grid>{details.runtime}</Grid>
+      </Grid>
+
+      <Grid className="details--padding-top">
+        <b>{CommonDetailsTxt.language}</b>
+        <Grid>
+          {details.spoken_languages?.map(
+            (x: languageInterface, index: number) =>
+              index === details.spoken_languages.length - 1
+                ? `${x.english_name}`
+                : `${x.english_name}, `
+          )}
+        </Grid>
+
+        <Grid className="details--padding-top">
+          <b>{CommonDetailsTxt.exec_producer}</b>
+          <Grid>
+            {credit.crew
+              .filter(
+                (x: CrewDetailsInterface) => x.job === CrewConst.EXEC_PRODUCER
+              )
+              ?.map((y: CrewDetailsInterface, index: number) => (
+                <Grid>{y.name}</Grid>
+              ))}
+          </Grid>
+        </Grid>
+
+        <Grid className="details--padding-top">
+          <b>{CommonDetailsTxt.producer}</b>
+          <Grid>
+            {credit.crew
+              .filter((x: CrewDetailsInterface) => x.job === CrewConst.PRODUCER)
+              ?.map((y: CrewDetailsInterface, index: number) => (
+                <Grid>{y.name}</Grid>
+              ))}
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
+  );
+
+  const renderDetails = (
+    <>
+      <Grid className="details--justify details--emphasize details--padding-top">
+        <b>{details.title}</b>
+      </Grid>
+      <Grid className="details--justify">
+        <i>{details.tagline}</i>
+      </Grid>
+      <Grid className="details--padding-top">
+        <Grid>
+          <b>{CommonDetailsTxt.overview}</b>
+          <Grid>{details.overview}</Grid>
+        </Grid>
+
+        <Grid container className="details--padding-top">
+          <Grid item xs={6}>
+            {renderLeftColumn}
+          </Grid>
+
+          <Grid item xs={6}>
+            {renderRightColumn}
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
+  );
+  const renderCast = (
+    <Grid className="common--padding">
+      <PageTitle title={CommonDetailsTxt.cast}></PageTitle>
+      <ScrollBox>
+        {credit.cast
+          ?.slice(0, 10)
+          .map((row: MovieCastDetailsInterface, index: number) => (
+            <DataList
+              src={`https://image.tmdb.org/t/p/original${row.profile_path}`}
+              title={row.name}
+              subtitle={row.character}
+              key={index}
+            />
+          ))}
+      </ScrollBox>
+    </Grid>
+  );
+
   return (
     <Grid>
       <Grid className="common--padding">
@@ -102,127 +211,15 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
             <img
               src={`https://image.tmdb.org/t/p/original${details.poster_path}`}
               width={550}
-              alt={common.imgNotFound}
+              alt={CommonTxt.imgNotFound}
             />
           </Grid>
+
           <Grid item xs={6}>
-            <Grid className="details--justify details--emphasize details--padding-top">
-              <b>{details.title}</b>
-            </Grid>
-            <Grid className="details--justify">
-              <i>{details.tagline}</i>
-            </Grid>
-            <Grid className="details--padding-top">
-              <Grid>
-                <b>{commonDetails.overview}</b>
-                <Grid>{details.overview}</Grid>
-              </Grid>
-              <Grid container className="details--padding-top">
-                <Grid item xs={6}>
-                  <Grid>
-                    <b>{movieDetailsConst.release_date}</b>
-                    <Grid>{details.release_date}</Grid>
-                  </Grid>
-                  <Grid className="details--padding-top">
-                    <b>{commonDetails.genre}</b>
-                    <Grid>
-                      {details.genres?.map(
-                        (x: genresInterface, index: number) =>
-                          index === details.genres.length - 1
-                            ? `${x.name}`
-                            : `${x.name}, `
-                      )}
-                    </Grid>
-                  </Grid>
-                  <Grid className="details--padding-top">
-                    <b>{commonDetails.director}</b>
-                    <Grid>
-                    {credit.crew
-                          .filter(
-                            (x: CrewDetailsInterface) =>
-                              x.job === crew.DIRECTOR
-                          )
-                          ?.map((y: CrewDetailsInterface, index: number) => (
-                            <Grid>{y.name}</Grid>
-                          ))}
-                    </Grid>
-                  </Grid>
-                  <Grid className="details--padding-top">
-                    <b>{commonDetails.writer}</b>
-                    <Grid>
-                    {credit.crew
-                          .filter(
-                            (x: CrewDetailsInterface) =>
-                              x.job === crew.WRITER
-                          )
-                          ?.map((y: CrewDetailsInterface, index: number) => (
-                            <Grid>{y.name}</Grid>
-                          ))}
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item xs={6}>
-                  <Grid>
-                    <b>{movieDetailsConst.runtime}</b>
-                    <Grid>{details.runtime}</Grid>
-                  </Grid>
-                  <Grid className="details--padding-top">
-                    <b>{commonDetails.language}</b>
-                    <Grid>
-                      {details.spoken_languages?.map(
-                        (x: languageInterface, index: number) =>
-                          index === details.spoken_languages.length - 1
-                            ? `${x.english_name}`
-                            : `${x.english_name}, `
-                      )}
-                    </Grid>
-                    <Grid className="details--padding-top">
-                      <b>{commonDetails.exec_producer}</b>
-                      <Grid>
-                        {credit.crew
-                          .filter(
-                            (x: CrewDetailsInterface) =>
-                              x.job === crew.EXEC_PRODUCER
-                          )
-                          ?.map((y: CrewDetailsInterface, index: number) => (
-                            <Grid>{y.name}</Grid>
-                          ))}
-                      </Grid>
-                    </Grid>
-                    <Grid className="details--padding-top">
-                      <b>{commonDetails.producer}</b>
-                      <Grid>
-                        {credit.crew
-                          .filter(
-                            (x: CrewDetailsInterface) =>
-                              x.job === crew.PRODUCER
-                          )
-                          ?.map((y: CrewDetailsInterface, index: number) => (
-                            <Grid>{y.name}</Grid>
-                          ))}
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
+            {renderDetails}
           </Grid>
         </Grid>
-        <Grid className="common--padding">
-          <PageTitle title={commonDetails.cast}></PageTitle>
-          <ScrollBox>
-            {credit.cast
-              ?.slice(0, 10)
-              .map((row: MovieCastDetailsInterface, index: number) => (
-                <DataList
-                  src={`https://image.tmdb.org/t/p/original${row.profile_path}`}
-                  title={row.name}
-                  subtitle={row.character}
-                  key={index}
-                />
-              ))}
-          </ScrollBox>
-        </Grid>
+        {renderCast}
       </Grid>
       <BackButton />
     </Grid>
