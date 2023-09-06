@@ -77,7 +77,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
       </Grid>
 
       {details.next_episode_to_air && (
-        <Grid className="details--padding-top">
+        <Grid className="common--padding-top">
           <b>{DramaDetailsTxt.next_episode}</b>
           <Grid>
             {details.next_episode_to_air.name} (
@@ -89,7 +89,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
       )}
 
       {details.genres.length > 0 && (
-        <Grid className="details--padding-top">
+        <Grid className="common--padding-top">
           <b>{CommonDetailsTxt.genre}</b>
           <Grid>
             {details.genres?.map((x: genresInterface, index: number) =>
@@ -102,7 +102,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
       {credit.crew.find(
         (x: CrewDetailsInterface) => x.job === CrewConst.DIRECTOR
       ) && (
-        <Grid className="details--padding-top">
+        <Grid className="common--padding-top">
           <b>{CommonDetailsTxt.director}</b>
           <Grid>
             {credit.crew
@@ -117,7 +117,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
       {credit.crew.find(
         (x: CrewDetailsInterface) => x.job === CrewConst.WRITER
       ) && (
-        <Grid className="details--padding-top">
+        <Grid className="common--padding-top">
           <b>{CommonDetailsTxt.writer}</b>
           <Grid>
             {credit.crew
@@ -129,7 +129,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
         </Grid>
       )}
 
-      <Grid className="details--padding-top">
+      <Grid className="common--padding-top">
         <b>{DramaDetailsTxt.status}</b>
         <Grid>{details.status}</Grid>
       </Grid>
@@ -144,13 +144,13 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
       </Grid>
 
       {details.episode_run_time.length > 0 && (
-        <Grid className="details--padding-top">
+        <Grid className="common--padding-top">
           <b>{DramaDetailsTxt.episode_run_time}</b>
           <Grid>{details.episode_run_time}</Grid>
         </Grid>
       )}
 
-      <Grid className="details--padding-top">
+      <Grid className="common--padding-top">
         <b>{CommonDetailsTxt.language}</b>
         <Grid>
           {details.spoken_languages?.map(
@@ -164,7 +164,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
         {credit.crew.find(
           (x: CrewDetailsInterface) => x.job === CrewConst.EXEC_PRODUCER
         ) && (
-          <Grid className="details--padding-top">
+          <Grid className="common--padding-top">
             <b>{CommonDetailsTxt.exec_producer}</b>
             <Grid>
               {credit.crew
@@ -181,7 +181,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
         {credit.crew.find(
           (x: CrewDetailsInterface) => x.job === CrewConst.PRODUCER
         ) && (
-          <Grid className="details--padding-top">
+          <Grid className="common--padding-top">
             <b>{CommonDetailsTxt.producer}</b>
             <Grid>
               {credit.crew
@@ -195,7 +195,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
           </Grid>
         )}
 
-        <Grid className="details--padding-top">
+        <Grid className="common--padding-top">
           <b>{DramaDetailsTxt.type}</b>
           <Grid>{details.type}</Grid>
         </Grid>
@@ -205,19 +205,19 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
 
   const renderDetails = (
     <>
-      <Grid className="details--justify details--emphasize details--padding-top">
+      <Grid className="details--justify details--emphasize common--padding-top">
         <b>{details.original_name}</b>
       </Grid>
       <Grid className="details--justify">
         <i>{details.tagline}</i>
       </Grid>
-      <Grid className="details--padding-top">
+      <Grid className="common--padding-top">
         <Grid>
           <b>{CommonDetailsTxt.overview}</b>
           <Grid>{details.overview}</Grid>
         </Grid>
 
-        <Grid container className="details--padding-top">
+        <Grid container className="common--padding-top">
           <Grid item xs={6}>
             {renderLeftColumn}
           </Grid>
@@ -263,7 +263,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={6} className="common--padding">
             {renderDetails}
           </Grid>
         </Grid>

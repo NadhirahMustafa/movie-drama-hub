@@ -4,6 +4,11 @@ export const CommonTxt = {
     back: 'Back'
 };
 
+export const NavTxt = {
+    home: 'Home',
+    now_playing: 'Now Playing'
+};
+
 export const HomeTxt = {
     title: 'Welcome!',
     header_message: 'Tons of movies and drama are listed here. Explore now',

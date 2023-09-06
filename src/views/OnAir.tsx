@@ -10,6 +10,7 @@ import PageTitle from "../components/PageTitle";
 import PageContent from "../components/PageContent";
 import { RouterConst } from "../constant/constants";
 import { CommonTxt, OnAirTxt } from "../constant/text";
+import "../styles/Views.scss";
 
 const OnAir: React.FC = () => {
   

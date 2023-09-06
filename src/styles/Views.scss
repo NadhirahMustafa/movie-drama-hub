@@ -15,7 +15,13 @@
 }
 
 .home {
-  &--header-text {
+  &--header {
+    background-image: url("../../public/header.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    align-items: center;
+    justify-content: center;    
     color: white;
     padding: 20px 0 20px 0;
     font-style: oblique;
@@ -30,14 +36,6 @@
   }
   &--header-message {
     font-size: 20px;
-  }
-  &--header-image {
-    background-image: url("../../public/header.jpeg");
-    background-size: cover;
-    background-position: center;
-    height: 200px;
-    align-items: center;
-    justify-content: center;
   }
   &--footer {
     position: fixed;
@@ -87,7 +85,10 @@
   border-radius: 50px;
 }
 
-.details{
+.details {
+  &--absolute{
+    position: absolute;
+  }
   &--display-flex{
     display: flex;
     justify-content: center;
@@ -98,9 +99,6 @@
     display: flex;
     z-index: 99;
   }
-  &--padding-top {
-    padding-top: 20px;
-  }
   &--emphasize {
     font-size: 24px;
     font-weight: bolder;
@@ -108,8 +106,5 @@
       sans-serif;
     color: rgb(68, 67, 67);
     padding-bottom: 20px;
-  }
-  &--absolute{
-    position: absolute;
   }
 }

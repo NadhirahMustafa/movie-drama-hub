@@ -10,6 +10,7 @@ import ScrollBox from "../components/ScrollBox";
 import PageContent from "../components/PageContent";
 import { RouterConst, MediaTypeConst } from "../constant/constants";
 import { CommonTxt, TrendingTxt } from "../constant/text";
+import "../styles/Views.scss";
 
 const Trending: React.FC = () => {
 

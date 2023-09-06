@@ -7,21 +7,28 @@ import {
   popularMoviesInterface,
   popularDramaInterface,
 } from "../interface/interface";
-import { setSelectedDramaData, setSelectedMovieData } from "../actions/DataActions";
+import {
+  setSelectedDramaData,
+  setSelectedMovieData,
+} from "../actions/DataActions";
 import DataDisplay from "../components/DataDisplay";
 import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";
 import PageContent from "../components/PageContent";
 import { RouterConst, ShowTypeConst } from "../constant/constants";
 import { CommonTxt, PopularTxt } from "../constant/text";
+import "../styles/Views.scss";
 
 const Popular: React.FC = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [popularMovieList, setPopularMovieList] = useState<popularMoviesInterface[]>([]);
-  const [popularDramaList, setPopularDramaList] = useState<popularDramaInterface[]>([]);
+  const [popularMovieList, setPopularMovieList] = useState<
+    popularMoviesInterface[]
+  >([]);
+  const [popularDramaList, setPopularDramaList] = useState<
+    popularDramaInterface[]
+  >([]);
   const [movieList, setMovieList] = useState<popularMoviesInterface[]>([]);
   const [dramaList, setDramaList] = useState<popularDramaInterface[]>([]);
   const [showType, setShowType] = useState("");
@@ -80,9 +87,7 @@ const Popular: React.FC = () => {
         <Button onClick={handleMovieList}>
           <p
             className={`popular--button ${
-              showType === ShowTypeConst.MOVIE
-                ? "common--button-active "
-                : ""
+              showType === ShowTypeConst.MOVIE && "common--button-active "
             }`}
           >
             {PopularTxt.movie}
@@ -93,9 +98,7 @@ const Popular: React.FC = () => {
         <Button onClick={handleDramaList}>
           <p
             className={`popular--button ${
-              showType === ShowTypeConst.DRAMA
-                ? "common--button-active "
-                : ""
+              showType === ShowTypeConst.DRAMA && "common--button-active "
             }`}
           >
             {PopularTxt.drama}

@@ -1,3 +1,32 @@
+.commonComponent { 
+  &--image-enlarged {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+  }
+  &--img-height {
+    height: 150px;
+  }
+  &--fade-in {
+    animation: fadeIn ease 10s;
+    -webkit-animation: fadeIn ease 10s;
+    -moz-animation: fadeIn ease 10s;
+    -o-animation: fadeIn ease 10s;
+    -ms-animation: fadeIn ease 10s;
+  }
+  &--color {
+    color: rgb(248, 92, 1);
+  }
+  &--card-grid {
+    flex-shrink: 0;
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    margin-left: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
 .nav {
   &--bar {
     background-color: rgb(248, 92, 1);
@@ -22,44 +51,26 @@
 
   &--list li a:hover {
     text-decoration: underline;
+    font-weight: 900;
   }
-}
-
-.data-display {
-  &--card-grid {
-    flex-shrink: 0;
-    width: 150px;
-    height: 200px;
-    border-radius: 10px;
-    margin-left: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-  &--img-height {
-    height: 150px;
-  }
-  &--color {
-    color: rgb(248, 92, 1);
-  }
-  &--image-enlarged {
-    transform: scale(1.2);
-    transition: transform 0.3s ease;
+  &--list li a:active {
+    font-weight: 900;
+    color: rgb(0, 0, 0);
   }
 }
 
 .button-data {
-  &--card-list {
-    width: 200px;
-  }
-  &--card-grid {
-    width: 100%;
-  }
   &--card-layout {
     height: 100%;
     font-size: 20px;
     text-align: center;
     padding-bottom: 30px;
+  }
+  &--card-list {
+    width: 200px;
+  }
+  &--card-grid {
+    width: 100%;
   }
 }
 
@@ -92,9 +103,7 @@
     display: flex;
     overflow-x: scroll;
     width: 100%;
-    text-align: center;
-  }
-  &--padding-top {
+    text-align: center;    
     padding-top: 20px;
   }
 }
@@ -106,14 +115,6 @@
   &--active {
     font-weight: 900;
   }
-}
-
-.fade-in {
-  animation: fadeIn ease 10s;
-  -webkit-animation: fadeIn ease 10s;
-  -moz-animation: fadeIn ease 10s;
-  -o-animation: fadeIn ease 10s;
-  -ms-animation: fadeIn ease 10s;
 }
 
 @keyframes fadeIn {

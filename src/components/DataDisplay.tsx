@@ -28,21 +28,21 @@ const DataDisplay: React.FC<DataDisplayProps> = ({
   };
 
   return (
-    <Grid className="data-display--card-grid">
+    <Grid className="commonComponent--card-grid">
       <Grid>
         <Button
           onClick={handleClick}
           onMouseEnter={(e) =>
-            e.currentTarget.classList.add("data-display--image-enlarged")
+            e.currentTarget.classList.add("commonComponent--image-enlarged")
           }
           onMouseLeave={(e) =>
-            e.currentTarget.classList.remove("data-display--image-enlarged")
+            e.currentTarget.classList.remove("commonComponent--image-enlarged")
           }
         >
           <Grid>
-            <Grid className="data-display--img-height">
+            <Grid className="commonComponent--img-height">
               <img
-                className="fade-in"
+                className="commonComponent--fade-in"
                 src={src}
                 alt={CommonTxt.imgNotFound}
                 width={100}
@@ -50,7 +50,7 @@ const DataDisplay: React.FC<DataDisplayProps> = ({
               />
             </Grid>
             <Grid>
-              <Grid className="data-display--color">{title}</Grid>
+              <Grid className="commonComponent--color">{title}</Grid>
             </Grid>
           </Grid>
         </Button>

@@ -9,11 +9,11 @@ import "../styles/Views.scss";
 const Home: React.FC = () => {
   return (
     <>
-      <Grid className="home--header-image">
-        <Grid className="home--header-text home--header-title">
+      <Grid className="home--header">
+        <Grid className="home--header-title">
           {HomeTxt.title}
         </Grid>
-        <Grid className="home--header-text home--header-message">
+        <Grid className="home--header-message">
           {HomeTxt.header_message}
         </Grid>
       </Grid>

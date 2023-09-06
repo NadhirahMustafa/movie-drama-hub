@@ -39,23 +39,23 @@ const ButtonData: React.FC<ButtonDataProps> = ({
       <Button
         onClick={handleClick}
         onMouseEnter={(e) =>
-          e.currentTarget.classList.add("data-display--image-enlarged")
+          e.currentTarget.classList.add("commonComponent--image-enlarged")
         }
         onMouseLeave={(e) =>
-          e.currentTarget.classList.remove("data-display--image-enlarged")
+          e.currentTarget.classList.remove("commonComponent--image-enlarged")
         }
       >
         <Grid>
-          <Grid className="data-display--img-height">
+          <Grid className="commonComponent--img-height">
             <img
-              className="fade-in"
+              className="commonComponent--fade-in"
               src={src}
               width={100}
               alt={CommonTxt.imgNotFound}
               loading="lazy"
             />
           </Grid>
-          <Grid className="data-display--color">{title}</Grid>
+          <Grid className="commonComponent--color">{title}</Grid>
         </Grid>
       </Button>
     </Grid>
