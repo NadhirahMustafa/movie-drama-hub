@@ -1,6 +1,6 @@
 import { ShowActionTypes } from "../actions/ShowTypeAction";
 import { ShowState } from "../interface/redux.interface";
-import { ShowTypeConst, ViewTypeConst } from "../constant/constants";
+import { ShowTypeConst } from "../constant/constants";
 
 const initialState: ShowState = {
   showType: ShowTypeConst.MOVIE,

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { Grid, Button } from "@mui/material";
 import { getPopularMovies, getPopularDrama } from "../services/api.service";
 import {
   popularMoviesInterface,
@@ -28,22 +27,14 @@ interface PopularProps {
 const Popular: React.FC<PopularProps> = ({showType}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [popularMovieList, setPopularMovieList] = useState<
-    popularMoviesInterface[]
-  >([]);
-  const [popularDramaList, setPopularDramaList] = useState<
-    popularDramaInterface[]
-  >([]);
+  
   const [movieList, setMovieList] = useState<popularMoviesInterface[]>([]);
   const [dramaList, setDramaList] = useState<popularDramaInterface[]>([]);
-  // const [showTypeState, setShowTypeState] = useState("");
 
   const fetchPopularMovies = async () => {
     let res = await getPopularMovies();
     if (res) {
       setMovieList(res);
-      setPopularMovieList(res);
       setShowType(ShowTypeConst.MOVIE);
     } else {
       alert(CommonTxt.alertMessage);
