@@ -39,10 +39,6 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     }
   };
 
-  useEffect(() => {
-    fetchMovieDetails();
-  }, []);
-
   const fetchCreditDetails = async () => {
     let res = await getMovieCreditDetails(selectedData.id);
     if (res) {
@@ -53,6 +49,7 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
   };
 
   useEffect(() => {
+    fetchMovieDetails();
     fetchCreditDetails();
   }, []);
 
@@ -187,6 +184,7 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
 
   const renderCast = (
     <Grid className="common--padding">
+    <Grid className="common--padding">
       <PageTitle title={CommonDetailsTxt.cast}></PageTitle>
       <ScrollBox>
         {credit.cast
@@ -201,25 +199,29 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
           ))}
       </ScrollBox>
     </Grid>
+    </Grid>
   );
 
   return (
     <Grid>
       <Grid className="common--padding">
-        <Grid style={backgroundStyle} className="details--absolute"></Grid>
-        <Grid container className="details--display-flex">
-          <Grid item xs={6} className="details--justify">
-            <img
-              src={`https://image.tmdb.org/t/p/original${details.poster_path}`}
-              width={550}
-              alt={CommonTxt.imgNotFound}
-            />
-          </Grid>
+        <Grid>
+          <Grid style={backgroundStyle} className="details--absolute" />
+          <Grid container className="details--display-flex">
+            <Grid item xs={6} className="details--justify">
+              <img
+                src={`https://image.tmdb.org/t/p/original${details.poster_path}`}
+                width={550}
+                alt={CommonTxt.imgNotFound}
+              />
+            </Grid>
 
-          <Grid item xs={6} className="common--padding">
-            {renderDetails}
+            <Grid item xs={6}>
+              {renderDetails}
+            </Grid>
           </Grid>
         </Grid>
+
         {credit.cast.length > 0 && renderCast}
       </Grid>
       <BackButton />

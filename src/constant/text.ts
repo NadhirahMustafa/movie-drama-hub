@@ -25,8 +25,6 @@ export const TrendingTxt = {
 
 export const PopularTxt = {
     title: `All time favourite`,
-    movie: `Movies`,
-    drama: `Drama`
 }
 
 export const CommonDetailsTxt = {
@@ -59,4 +57,9 @@ export const DramaDetailsTxt = {
 export const ViewTypeTxt = {
     grid: 'Grid',
     list: 'List'
+}
+
+export const ShowTypeTxt = {    
+    movie: `Movies`,
+    drama: `Drama`
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Grid, Button } from "@mui/material";
+import { connect, useDispatch } from "react-redux";
 import { getPopularMovies, getPopularDrama } from "../services/api.service";
 import {
   popularMoviesInterface,
@@ -11,34 +10,41 @@ import {
   setSelectedDramaData,
   setSelectedMovieData,
 } from "../actions/DataActions";
+import { setShowType } from "../actions/ShowTypeAction";
+import { RootState } from "../reducers/rootReducer";
 import DataDisplay from "../components/DataDisplay";
 import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";
 import PageContent from "../components/PageContent";
+import ShowType from "../components/ShowType";
 import { RouterConst, ShowTypeConst } from "../constant/constants";
 import { CommonTxt, PopularTxt } from "../constant/text";
 import "../styles/Views.scss";
 
-const Popular: React.FC = () => {
+interface PopularProps {
+  showType: string;
+}
+const Popular: React.FC<PopularProps> = ({ showType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [popularMovieList, setPopularMovieList] = useState<
-    popularMoviesInterface[]
-  >([]);
-  const [popularDramaList, setPopularDramaList] = useState<
-    popularDramaInterface[]
-  >([]);
   const [movieList, setMovieList] = useState<popularMoviesInterface[]>([]);
   const [dramaList, setDramaList] = useState<popularDramaInterface[]>([]);
-  const [showType, setShowType] = useState("");
 
   const fetchPopularMovies = async () => {
     let res = await getPopularMovies();
     if (res) {
       setMovieList(res);
-      setPopularMovieList(res);
       setShowType(ShowTypeConst.MOVIE);
+    } else {
+      alert(CommonTxt.alertMessage);
+    }
+  };
+
+  const fetchPopularDrama = async () => {
+    let res = await getPopularDrama();
+    if (res) {
+      setDramaList(res);
     } else {
       alert(CommonTxt.alertMessage);
     }
@@ -46,30 +52,8 @@ const Popular: React.FC = () => {
 
   useEffect(() => {
     fetchPopularMovies();
-  }, []);
-
-  const fetchPopularDrama = async () => {
-    let res = await getPopularDrama();
-    if (res) {
-      setPopularDramaList(res);
-    } else {
-      alert(CommonTxt.alertMessage);
-    }
-  };
-
-  useEffect(() => {
     fetchPopularDrama();
   }, []);
-
-  const handleMovieList = () => {
-    setMovieList(popularMovieList);
-    setShowType(ShowTypeConst.MOVIE);
-  };
-
-  const handleDramaList = () => {
-    setDramaList(popularDramaList);
-    setShowType(ShowTypeConst.DRAMA);
-  };
 
   const onClickCellMovie = (c: popularMoviesInterface) => {
     dispatch(setSelectedMovieData(c));
@@ -81,36 +65,11 @@ const Popular: React.FC = () => {
     navigate(RouterConst.DRAMA_DETAILS);
   };
 
-  const renderShowType = (
-    <Grid container>
-      <Grid item>
-        <Button onClick={handleMovieList}>
-          <p
-            className={`popular--button ${
-              showType === ShowTypeConst.MOVIE && "common--button-active "
-            }`}
-          >
-            {PopularTxt.movie}
-          </p>
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button onClick={handleDramaList}>
-          <p
-            className={`popular--button ${
-              showType === ShowTypeConst.DRAMA && "common--button-active "
-            }`}
-          >
-            {PopularTxt.drama}
-          </p>
-        </Button>
-      </Grid>
-    </Grid>
-  );
-
   return (
     <PageContent>
-      <PageTitle title={PopularTxt.title}>{renderShowType}</PageTitle>
+      <PageTitle title={PopularTxt.title}>
+        <ShowType />
+      </PageTitle>
       <ScrollBox>
         {showType === ShowTypeConst.MOVIE
           ? movieList.map((row: popularMoviesInterface, index: number) => (
@@ -136,4 +95,7 @@ const Popular: React.FC = () => {
   );
 };
 
-export default Popular;
+const mapStateToProps = (state: RootState) => ({
+  showType: state.showType.showType,
+});
+export default connect(mapStateToProps)(Popular);
