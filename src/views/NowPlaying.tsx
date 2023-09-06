@@ -32,7 +32,6 @@ const NowPlaying = () => {
   }, []);
 
   const onClickCell = (c: movieInterface) => {
-    console.log("text: ", c);
     dispatch(setSelectedMovieData(c));
     navigate(RouterConst.MOVIE_DETAILS);
   };
