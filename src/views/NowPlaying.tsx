@@ -42,6 +42,7 @@ const NowPlaying = () => {
       <Grid className="now-playing--card-arr">
         {nowPlayingList.map((item: movieInterface, index: any) => (
           <ButtonData
+            key={index}
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
             title={item.title}
             dataMovie={item}

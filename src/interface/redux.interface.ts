@@ -8,6 +8,10 @@ export interface ViewState {
   viewType: string;
 }
 
+export interface ShowState {
+  showType: string;
+}
+
 export interface GetSelectedDataAction {
   type: "SET_SELECTED_DATA";
   payload: trendingInterface;

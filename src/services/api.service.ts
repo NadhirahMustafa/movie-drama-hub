@@ -59,7 +59,7 @@ export const getDramaOnAir = () => {
     fetch(`https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1`, fetchHeader)
     .then((res) => res.json())
     .then((res) => resolve(res.results))
-    .catch((err) => reject(err));;
+    .catch((err) => reject(err));
   });
 };
 
@@ -118,6 +118,18 @@ export const getNowPlayingMovies = () => {
       .then((res) => resolve(res.results))
       .catch((err) => reject(err));
   });
+};
+
+export const getNowPlayingDrama = () => {
+  return new Promise<popularDramaInterface[]>((resolve, reject) => {
+    fetch(
+      "https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1",
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res.results))
+      .catch((err) => reject(err));
+  });  
 };
 
 export const getTopRatedMovies = () => {

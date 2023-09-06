@@ -1,4 +1,4 @@
-import { ActionTypes } from '../actions/ViewTypeActions';
+import { ViewActionTypes } from '../actions/ViewTypeAction';
 import { ViewTypeConst } from '../constant/constants';
 import { ViewState } from '../interface/redux.interface';
 
@@ -8,7 +8,7 @@ const initialState: ViewState = {
 
 const viewReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case ActionTypes.SET_VIEW_TYPE:
+    case ViewActionTypes.SET_VIEW_TYPE:
       return {
         ...state,
         viewType: action.payload,

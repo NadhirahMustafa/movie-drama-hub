@@ -208,9 +208,6 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
       <Grid className="details--justify details--emphasize common--padding-top">
         <b>{details.original_name}</b>
       </Grid>
-      <Grid className="details--justify">
-        <i>{details.tagline}</i>
-      </Grid>
       <Grid className="common--padding-top">
         <Grid>
           <b>{CommonDetailsTxt.overview}</b>
