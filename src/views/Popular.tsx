@@ -11,6 +11,7 @@ import {
   setSelectedMovieData,
 } from "../actions/DataActions";
 import { setShowType } from "../actions/ShowTypeAction";
+import { RootState } from "../reducers/rootReducer";
 import DataDisplay from "../components/DataDisplay";
 import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";
@@ -19,15 +20,14 @@ import ShowType from "../components/ShowType";
 import { RouterConst, ShowTypeConst } from "../constant/constants";
 import { CommonTxt, PopularTxt } from "../constant/text";
 import "../styles/Views.scss";
-import { RootState } from "../reducers/rootReducer";
 
 interface PopularProps {
   showType: string;
 }
-const Popular: React.FC<PopularProps> = ({showType}) => {
+const Popular: React.FC<PopularProps> = ({ showType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const [movieList, setMovieList] = useState<popularMoviesInterface[]>([]);
   const [dramaList, setDramaList] = useState<popularDramaInterface[]>([]);
 
@@ -64,7 +64,7 @@ const Popular: React.FC<PopularProps> = ({showType}) => {
     dispatch(setSelectedDramaData(c));
     navigate(RouterConst.DRAMA_DETAILS);
   };
-  
+
   return (
     <PageContent>
       <PageTitle title={PopularTxt.title}>
@@ -96,6 +96,6 @@ const Popular: React.FC<PopularProps> = ({showType}) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  showType: state.showType.showType
+  showType: state.showType.showType,
 });
 export default connect(mapStateToProps)(Popular);

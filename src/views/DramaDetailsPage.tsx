@@ -60,7 +60,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     top: 0,
     left: 0,
     width: "100%",
-    height: "100%",
+    height: "100vh",
     backgroundImage: `url(https://image.tmdb.org/t/p/original${details.backdrop_path})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -250,18 +250,20 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
   return (
     <Grid>
       <Grid className="common--padding">
-        <Grid style={backgroundStyle} className="details--absolute"></Grid>
-        <Grid container className="details--display-flex">
-          <Grid item xs={6} className="details--justify">
-            <img
-              src={`https://image.tmdb.org/t/p/original${details.poster_path}`}
-              width={550}
-              alt={CommonTxt.imgNotFound}
-            />
-          </Grid>
+        <Grid className="common--padding">
+          <Grid style={backgroundStyle} className="details--absolute" />
+          <Grid container className="details--display-flex">
+            <Grid item xs={6} className="details--justify">
+              <img
+                src={`https://image.tmdb.org/t/p/original${details.poster_path}`}
+                width={550}
+                alt={CommonTxt.imgNotFound}
+              />
+            </Grid>
 
-          <Grid item xs={6} className="common--padding">
-            {renderDetails}
+            <Grid item xs={6}>
+              {renderDetails}
+            </Grid>
           </Grid>
         </Grid>
 
