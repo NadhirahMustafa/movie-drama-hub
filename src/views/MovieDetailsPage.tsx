@@ -220,7 +220,7 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
             {renderDetails}
           </Grid>
         </Grid>
-        {renderCast}
+        {credit.cast.length > 0 && renderCast}
       </Grid>
       <BackButton />
     </Grid>

@@ -6,20 +6,20 @@ import "../styles/Component.scss";
 
 const DataList: React.FC<DataListProps> = ({ src, title, subtitle }) => {
   return (
-    <Grid className="commonComponent--card-grid">
+    <Grid className="common-component--card-grid">
       <Grid>
         <Grid
           onMouseEnter={(e) =>
-            e.currentTarget.classList.add("commonComponent--image-enlarged")
+            e.currentTarget.classList.add("common-component--image-enlarged")
           }
           onMouseLeave={(e) =>
-            e.currentTarget.classList.remove("commonComponent--image-enlarged")
+            e.currentTarget.classList.remove("common-component--image-enlarged")
           }
         >
           <Grid>
-            <Grid className="commonComponent--img-height">
+            <Grid className="common-component--img-height">
               <img
-                className="commonComponent--fade-in"
+                className="common-component--fade-in"
                 src={src}
                 alt={CommonTxt.imgNotFound}
                 width={100}
@@ -27,8 +27,8 @@ const DataList: React.FC<DataListProps> = ({ src, title, subtitle }) => {
               />
             </Grid>
             <Grid>
-              <Grid className="commonComponent--color"><b>{title}</b></Grid>
-              <Grid className="commonComponent--color">{subtitle}</Grid>
+              <Grid className="common-component--color"><b>{title}</b></Grid>
+              <Grid className="common-component--color">{subtitle}</Grid>
             </Grid>
           </Grid>
         </Grid>

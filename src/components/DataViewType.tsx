@@ -23,7 +23,7 @@ const DataViewType: React.FC = () => {
   };
 
   return (
-    <Grid container>
+    <Grid container className="common-component--page-padding">
       <Grid item>
         <Button onClick={() => onClick(ViewTypeConst.GRID)}>
           <p
@@ -35,6 +35,7 @@ const DataViewType: React.FC = () => {
           </p>
         </Button>
       </Grid>
+
       <Grid item>
         <Button onClick={() => onClick(ViewTypeConst.LIST)}>
           <Grid

@@ -5,7 +5,7 @@ import "../styles/Component.scss";
 
 const PageContent: React.FC<ComponentProps> = ({ children }) => {
   return (
-    <Grid className="page-content--page-padding">
+    <Grid className="common-component--page-padding">
       {children}
     </Grid>
   );

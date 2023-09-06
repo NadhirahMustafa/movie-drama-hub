@@ -1,4 +1,4 @@
-.commonComponent { 
+.common-component { 
   &--image-enlarged {
     transform: scale(1.2);
     transition: transform 0.3s ease;
@@ -25,6 +25,9 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+  }
+  &--page-padding {
+    padding: 20px;
   }
 }
 .nav {
@@ -74,12 +77,6 @@
   }
 }
 
-.page-content {
-  &--page-padding {
-    padding: 20px;
-  }
-}
-
 .page-title {
   &--title {
     font-family: "Suwannaphum", serif;
@@ -111,6 +108,7 @@
 .button{
   &--color {
     color: #ff6600;
+    margin: 10px;
   }
   &--active {
     font-weight: 900;
