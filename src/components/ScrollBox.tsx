@@ -5,8 +5,8 @@ import "../styles/Component.scss";
 
 const ScrollBox: React.FC<ComponentProps> = ({ children }) => {
   return (
-    <Grid className="scroll-box--scroll-box">
-      <Grid className="scroll-box--card-arr scroll-box--padding-top">{children}</Grid>
+    <Grid className="scroll-box--scroll-box common-component--page-padding">
+      <Grid className="scroll-box--card-arr">{children}</Grid>
     </Grid>
   );
 };

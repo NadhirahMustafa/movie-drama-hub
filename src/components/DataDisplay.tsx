@@ -1,13 +1,12 @@
 import React from "react";
 import { Grid, Button } from "@mui/material";
 import { DataDisplayProps } from "../interface/component.interface";
-import { common } from "../constant/message";
+import { CommonTxt } from "../constant/text";
 import "../styles/Component.scss";
 
 const DataDisplay: React.FC<DataDisplayProps> = ({
   src,
   title,
-  
   dataTrending,
   dataPopularMovie,
   dataPopularDrama,
@@ -15,6 +14,7 @@ const DataDisplay: React.FC<DataDisplayProps> = ({
   onClickPopularMovie,
   onClickPopularDrama,
 }) => {
+  
   const handleClick = () => {
     let functOption = null;
     if (dataTrending) {
@@ -28,29 +28,29 @@ const DataDisplay: React.FC<DataDisplayProps> = ({
   };
 
   return (
-    <Grid className="data-display--card-grid">
+    <Grid className="common-component--card-grid">
       <Grid>
         <Button
           onClick={handleClick}
           onMouseEnter={(e) =>
-            e.currentTarget.classList.add("data-display--image-enlarged")
+            e.currentTarget.classList.add("common-component--image-enlarged")
           }
           onMouseLeave={(e) =>
-            e.currentTarget.classList.remove("data-display--image-enlarged")
+            e.currentTarget.classList.remove("common-component--image-enlarged")
           }
         >
           <Grid>
-            <Grid className="data-display--img-height">
+            <Grid className="common-component--img-height">
               <img
-                className="fade-in"
+                className="common-component--fade-in"
                 src={src}
-                alt={common.imgNotFound}
+                alt={CommonTxt.imgNotFound}
                 width={100}
                 loading="lazy"
               />
             </Grid>
             <Grid>
-              <p className="data-display--color">{title}</p>
+              <Grid className="common-component--color">{title}</Grid>
             </Grid>
           </Grid>
         </Button>

@@ -1,29 +1,25 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import { home } from "../constant/message";
 import Trending from "./Trending";
-import "../styles/Views.scss";
 import Popular from "./Popular";
 import OnAir from "./OnAir";
+import { HomeTxt } from "../constant/text";
+import "../styles/Views.scss";
 
 const Home: React.FC = () => {
   return (
     <>
-      <Grid className="home--header-image">
-        <Grid className="home--header-text home--header-title">
-          {home.title}
+      <Grid className="home--header">
+        <Grid className="home--header-title">
+          {HomeTxt.title}
         </Grid>
-        <Grid className="home--header-text home--header-message">
-          {home.header_message}
+        <Grid className="home--header-message">
+          {HomeTxt.header_message}
         </Grid>
       </Grid>
-<OnAir />
+      <OnAir />
       <Trending />
       <Popular />
-
-      <Grid className="common--padding-top">
-        <Grid className="home--footer">{home.footer}</Grid>
-      </Grid>
     </>
   );
 };

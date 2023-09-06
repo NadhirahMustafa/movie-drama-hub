@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import { getTrending } from "../services/api.service";
 import { trendingInterface } from "../interface/interface";
-import { setSelectedData } from "../redux/actions";
-import { common, trending } from "../constant/message";
-import { router, mediaType } from "../constant/constants";
+import { setSelectedData } from "../actions/DataActions";
 import DataDisplay from "../components/DataDisplay";
 import PageTitle from "../components/PageTitle";
 import ScrollBox from "../components/ScrollBox";
 import PageContent from "../components/PageContent";
+import { RouterConst, MediaTypeConst } from "../constant/constants";
+import { CommonTxt, TrendingTxt } from "../constant/text";
+import "../styles/Views.scss";
 
 const Trending: React.FC = () => {
-  const [trendingList, setTrendingList] = useState<trendingInterface[]>([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [trendingList, setTrendingList] = useState<trendingInterface[]>([]);
 
   const fetchTrendingList = async () => {
     let res = await getTrending();
     if (res) {
       setTrendingList(res);
     } else {
-      alert(common.alertMessage);
+      alert(CommonTxt.alertMessage);
     }
   };
 
@@ -32,18 +34,17 @@ const Trending: React.FC = () => {
 
   const onClickCell = (c: trendingInterface) => {
     dispatch(setSelectedData(c));
-    if (c.media_type === mediaType.DRAMA){
-      navigate(router.DRAMA_DETAILS);
+    if (c.media_type === MediaTypeConst.DRAMA){
+      navigate(RouterConst.DRAMA_DETAILS);
 
     } else {
-      navigate(router.MOVIE_DETAILS);
-    }
-    
+      navigate(RouterConst.MOVIE_DETAILS);
+    }    
   };
 
   return (
     <PageContent>
-      <PageTitle title={trending.title} />
+      <PageTitle title={TrendingTxt.title} />
       <ScrollBox>
         {trendingList.map((row: trendingInterface, index: number) => (
           <DataDisplay
