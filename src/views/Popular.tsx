@@ -9,7 +9,7 @@ import {
 import {
   setSelectedDramaData,
   setSelectedMovieData,
-} from "../actions/DataActions";
+} from "../actions/SelectedDataActions";
 import { setShowType } from "../actions/ShowTypeAction";
 import { RootState } from "../reducers/rootReducer";
 import DataDisplay from "../components/DataDisplay";

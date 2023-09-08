@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getDramaOnAir } from "../services/api.service";
 import { popularDramaInterface } from "../interface/interface";
-import { setSelectedDramaData } from "../actions/DataActions";
+import { setSelectedDramaData } from "../actions/SelectedDataActions";
 import DataDisplay from "../components/DataDisplay";
 import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";
