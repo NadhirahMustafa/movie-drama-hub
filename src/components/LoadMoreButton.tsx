@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, Grid } from "@mui/material";
-import { CommonTxt } from "../constant/text";
+import { Button } from "@mui/material";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "../styles/Component.scss";
 
 interface LoadMoreButtonProps {
@@ -10,7 +10,16 @@ interface LoadMoreButtonProps {
 const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({ onClick }) => {
   return (
     <Button onClick={onClick}>
-      <Grid className="button--color">{CommonTxt.loadMore}</Grid>
+      <ChevronRightIcon
+        className="button--color "
+        sx={{ fontSize: 60 }}
+        onMouseEnter={(e) =>
+          e.currentTarget.classList.add("common-component--image-enlarged")
+        }
+        onMouseLeave={(e) =>
+          e.currentTarget.classList.remove("common-component--image-enlarged")
+        }
+      />
     </Button>
   );
 };
