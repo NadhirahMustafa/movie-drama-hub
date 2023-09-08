@@ -7,8 +7,8 @@ import {
   getNowPlayingMovies,
 } from "../services/api.service";
 import { movieInterface, popularDramaInterface } from "../interface/interface";
-import { setSelectedMovieData, setSelectedDramaData } from "../actions/SelectedDataActions";
-import { RootState } from "../reducers/rootReducer";
+import { setSelectedMovieData, setSelectedDramaData } from "../actions/SelectedDataAction";
+import { RootState } from "../reducers/RootReducer";
 import ShowType from "../components/ShowType";
 import ButtonData from "../components/ButtonData";
 import DataViewType from "../components/DataViewType";

@@ -9,9 +9,9 @@ import {
 import {
   setSelectedDramaData,
   setSelectedMovieData,
-} from "../actions/SelectedDataActions";
+} from "../actions/SelectedDataAction";
 import { setShowType } from "../actions/ShowTypeAction";
-import { RootState } from "../reducers/rootReducer";
+import { RootState } from "../reducers/RootReducer";
 import DataDisplay from "../components/DataDisplay";
 import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";

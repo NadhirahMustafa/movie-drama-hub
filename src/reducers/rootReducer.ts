@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { selectedDataReducer } from "./dataReducer";
-import viewReducer from "./viewTypeReducer";
-import showTypeReducer from './showTypeReducer';
+import { selectedDataReducer } from "./DataReducer";
+import viewReducer from "./ViewTypeReducer";
+import showTypeReducer from './ShowTypeReducer';
 
 const rootReducer = combineReducers({
   selectedData: selectedDataReducer,

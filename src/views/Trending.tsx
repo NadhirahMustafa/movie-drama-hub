@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { getTrending } from "../services/api.service";
 import { trendingInterface } from "../interface/interface";
-import { setSelectedData } from "../actions/SelectedDataActions";
+import { setSelectedData } from "../actions/SelectedDataAction";
 import DataDisplay from "../components/DataDisplay";
 import PageTitle from "../components/PageTitle";
 import ScrollBox from "../components/ScrollBox";

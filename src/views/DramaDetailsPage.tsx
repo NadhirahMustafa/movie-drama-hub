@@ -14,7 +14,7 @@ import {
   CrewDetailsInterface,
   DramaCastDetailsInterface,
 } from "../interface/interface";
-import { RootState } from "../reducers/rootReducer";
+import { RootState } from "../reducers/RootReducer";
 import BackButton from "../components/BackButton";
 import DataList from "../components/DataList";
 import PageTitle from "../components/PageTitle";

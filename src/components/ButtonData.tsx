@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Grid, Button } from "@mui/material";
 import { ButtonDataProps } from "../interface/component.interface";
-import { RootState } from "../reducers/rootReducer";
+import { RootState } from "../reducers/RootReducer";
 import { ViewTypeConst } from "../constant/constants";
 import { CommonTxt } from "../constant/text";
 import "../styles/Component.scss";

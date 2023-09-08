@@ -14,7 +14,7 @@ import {
   CrewDetailsInterface,
   MovieCastDetailsInterface,
 } from "../interface/interface";
-import { RootState } from "../reducers/rootReducer";
+import { RootState } from "../reducers/RootReducer";
 import BackButton from "../components/BackButton";
 import PageTitle from "../components/PageTitle";
 import ScrollBox from "../components/ScrollBox";
