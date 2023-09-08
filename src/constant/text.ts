@@ -1,6 +1,7 @@
 export const CommonTxt = {
     alertMessage: 'Something Wrong on The Server, Please Try Again',
     imgNotFound: 'image not found',
+    loadMore: 'Load more',
     back: 'Back'
 };
 

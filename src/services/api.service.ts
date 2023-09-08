@@ -18,6 +18,16 @@ const fetchHeader = {
   },
 };
 
+export const getDramaOnAir = (page: number) => {
+  return new Promise<popularDramaInterface[]>((resolve, reject) => {
+    fetch(`https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${page}`, fetchHeader)
+    .then((res) => res.json())
+    .then((res) => resolve(res.results))
+    .catch((err) => reject(err));
+  });
+};
+
+
 export const getTrending = () => {
   return new Promise<trendingInterface[]>((resolve, reject) => {
     fetch(
@@ -51,15 +61,6 @@ export const getPopularDrama = () => {
       .then((res) => res.json())
       .then((res) => resolve(res.results))
       .catch((err) => reject(err));
-  });
-};
-
-export const getDramaOnAir = () => {
-  return new Promise<popularDramaInterface[]>((resolve, reject) => {
-    fetch(`https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1`, fetchHeader)
-    .then((res) => res.json())
-    .then((res) => resolve(res.results))
-    .catch((err) => reject(err));
   });
 };
 

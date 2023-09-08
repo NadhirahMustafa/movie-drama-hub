@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { getDramaOnAir } from "../services/api.service";
 import { popularDramaInterface } from "../interface/interface";
 import { setSelectedDramaData } from "../actions/SelectedDataAction";
@@ -9,28 +9,52 @@ import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";
 import PageContent from "../components/PageContent";
 import { RouterConst } from "../constant/constants";
-import { CommonTxt, OnAirTxt } from "../constant/text";
+import { OnAirTxt } from "../constant/text";
 import "../styles/Views.scss";
+import { fetchData as fetchDataTest } from "../actions/FetchDataAction";
+import { RootState } from "../reducers/RootReducer";
+import LoadMoreButton from "../components/LoadMoreButton";
 
-const OnAir: React.FC = () => {
-  
+interface onAirProps {
+  fetchData: popularDramaInterface[];
+}
+
+const OnAir: React.FC<onAirProps> = ({ fetchData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [onAirDramaList, setOnAirDramaList] = useState<popularDramaInterface[]>([]);
+  const [pageNum, setPageNum] = useState<number>(1);
+  const [onAirDramaList, setOnAirDramaList] = useState<popularDramaInterface[]>(
+    []
+  );
+  const isLoaded = onAirDramaList.length > 0;
+  const count = useRef(0);
 
-  const fetchPopularDrama = async () => {
-    let res = await getDramaOnAir();
-    if (res) {
-      setOnAirDramaList(res);
-    } else {
-      alert(CommonTxt.alertMessage);
-    }
+  const loadMoreData = () => {
+    setTimeout(() => {
+      dispatch(fetchDataTest(pageNum));
+      setPageNum(pageNum + 1);
+    }, 1000);
   };
 
   useEffect(() => {
-    fetchPopularDrama();
-  }, []);
+    if (count.current !== 0) {
+      setPageNum(pageNum + 1);
+      dispatch(fetchDataTest(pageNum));
+    }
+    count.current++;
+  }, [dispatch]);
+
+  useEffect(() => {
+    let tempArray: any = onAirDramaList;
+    fetchData.map((x: any) => tempArray.push(x));
+    tempArray = tempArray.filter(
+      (item: any, index: any, array: string | any[]) => {
+        return array.indexOf(item) === index;
+      }
+    );
+    setOnAirDramaList(tempArray);
+  }, [fetchData]);
 
   const onClickCellDrama = (c: popularDramaInterface) => {
     dispatch(setSelectedDramaData(c));
@@ -50,9 +74,14 @@ const OnAir: React.FC = () => {
             onClickPopularDrama={() => onClickCellDrama(row)}
           />
         ))}
+        {isLoaded && <LoadMoreButton onClick={loadMoreData} />}
       </ScrollBox>
     </PageContent>
   );
 };
 
-export default OnAir;
+const mapStateToProps = (state: RootState) => ({
+  fetchData: state.fetchData.data,
+});
+
+export default connect(mapStateToProps)(OnAir);
