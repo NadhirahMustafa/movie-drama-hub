@@ -10,7 +10,7 @@ export const fetchDataSuccess = (data: any) => ({ type: FETCH_DATA_SUCCESS, payl
 export const fetchDataFailure = (error: any) => ({ type: FETCH_DATA_FAILURE, error });
 
 
-export const fetchData: any = (page: number) => {
+export const fetchOnAirData: any = (page: number) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchDataRequest());
     try {

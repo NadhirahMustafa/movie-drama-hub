@@ -218,3 +218,13 @@ export interface DramaCreditDetailsInterface {
   cast: DramaCastDetailsInterface[];
   crew: CrewDetailsInterface[];
 }
+
+export interface OnAirProps {
+  fetchData: popularDramaInterface[];
+}
+
+export interface PopularProps {
+  showType: string;
+  fetchMovieData: popularMoviesInterface[];
+  fetchDramaData: popularDramaInterface[];
+}

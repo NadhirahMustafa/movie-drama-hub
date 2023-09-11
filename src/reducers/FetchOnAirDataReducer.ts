@@ -2,7 +2,7 @@ import {
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
-} from "../actions/FetchDataAction";
+} from "../actions/FetchOnAirDataAction";
 
 const fetchDataInitialState = {
   data: [],

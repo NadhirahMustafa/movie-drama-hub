@@ -40,10 +40,10 @@ export const getTrending = () => {
   });
 };
 
-export const getPopularMovies = () => {
+export const getPopularMovies = (page: number) => {
   return new Promise<popularMoviesInterface[]>((resolve, reject) => {
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+      `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`,
       fetchHeader
     )
       .then((res) => res.json())
@@ -52,10 +52,10 @@ export const getPopularMovies = () => {
   });
 };
 
-export const getPopularDrama = () => {
+export const getPopularDrama = (page: number) => {
   return new Promise<popularDramaInterface[]>((resolve, reject) => {
     fetch(
-      "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
+      `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`,
       fetchHeader
     )
       .then((res) => res.json())

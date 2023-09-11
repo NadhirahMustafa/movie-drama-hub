@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { getPopularMovies, getPopularDrama } from "../services/api.service";
 import {
   popularMoviesInterface,
   popularDramaInterface,
+  PopularProps,
 } from "../interface/interface";
 import {
   setSelectedDramaData,
@@ -12,48 +13,80 @@ import {
 } from "../actions/SelectedDataAction";
 import { setShowType } from "../actions/ShowTypeAction";
 import { RootState } from "../reducers/RootReducer";
+import { fetchPopularMovieData } from "../actions/FetchPopularMovieDataAction";
+import { fetchPopularDramaData } from "../actions/FetchPopularDramaDataAction";
 import DataDisplay from "../components/DataDisplay";
 import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";
+import LoadMoreButton from "../components/LoadMoreButton";
 import PageContent from "../components/PageContent";
 import ShowType from "../components/ShowType";
 import { RouterConst, ShowTypeConst } from "../constant/constants";
 import { CommonTxt, PopularTxt } from "../constant/text";
 import "../styles/Views.scss";
 
-interface PopularProps {
-  showType: string;
-}
-const Popular: React.FC<PopularProps> = ({ showType }) => {
+const Popular: React.FC<PopularProps> = ({
+  showType,
+  fetchMovieData,
+  fetchDramaData,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [movieList, setMovieList] = useState<popularMoviesInterface[]>([]);
   const [dramaList, setDramaList] = useState<popularDramaInterface[]>([]);
+  const [pageNumMovie, setPageNumMovie] = useState<number>(1);
+  const [pageNumDrama, setPageNumDrama] = useState<number>(1);
+  const isMovieLoaded = movieList.length > 0;
+  const isDramaLoaded = dramaList.length > 0;
+  const countMovie = useRef(0);
+  const countDrama = useRef(0);
 
-  const fetchPopularMovies = async () => {
-    let res = await getPopularMovies();
-    if (res) {
-      setMovieList(res);
-      setShowType(ShowTypeConst.MOVIE);
-    } else {
-      alert(CommonTxt.alertMessage);
-    }
+  const loadMoreMovieData = () => {
+    setTimeout(() => {
+      dispatch(fetchPopularMovieData(pageNumMovie));
+      setPageNumMovie(pageNumMovie + 1);
+    }, 1000);
   };
 
-  const fetchPopularDrama = async () => {
-    let res = await getPopularDrama();
-    if (res) {
-      setDramaList(res);
-    } else {
-      alert(CommonTxt.alertMessage);
-    }
+  const loadMoreDramaData = () => {
+    setTimeout(() => {
+      dispatch(fetchPopularDramaData(pageNumDrama));
+      setPageNumDrama(pageNumDrama + 1);
+    }, 1000);
   };
 
   useEffect(() => {
-    fetchPopularMovies();
-    fetchPopularDrama();
-  }, []);
+    if (countMovie.current !== 0) {
+      setPageNumMovie(pageNumMovie + 1);
+      setPageNumDrama(pageNumDrama + 1);
+      dispatch(fetchPopularMovieData(pageNumMovie));
+      dispatch(fetchPopularDramaData(pageNumDrama));
+    }
+    countMovie.current++;
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (showType === ShowTypeConst.MOVIE) {
+      let tempArray: any = movieList;
+      fetchMovieData.map((x: any) => tempArray.push(x));
+      tempArray = tempArray.filter(
+        (item: any, index: any, array: string | any[]) => {
+          return array.indexOf(item) === index;
+        }
+      );
+      setMovieList(tempArray);
+    } else if (showType === ShowTypeConst.DRAMA) {
+      let tempArray: any = dramaList;
+      fetchDramaData.map((x: any) => tempArray.push(x));
+      tempArray = tempArray.filter(
+        (item: any, index: any, array: string | any[]) => {
+          return array.indexOf(item) === index;
+        }
+      );
+      setDramaList(tempArray);
+    }
+  }, [fetchMovieData, fetchDramaData, showType]);
 
   const onClickCellMovie = (c: popularMoviesInterface) => {
     dispatch(setSelectedMovieData(c));
@@ -90,6 +123,12 @@ const Popular: React.FC<PopularProps> = ({ showType }) => {
                 onClickPopularDrama={() => onClickCellDrama(row)}
               />
             ))}
+        {showType === ShowTypeConst.MOVIE && isMovieLoaded && (
+          <LoadMoreButton onClick={loadMoreMovieData} />
+        )}
+        {showType === ShowTypeConst.DRAMA && isDramaLoaded && (
+          <LoadMoreButton onClick={loadMoreDramaData} />
+        )}
       </ScrollBox>
     </PageContent>
   );
@@ -97,5 +136,7 @@ const Popular: React.FC<PopularProps> = ({ showType }) => {
 
 const mapStateToProps = (state: RootState) => ({
   showType: state.showType.showType,
+  fetchMovieData: state.fetchPopularMovieData.data,
+  fetchDramaData: state.fetchPopularDramaData.data,
 });
 export default connect(mapStateToProps)(Popular);

@@ -1,25 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { getDramaOnAir } from "../services/api.service";
-import { popularDramaInterface } from "../interface/interface";
+import { OnAirProps, popularDramaInterface } from "../interface/interface";
 import { setSelectedDramaData } from "../actions/SelectedDataAction";
+import { fetchOnAirData } from "../actions/FetchOnAirDataAction";
+import { RootState } from "../reducers/RootReducer";
 import DataDisplay from "../components/DataDisplay";
 import ScrollBox from "../components/ScrollBox";
 import PageTitle from "../components/PageTitle";
 import PageContent from "../components/PageContent";
+import LoadMoreButton from "../components/LoadMoreButton";
 import { RouterConst } from "../constant/constants";
 import { OnAirTxt } from "../constant/text";
 import "../styles/Views.scss";
-import { fetchData as fetchDataTest } from "../actions/FetchDataAction";
-import { RootState } from "../reducers/RootReducer";
-import LoadMoreButton from "../components/LoadMoreButton";
 
-interface onAirProps {
-  fetchData: popularDramaInterface[];
-}
-
-const OnAir: React.FC<onAirProps> = ({ fetchData }) => {
+const OnAir: React.FC<OnAirProps> = ({ fetchData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,7 +27,7 @@ const OnAir: React.FC<onAirProps> = ({ fetchData }) => {
 
   const loadMoreData = () => {
     setTimeout(() => {
-      dispatch(fetchDataTest(pageNum));
+      dispatch(fetchOnAirData(pageNum));
       setPageNum(pageNum + 1);
     }, 1000);
   };
@@ -40,7 +35,7 @@ const OnAir: React.FC<onAirProps> = ({ fetchData }) => {
   useEffect(() => {
     if (count.current !== 0) {
       setPageNum(pageNum + 1);
-      dispatch(fetchDataTest(pageNum));
+      dispatch(fetchOnAirData(pageNum));
     }
     count.current++;
   }, [dispatch]);
@@ -81,7 +76,7 @@ const OnAir: React.FC<onAirProps> = ({ fetchData }) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  fetchData: state.fetchData.data,
+  fetchData: state.fetchOnAirData.data,
 });
 
 export default connect(mapStateToProps)(OnAir);
