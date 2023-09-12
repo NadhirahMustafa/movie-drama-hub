@@ -221,10 +221,20 @@ export interface DramaCreditDetailsInterface {
 
 export interface OnAirProps {
   fetchData: popularDramaInterface[];
+  totalPages: number;
 }
 
 export interface PopularProps {
   showType: string;
   fetchMovieData: popularMoviesInterface[];
   fetchDramaData: popularDramaInterface[];
+  totalMoviePages: number;
+  totalDramaPages: number;
+}
+
+export interface FetchResponseAPI {
+  page: number;
+  results: popularMoviesInterface[] | popularDramaInterface[];
+  total_pages: number;
+  total_results: number;
 }

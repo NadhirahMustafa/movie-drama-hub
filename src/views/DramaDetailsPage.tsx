@@ -60,12 +60,12 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     top: 0,
     left: 0,
     width: "100%",
-    height: "100vh",
+    height: "97%",
     backgroundImage: `url(https://image.tmdb.org/t/p/original${details.backdrop_path})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    minHeight: "100vh",
+    minHeight: "10px",
     opacity: 0.3,
   };
 
@@ -171,7 +171,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
                 .filter(
                   (x: CrewDetailsInterface) => x.job === CrewConst.EXEC_PRODUCER
                 )
-                ?.map((y: CrewDetailsInterface, index: number) => (
+                ?.map((y: CrewDetailsInterface) => (
                   <Grid>{y.name}</Grid>
                 ))}
             </Grid>
@@ -188,7 +188,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
                 .filter(
                   (x: CrewDetailsInterface) => x.job === CrewConst.PRODUCER
                 )
-                ?.map((y: CrewDetailsInterface, index: number) => (
+                ?.map((y: CrewDetailsInterface) => (
                   <Grid>{y.name}</Grid>
                 ))}
             </Grid>
@@ -206,7 +206,10 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
   const renderDetails = (
     <>
       <Grid className="details--justify details--emphasize common--padding-top">
-        <b>{details.original_name}</b>
+      <b>{`${details.name} `}</b>
+        <Grid>
+          {details.name !== details.original_name && ` (${details.original_name})`}
+        </Grid>
       </Grid>
       <Grid className="common--padding-top">
         <Grid>
@@ -251,12 +254,12 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     <Grid>
       <Grid className="common--padding">
         <Grid className="common--padding">
-          <Grid style={backgroundStyle} className="details--absolute" />
-          <Grid container className="details--display-flex">
+          
+          <Grid container className="details--display-flex"><Grid style={backgroundStyle} className="details--absolute" />
             <Grid item xs={6} className="details--justify">
               <img
                 src={`https://image.tmdb.org/t/p/original${details.poster_path}`}
-                width={550}
+                width={500}
                 alt={CommonTxt.imgNotFound}
               />
             </Grid>

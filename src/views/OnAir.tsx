@@ -14,7 +14,7 @@ import { RouterConst } from "../constant/constants";
 import { OnAirTxt } from "../constant/text";
 import "../styles/Views.scss";
 
-const OnAir: React.FC<OnAirProps> = ({ fetchData }) => {
+const OnAir: React.FC<OnAirProps> = ({ fetchData, totalPages }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,7 +24,6 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData }) => {
   );
   const isLoaded = onAirDramaList.length > 0;
   const count = useRef(0);
-
   const loadMoreData = () => {
     setTimeout(() => {
       dispatch(fetchOnAirData(pageNum));
@@ -63,13 +62,13 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData }) => {
         {onAirDramaList.map((row: popularDramaInterface, index: number) => (
           <DataDisplay
             src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
-            title={row.original_name}
+            title={row.name}
             key={index}
             dataPopularDrama={row}
             onClickPopularDrama={() => onClickCellDrama(row)}
           />
         ))}
-        {isLoaded && <LoadMoreButton onClick={loadMoreData} />}
+        {isLoaded && pageNum <= totalPages && <LoadMoreButton onClick={loadMoreData} />}
       </ScrollBox>
     </PageContent>
   );
@@ -77,6 +76,7 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData }) => {
 
 const mapStateToProps = (state: RootState) => ({
   fetchData: state.fetchOnAirData.data,
+  totalPages: state.fetchOnAirData.totalPages,
 });
 
 export default connect(mapStateToProps)(OnAir);

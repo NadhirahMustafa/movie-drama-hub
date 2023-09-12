@@ -106,3 +106,11 @@ export const SelectedDataInit: trendingInterface = {
     vote_count: 0,
     media_type: ''
 };
+
+export const fetchDataInitialState = {
+  data: [],
+  totalPages: 0,
+  isLoading: false,
+  error: null,
+  page: 1,
+};

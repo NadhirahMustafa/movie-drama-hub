@@ -11,7 +11,6 @@ import {
   setSelectedDramaData,
   setSelectedMovieData,
 } from "../actions/SelectedDataAction";
-import { setShowType } from "../actions/ShowTypeAction";
 import { RootState } from "../reducers/RootReducer";
 import { fetchPopularMovieData } from "../actions/FetchPopularMovieDataAction";
 import { fetchPopularDramaData } from "../actions/FetchPopularDramaDataAction";
@@ -22,13 +21,15 @@ import LoadMoreButton from "../components/LoadMoreButton";
 import PageContent from "../components/PageContent";
 import ShowType from "../components/ShowType";
 import { RouterConst, ShowTypeConst } from "../constant/constants";
-import { CommonTxt, PopularTxt } from "../constant/text";
+import { PopularTxt } from "../constant/text";
 import "../styles/Views.scss";
 
 const Popular: React.FC<PopularProps> = ({
   showType,
   fetchMovieData,
   fetchDramaData,
+  totalMoviePages,
+  totalDramaPages,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,8 +40,7 @@ const Popular: React.FC<PopularProps> = ({
   const [pageNumDrama, setPageNumDrama] = useState<number>(1);
   const isMovieLoaded = movieList.length > 0;
   const isDramaLoaded = dramaList.length > 0;
-  const countMovie = useRef(0);
-  const countDrama = useRef(0);
+  const count = useRef(0);
 
   const loadMoreMovieData = () => {
     setTimeout(() => {
@@ -57,13 +57,13 @@ const Popular: React.FC<PopularProps> = ({
   };
 
   useEffect(() => {
-    if (countMovie.current !== 0) {
+    if (count.current !== 0) {
       setPageNumMovie(pageNumMovie + 1);
       setPageNumDrama(pageNumDrama + 1);
       dispatch(fetchPopularMovieData(pageNumMovie));
       dispatch(fetchPopularDramaData(pageNumDrama));
     }
-    countMovie.current++;
+    count.current++;
   }, [dispatch]);
 
   useEffect(() => {
@@ -117,16 +117,16 @@ const Popular: React.FC<PopularProps> = ({
           : dramaList.map((row: popularDramaInterface, index: number) => (
               <DataDisplay
                 src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
-                title={row.original_name}
+                title={row.name}
                 key={index}
                 dataPopularDrama={row}
                 onClickPopularDrama={() => onClickCellDrama(row)}
               />
             ))}
-        {showType === ShowTypeConst.MOVIE && isMovieLoaded && (
+        {showType === ShowTypeConst.MOVIE && isMovieLoaded && pageNumMovie <= totalMoviePages &&(
           <LoadMoreButton onClick={loadMoreMovieData} />
         )}
-        {showType === ShowTypeConst.DRAMA && isDramaLoaded && (
+        {showType === ShowTypeConst.DRAMA && isDramaLoaded && pageNumDrama <= totalDramaPages && (
           <LoadMoreButton onClick={loadMoreDramaData} />
         )}
       </ScrollBox>
@@ -138,5 +138,7 @@ const mapStateToProps = (state: RootState) => ({
   showType: state.showType.showType,
   fetchMovieData: state.fetchPopularMovieData.data,
   fetchDramaData: state.fetchPopularDramaData.data,
+  totalMoviePages: state.fetchPopularMovieData.totalPages,
+  totalDramaPages: state.fetchPopularDramaData.totalPages
 });
 export default connect(mapStateToProps)(Popular);

@@ -7,6 +7,7 @@ import {
   popularMoviesInterface,
   MovieCreditDetailsInterface,
   DramaCreditDetailsInterface,
+  FetchResponseAPI,
 } from "../interface/interface";
 
 const fetchHeader = {
@@ -19,10 +20,10 @@ const fetchHeader = {
 };
 
 export const getDramaOnAir = (page: number) => {
-  return new Promise<popularDramaInterface[]>((resolve, reject) => {
+  return new Promise<FetchResponseAPI>((resolve, reject) => {
     fetch(`https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${page}`, fetchHeader)
     .then((res) => res.json())
-    .then((res) => resolve(res.results))
+    .then((res) => resolve(res))
     .catch((err) => reject(err));
   });
 };
@@ -41,25 +42,25 @@ export const getTrending = () => {
 };
 
 export const getPopularMovies = (page: number) => {
-  return new Promise<popularMoviesInterface[]>((resolve, reject) => {
+  return new Promise<FetchResponseAPI>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`,
       fetchHeader
     )
       .then((res) => res.json())
-      .then((res) => resolve(res.results))
+      .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 };
 
 export const getPopularDrama = (page: number) => {
-  return new Promise<popularDramaInterface[]>((resolve, reject) => {
+  return new Promise<FetchResponseAPI>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`,
       fetchHeader
     )
       .then((res) => res.json())
-      .then((res) => resolve(res.results))
+      .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 };
