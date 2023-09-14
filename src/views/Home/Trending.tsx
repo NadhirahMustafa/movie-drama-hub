@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { getTrending } from "../services/api.service";
-import { trendingInterface } from "../interface/interface";
-import { setSelectedData } from "../actions/SelectedDataAction";
-import DataDisplay from "../components/DataDisplay";
-import PageTitle from "../components/PageTitle";
-import ScrollBox from "../components/ScrollBox";
-import PageContent from "../components/PageContent";
-import { RouterConst, MediaTypeConst } from "../constant/constants";
-import { CommonTxt, TrendingTxt } from "../constant/text";
-import "../styles/Views.scss";
+import { getTrending } from "../../services/api.service";
+import { trendingInterface } from "../../interface/interface";
+import { setSelectedData } from "../../actions/SelectedDataAction";
+import DataDisplay from "../../components/DataDisplay";
+import PageTitle from "../../components/PageTitle";
+import ScrollBox from "../../components/ScrollBox";
+import PageContent from "../../components/PageContent";
+import { RouterConst, MediaTypeConst } from "../../constant/constants";
+import { CommonTxt, TrendingTxt } from "../../constant/text";
+import "../../styles/Views.scss";
 
 const Trending: React.FC = () => {
 

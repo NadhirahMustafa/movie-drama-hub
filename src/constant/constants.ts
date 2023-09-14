@@ -1,8 +1,13 @@
 export const RouterConst = {
     HOME: '/',
-    MOVIE_DETAILS: '/movieDetails',
-    DRAMA_DETAILS: '/dramaDetails',
-    NOW_PLAYING: '/nowPlaying'
+    MOVIE_DETAILS: '/moviedetails',
+    DRAMA_DETAILS: '/dramadetails',
+    MOVIE_NOW_PLAYING: '/movienowplaying',
+    DRAMA_NOW_PLAYING: '/dramanowplaying',
+    MOVIE_TOP_RATED: '/movietoprated',
+    DRAMA_TOP_RATED: '/dramatoprated',
+    MOVIE_UPCOMING: '/movieupcoming',
+    DRAMA_UPCOMING: '/dramaupcoming',
 }
 export const ShowTypeConst = {
     MOVIE: 'Movies',

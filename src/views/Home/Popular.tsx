@@ -1,28 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { getPopularMovies, getPopularDrama } from "../services/api.service";
+import { getPopularMovies, getPopularDrama } from "../../services/api.service";
 import {
   popularMoviesInterface,
   popularDramaInterface,
   PopularProps,
-} from "../interface/interface";
+} from "../../interface/interface";
 import {
   setSelectedDramaData,
   setSelectedMovieData,
-} from "../actions/SelectedDataAction";
-import { RootState } from "../reducers/RootReducer";
-import { fetchPopularMovieData } from "../actions/FetchPopularMovieDataAction";
-import { fetchPopularDramaData } from "../actions/FetchPopularDramaDataAction";
-import DataDisplay from "../components/DataDisplay";
-import ScrollBox from "../components/ScrollBox";
-import PageTitle from "../components/PageTitle";
-import LoadMoreButton from "../components/LoadMoreButton";
-import PageContent from "../components/PageContent";
-import ShowType from "../components/ShowType";
-import { RouterConst, ShowTypeConst } from "../constant/constants";
-import { PopularTxt } from "../constant/text";
-import "../styles/Views.scss";
+} from "../../actions/SelectedDataAction";
+import { RootState } from "../../reducers/RootReducer";
+import { fetchPopularMovieData } from "../../actions/FetchPopularMovieDataAction";
+import { fetchPopularDramaData } from "../../actions/FetchPopularDramaDataAction";
+import DataDisplay from "../../components/DataDisplay";
+import ScrollBox from "../../components/ScrollBox";
+import PageTitle from "../../components/PageTitle";
+import LoadMoreButton from "../../components/LoadMoreButton";
+import PageContent from "../../components/PageContent";
+import ShowType from "../../components/ShowType";
+import { RouterConst, ShowTypeConst } from "../../constant/constants";
+import { PopularTxt } from "../../constant/text";
+import "../../styles/Views.scss";
 
 const Popular: React.FC<PopularProps> = ({
   showType,

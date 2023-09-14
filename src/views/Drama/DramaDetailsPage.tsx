@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 import {
   getDramaDetails,
   getDramaCreditDetails,
-} from "../services/api.service";
+} from "../../services/api.service";
 import {
   DetailsProps,
   genresInterface,
@@ -13,16 +13,16 @@ import {
   DramaCreditDetailsInterface,
   CrewDetailsInterface,
   DramaCastDetailsInterface,
-} from "../interface/interface";
-import { RootState } from "../reducers/RootReducer";
-import BackButton from "../components/BackButton";
-import DataList from "../components/DataList";
-import PageTitle from "../components/PageTitle";
-import ScrollBox from "../components/ScrollBox";
-import { CrewConst } from "../constant/constants";
-import { DramaDetailsInit, DramaCreditInit } from "../constant/initialize";
-import { CommonTxt, CommonDetailsTxt, DramaDetailsTxt } from "../constant/text";
-import "../styles/Views.scss";
+} from "../../interface/interface";
+import { RootState } from "../../reducers/RootReducer";
+import BackButton from "../../components/BackButton";
+import DataList from "../../components/DataList";
+import PageTitle from "../../components/PageTitle";
+import ScrollBox from "../../components/ScrollBox";
+import { CrewConst } from "../../constant/constants";
+import { DramaDetailsInit, DramaCreditInit } from "../../constant/initialize";
+import { CommonTxt, CommonDetailsTxt, DramaDetailsTxt } from "../../constant/text";
+import "../../styles/Views.scss";
 
 const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
   const [details, setDetails] =

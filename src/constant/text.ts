@@ -7,7 +7,9 @@ export const CommonTxt = {
 
 export const NavTxt = {
     home: 'Home',
-    now_playing: 'Now Playing'
+    now_playing: 'Now Playing',
+    top_rated: 'Top Rated',
+    upcoming: 'Upcoming'
 };
 
 export const HomeTxt = {
