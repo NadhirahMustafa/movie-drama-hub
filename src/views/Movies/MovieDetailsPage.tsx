@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 import {
   getMovieDetails,
   getMovieCreditDetails,
-} from "../services/api.service";
+} from "../../services/api.service";
 import {
   DetailsProps,
   genresInterface,
@@ -13,16 +13,16 @@ import {
   MovieCreditDetailsInterface,
   CrewDetailsInterface,
   MovieCastDetailsInterface,
-} from "../interface/interface";
-import { RootState } from "../reducers/rootReducer";
-import BackButton from "../components/BackButton";
-import PageTitle from "../components/PageTitle";
-import ScrollBox from "../components/ScrollBox";
-import DataList from "../components/DataList";
-import { CrewConst } from "../constant/constants";
-import { MovieDetailsInit, MovieCreditInit } from "../constant/initialize";
-import { CommonTxt, CommonDetailsTxt, MovieDetailsTxt } from "../constant/text";
-import "../styles/Views.scss";
+} from "../../interface/interface";
+import { RootState } from "../../reducers/RootReducer";
+import BackButton from "../../components/BackButton";
+import PageTitle from "../../components/PageTitle";
+import ScrollBox from "../../components/ScrollBox";
+import DataList from "../../components/DataList";
+import { CrewConst } from "../../constant/constants";
+import { MovieDetailsInit, MovieCreditInit } from "../../constant/initialize";
+import { CommonTxt, CommonDetailsTxt, MovieDetailsTxt } from "../../constant/text";
+import "../../styles/Views.scss";
 
 const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
   const [details, setDetails] =
@@ -57,12 +57,12 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     top: 0,
     left: 0,
     width: "100%",
-    height: "100%",
+    height: "97%",
     backgroundImage: `url(https://image.tmdb.org/t/p/original${details.backdrop_path})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    minHeight: "100vh",
+    minHeight: "10px",
     opacity: 0.3,
   };
 
@@ -184,21 +184,23 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
 
   const renderCast = (
     <Grid className="common--padding">
-    <Grid className="common--padding">
-      <PageTitle title={CommonDetailsTxt.cast}></PageTitle>
-      <ScrollBox>
-        {credit.cast
-          ?.slice(0, 10)
-          .map((row: MovieCastDetailsInterface, index: number) => (
-            <DataList
-              src={`https://image.tmdb.org/t/p/original${row.profile_path}`}
-              title={row.name}
-              subtitle={row.character}
-              key={index}
-            />
-          ))}
-      </ScrollBox>
-    </Grid>
+      <Grid className="common--padding">
+      <Grid className="common--padding">
+        <PageTitle title={CommonDetailsTxt.cast}></PageTitle>
+        <ScrollBox>
+          {credit.cast
+            ?.slice(0, 10)
+            .map((row: MovieCastDetailsInterface, index: number) => (
+              <DataList
+                src={`https://image.tmdb.org/t/p/original${row.profile_path}`}
+                title={row.name}
+                subtitle={row.character}
+                key={index}
+              />
+            ))}
+        </ScrollBox>
+      </Grid>
+      </Grid>
     </Grid>
   );
 
@@ -206,12 +208,12 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     <Grid>
       <Grid className="common--padding">
         <Grid>
-          <Grid style={backgroundStyle} className="details--absolute" />
           <Grid container className="details--display-flex">
+            <Grid style={backgroundStyle} className="details--absolute" />
             <Grid item xs={6} className="details--justify">
               <img
                 src={`https://image.tmdb.org/t/p/original${details.poster_path}`}
-                width={550}
+                width={500}
                 alt={CommonTxt.imgNotFound}
               />
             </Grid>

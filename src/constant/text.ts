@@ -1,12 +1,15 @@
 export const CommonTxt = {
     alertMessage: 'Something Wrong on The Server, Please Try Again',
     imgNotFound: 'image not found',
+    loadMore: 'Load more',
     back: 'Back'
 };
 
 export const NavTxt = {
     home: 'Home',
-    now_playing: 'Now Playing'
+    now_playing: 'Now Playing',
+    top_rated: 'Top Rated',
+    upcoming: 'Upcoming'
 };
 
 export const HomeTxt = {
