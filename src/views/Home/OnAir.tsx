@@ -41,11 +41,14 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData, totalPages }) => {
     count.current++;
   }, [dispatch]);
 
+  console.log('onAirDramaList: ', onAirDramaList);
   useEffect(() => {
     let tempArray: any = onAirDramaList;
-    fetchData.map((x: any) => tempArray.push(x));
-    tempArray = tempArray.filter(tempArrayFilter);
-    setOnAirDramaList(tempArray);
+    if (pageNum !== 1) {
+      fetchData.map((x: any) => tempArray.push(x));
+      tempArray = tempArray.filter(tempArrayFilter);
+      setOnAirDramaList(tempArray);
+    }
   }, [fetchData]);
 
   const onClickCellDrama = (c: popularDramaInterface) => {

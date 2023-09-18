@@ -3,23 +3,18 @@ import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import {
-  DisplayDramaProps,
-  popularDramaInterface,
+  DisplayMovieProps,
+  movieInterface,
 } from "../../interface/interface";
-import { fetchNowPlayingDramaData } from "../../actions/FetchNowPlayingDramaAction";
-import { setSelectedDramaData } from "../../actions/SelectedDataAction";
+import { fetchTopRatedMovieData } from "../../actions/FetchTopRatedMovieAction";
+import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
-import {
-  documentHeight,
-  scrollTop,
-  uniqueArrayFilter,
-  windowHeight,
-} from "../../constant/common";
+import { documentHeight, scrollTop, uniqueArrayFilter, windowHeight } from "../../constant/common";
 import { RouterConst } from "../../constant/constants";
 import "../../styles/Views.scss";
 
-const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
+const TopRatedMovie: React.FC<DisplayMovieProps> = ({
   fetchData,
   totalPages,
 }) => {
@@ -28,17 +23,16 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
 
   const [pageNum, setPageNum] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
-
-  const [nowPlayingDrama, setNowPlayingDrama] = useState<
-    popularDramaInterface[]
-  >([]);
+  const [topRatedMovie, setTopRatedMovie] = useState<movieInterface[]>(
+    []
+  );
   const count = useRef(0);
 
   useEffect(() => {
     const loadMoreData = () => {
-      if (pageNumber <= totalPages) {
+      if(pageNumber <= (totalPages)){
         setTimeout(() => {
-          dispatch(fetchNowPlayingDramaData(pageNumber));
+          dispatch(fetchTopRatedMovieData(pageNumber));
         }, 100);
       }
     };
@@ -48,21 +42,24 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
   useEffect(() => {
     if (count.current !== 0) {
       setPageNum(pageNum + 1);
-      dispatch(fetchNowPlayingDramaData(pageNum));
+      setTimeout(() => {
+        dispatch(fetchTopRatedMovieData(pageNum));
+      }, 2000)
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
-    let tempArray: any = nowPlayingDrama;
-    if(pageNum !== 1) {
+    let tempArray: any = topRatedMovie;
+    if(pageNum !== 1){
       fetchData.map((x: any) => tempArray.push(x));
       const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
       setTimeout(() => {
-        setNowPlayingDrama(uniqueArray);
+        setTopRatedMovie(uniqueArray);
       }, 100);
     }
   }, [fetchData]);
+
   
   const handleScroll = () => {
     if (windowHeight + scrollTop === documentHeight) {
@@ -77,30 +74,30 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
     };
   }, [handleScroll]);
 
-  const onClickCellDrama = (c: popularDramaInterface) => {
-    dispatch(setSelectedDramaData(c));
-    navigate(RouterConst.DRAMA_DETAILS);
+  const onClickCellMovies = (c: movieInterface) => {
+    dispatch(setSelectedMovieData(c));
+    navigate(RouterConst.MOVIE_DETAILS);
   };
 
   return (
     <Grid className="common--padding">
       <Grid className="now-playing--card-arr">
-        {nowPlayingDrama.map((item: popularDramaInterface, index: any) => (
+        {topRatedMovie.map((item: movieInterface, index: any) => (
           <ButtonData
             key={index}
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
-            title={item.name}
-            dataDrama={item}
-            onClickDrama={onClickCellDrama}
+            title={item.title}
+            dataMovie={item}
+            onClickMovie={onClickCellMovies}
           />
         ))}
-      </Grid>
+        </Grid>
     </Grid>
   );
 };
 
 const mapStateToProps = (state: RootState) => ({
-  fetchData: state.fetchNowPlayingDramaData.data,
-  totalPages: state.fetchNowPlayingDramaData.totalPages,
+  fetchData: state.fetchTopRatedMovieData.data,
+  totalPages: state.fetchTopRatedMovieData.totalPages,
 });
-export default connect(mapStateToProps)(NowPlayingDrama);
+export default connect(mapStateToProps)(TopRatedMovie);

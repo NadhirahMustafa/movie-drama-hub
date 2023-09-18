@@ -7,6 +7,8 @@ import fetchPopularMovieDataReducer from "./FetchPopularMovieReducer";
 import fetchPopularDramaDataReducer from "./FetchPopularDramaReducer";
 import fetchNowPlayingMovieDataReducer from "./FetchNowPlayingMovieReducer";
 import fetchNowPlayingDramaDataReducer from "./FetchNowPlayingDramaReducer";
+import fetchTopRatedMovieDataReducer from "./FetchTopRatedMovieReducer";
+import fetchTopRatedDramaDataReducer from "./FetchTopRatedDramaReducer";
 
 const rootReducer = combineReducers({
   selectedData: selectedDataReducer,
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
   fetchPopularDramaData: fetchPopularDramaDataReducer,
   fetchNowPlayingMovieData: fetchNowPlayingMovieDataReducer,
   fetchNowPlayingDramaData: fetchNowPlayingDramaDataReducer,
+  fetchTopRatedMovieData: fetchTopRatedMovieDataReducer,
+  fetchTopRatedDramaData: fetchTopRatedDramaDataReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -2,19 +2,21 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
-import {
-  NowPlayingMovieProps,
-  movieInterface,
-} from "../../interface/interface";
+import { DisplayMovieProps, movieInterface } from "../../interface/interface";
 import { fetchNowPlayingMovieData } from "../../actions/FetchNowPlayingMovieAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
-import { documentHeight, scrollTop, uniqueArrayFilter, windowHeight } from "../../constant/common";
+import {
+  documentHeight,
+  scrollTop,
+  uniqueArrayFilter,
+  windowHeight,
+} from "../../constant/common";
 import { RouterConst } from "../../constant/constants";
 import "../../styles/Views.scss";
 
-const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
+const NowPlayingMovie: React.FC<DisplayMovieProps> = ({
   fetchData,
   totalPages,
 }) => {
@@ -30,7 +32,7 @@ const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
 
   useEffect(() => {
     const loadMoreData = () => {
-      if(pageNumber <= (totalPages)){
+      if (pageNumber <= totalPages) {
         setTimeout(() => {
           dispatch(fetchNowPlayingMovieData(pageNumber));
         }, 100);
@@ -44,14 +46,14 @@ const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
       setPageNum(pageNum + 1);
       setTimeout(() => {
         dispatch(fetchNowPlayingMovieData(pageNum));
-      }, 2000)
+      }, 2000);
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
     let tempArray: any = nowPlayingMovies;
-    if(pageNum !== 1){
+    if (pageNum !== 1) {
       fetchData.map((x: any) => tempArray.push(x));
       const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
       setTimeout(() => {
@@ -60,10 +62,9 @@ const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
     }
   }, [fetchData]);
 
-  
   const handleScroll = () => {
     if (windowHeight + scrollTop === documentHeight) {
-      setPageNumber((test) => test + 1);
+      setPageNumber((page) => page + 1);
     }
   };
 
@@ -91,7 +92,7 @@ const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
             onClickMovie={onClickCellMovies}
           />
         ))}
-        </Grid>
+      </Grid>
     </Grid>
   );
 };
