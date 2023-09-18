@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
@@ -42,31 +42,37 @@ const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
   useEffect(() => {
     if (count.current !== 0) {
       setPageNum(pageNum + 1);
-      dispatch(fetchNowPlayingMovieData(pageNum));
+      setTimeout(() => {
+        dispatch(fetchNowPlayingMovieData(pageNum));
+      }, 2000)
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
     let tempArray: any = nowPlayingMovies;
-    fetchData.map((x: any) => tempArray.push(x));
-    const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
-    setTimeout(() => {
-      setNowPlayingMovies(uniqueArray);
-    }, 100);
+    if(pageNum !== 1){
+      fetchData.map((x: any) => tempArray.push(x));
+      const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      setTimeout(() => {
+        setNowPlayingMovies(uniqueArray);
+      }, 100);
+    }
   }, [fetchData]);
 
+  
+  const handleScroll = () => {
+    if (windowHeight + scrollTop === documentHeight) {
+      setPageNumber((test) => test + 1);
+    }
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (windowHeight + scrollTop === documentHeight) {
-        setPageNumber((test) => test + 1);
-      }
-    };
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   const onClickCellMovies = (c: movieInterface) => {
     dispatch(setSelectedMovieData(c));

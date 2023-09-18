@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
@@ -55,24 +55,27 @@ const NowPlayingDrama: React.FC<NowPlayingDramaProps> = ({
 
   useEffect(() => {
     let tempArray: any = nowPlayingDrama;
-    fetchData.map((x: any) => tempArray.push(x));
-    const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
-    setTimeout(() => {
-      setNowPlayingDrama(uniqueArray);
-    }, 100);
+    if(pageNum !== 1) {
+      fetchData.map((x: any) => tempArray.push(x));
+      const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      setTimeout(() => {
+        setNowPlayingDrama(uniqueArray);
+      }, 100);
+    }
   }, [fetchData]);
+  
+  const handleScroll = () => {
+    if (windowHeight + scrollTop === documentHeight) {
+      setPageNumber((test) => test + 1);
+    }
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (windowHeight + scrollTop === documentHeight) {
-        setPageNumber((test) => test + 1);
-      }
-    };
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   const onClickCellDrama = (c: popularDramaInterface) => {
     dispatch(setSelectedDramaData(c));
