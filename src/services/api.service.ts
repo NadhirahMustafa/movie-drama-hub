@@ -4,7 +4,6 @@ import {
   MovieDetailsInterface,
   DramaDetailsInteface,
   popularDramaInterface,
-  popularMoviesInterface,
   MovieCreditDetailsInterface,
   DramaCreditDetailsInterface,
   FetchResponseAPI,
@@ -65,6 +64,30 @@ export const getPopularDrama = (page: number) => {
   });
 };
 
+export const getNowPlayingMovies = (page: number) => {
+  return new Promise<FetchResponseAPI>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getNowPlayingDrama = (page: number) => {
+  return new Promise<FetchResponseAPI>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=${page}`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });  
+};
+
 export const getMovieDetails = (id: number) => {
   return new Promise<MovieDetailsInterface>((resolve, reject) => {
     fetch(
@@ -108,30 +131,6 @@ export const getDramaDetails = (id: number) => {
       .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
-};
-
-export const getNowPlayingMovies = () => {
-  return new Promise<movieInterface[]>((resolve, reject) => {
-    fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-      fetchHeader
-    )
-      .then((res) => res.json())
-      .then((res) => resolve(res.results))
-      .catch((err) => reject(err));
-  });
-};
-
-export const getNowPlayingDrama = () => {
-  return new Promise<popularDramaInterface[]>((resolve, reject) => {
-    fetch(
-      "https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1",
-      fetchHeader
-    )
-      .then((res) => res.json())
-      .then((res) => resolve(res.results))
-      .catch((err) => reject(err));
-  });  
 };
 
 export const getTopRatedMovies = () => {
