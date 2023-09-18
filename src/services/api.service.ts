@@ -3,7 +3,6 @@ import {
   movieInterface,
   MovieDetailsInterface,
   DramaDetailsInteface,
-  popularDramaInterface,
   MovieCreditDetailsInterface,
   DramaCreditDetailsInterface,
   FetchResponseAPI,
@@ -88,6 +87,30 @@ export const getNowPlayingDrama = (page: number) => {
   });  
 };
 
+export const getTopRatedMovies = (page: number) => {
+  return new Promise<FetchResponseAPI>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getTopRatedDrama = (page: number) => {
+  return new Promise<FetchResponseAPI>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page==${page}`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};
+
 export const getMovieDetails = (id: number) => {
   return new Promise<MovieDetailsInterface>((resolve, reject) => {
     fetch(
@@ -129,18 +152,6 @@ export const getDramaDetails = (id: number) => {
     fetch(`https://api.themoviedb.org/3/tv/${id}?language=en-US`, fetchHeader)
       .then((res) => res.json())
       .then((res) => resolve(res))
-      .catch((err) => reject(err));
-  });
-};
-
-export const getTopRatedMovies = () => {
-  return new Promise<movieInterface[]>((resolve, reject) => {
-    fetch(
-      "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-      fetchHeader
-    )
-      .then((res) => res.json())
-      .then((res) => resolve(res.results))
       .catch((err) => reject(err));
   });
 };

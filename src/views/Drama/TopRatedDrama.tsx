@@ -6,20 +6,15 @@ import {
   DisplayDramaProps,
   popularDramaInterface,
 } from "../../interface/interface";
-import { fetchNowPlayingDramaData } from "../../actions/FetchNowPlayingDramaAction";
+import { fetchTopRatedDramaData } from "../../actions/FetchTopRatedDramaAction";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
-import {
-  documentHeight,
-  scrollTop,
-  uniqueArrayFilter,
-  windowHeight,
-} from "../../constant/common";
+import { documentHeight, scrollTop, uniqueArrayFilter, windowHeight } from "../../constant/common";
 import { RouterConst } from "../../constant/constants";
 import "../../styles/Views.scss";
 
-const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
+const TopRatedDrama: React.FC<DisplayDramaProps> = ({
   fetchData,
   totalPages,
 }) => {
@@ -28,17 +23,16 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
 
   const [pageNum, setPageNum] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
-
-  const [nowPlayingDrama, setNowPlayingDrama] = useState<
-    popularDramaInterface[]
-  >([]);
+  const [topRatedDrama, setTopRatedDrama] = useState<popularDramaInterface[]>(
+    []
+  );
   const count = useRef(0);
 
   useEffect(() => {
     const loadMoreData = () => {
-      if (pageNumber <= totalPages) {
+      if(pageNumber <= (totalPages)){
         setTimeout(() => {
-          dispatch(fetchNowPlayingDramaData(pageNumber));
+          dispatch(fetchTopRatedDramaData(pageNumber));
         }, 100);
       }
     };
@@ -48,21 +42,24 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
   useEffect(() => {
     if (count.current !== 0) {
       setPageNum(pageNum + 1);
-      dispatch(fetchNowPlayingDramaData(pageNum));
+      setTimeout(() => {
+        dispatch(fetchTopRatedDramaData(pageNum));
+      }, 2000)
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
-    let tempArray: any = nowPlayingDrama;
-    if(pageNum !== 1) {
+    let tempArray: any = topRatedDrama;
+    if(pageNum !== 1){
       fetchData.map((x: any) => tempArray.push(x));
       const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
       setTimeout(() => {
-        setNowPlayingDrama(uniqueArray);
+        setTopRatedDrama(uniqueArray);
       }, 100);
     }
   }, [fetchData]);
+
   
   const handleScroll = () => {
     if (windowHeight + scrollTop === documentHeight) {
@@ -77,7 +74,7 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
     };
   }, [handleScroll]);
 
-  const onClickCellDrama = (c: popularDramaInterface) => {
+  const onClickCellDramas = (c: popularDramaInterface) => {
     dispatch(setSelectedDramaData(c));
     navigate(RouterConst.DRAMA_DETAILS);
   };
@@ -85,22 +82,22 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
   return (
     <Grid className="common--padding">
       <Grid className="now-playing--card-arr">
-        {nowPlayingDrama.map((item: popularDramaInterface, index: any) => (
+        {topRatedDrama.map((item: popularDramaInterface, index: any) => (
           <ButtonData
             key={index}
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
             title={item.name}
             dataDrama={item}
-            onClickDrama={onClickCellDrama}
+            onClickDrama={onClickCellDramas}
           />
         ))}
-      </Grid>
+        </Grid>
     </Grid>
   );
 };
 
 const mapStateToProps = (state: RootState) => ({
-  fetchData: state.fetchNowPlayingDramaData.data,
-  totalPages: state.fetchNowPlayingDramaData.totalPages,
+  fetchData: state.fetchTopRatedDramaData.data,
+  totalPages: state.fetchTopRatedDramaData.totalPages,
 });
-export default connect(mapStateToProps)(NowPlayingDrama);
+export default connect(mapStateToProps)(TopRatedDrama);

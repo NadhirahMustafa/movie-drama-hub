@@ -1,20 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
-import {
-  NowPlayingMovieProps,
-  movieInterface,
-} from "../../interface/interface";
+import { DisplayMovieProps, movieInterface } from "../../interface/interface";
 import { fetchNowPlayingMovieData } from "../../actions/FetchNowPlayingMovieAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
-import { documentHeight, scrollTop, uniqueArrayFilter, windowHeight } from "../../constant/common";
+import {
+  documentHeight,
+  scrollTop,
+  uniqueArrayFilter,
+  windowHeight,
+} from "../../constant/common";
 import { RouterConst } from "../../constant/constants";
 import "../../styles/Views.scss";
 
-const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
+const NowPlayingMovie: React.FC<DisplayMovieProps> = ({
   fetchData,
   totalPages,
 }) => {
@@ -30,7 +32,7 @@ const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
 
   useEffect(() => {
     const loadMoreData = () => {
-      if(pageNumber <= (totalPages)){
+      if (pageNumber <= totalPages) {
         setTimeout(() => {
           dispatch(fetchNowPlayingMovieData(pageNumber));
         }, 100);
@@ -42,31 +44,36 @@ const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
   useEffect(() => {
     if (count.current !== 0) {
       setPageNum(pageNum + 1);
-      dispatch(fetchNowPlayingMovieData(pageNum));
+      setTimeout(() => {
+        dispatch(fetchNowPlayingMovieData(pageNum));
+      }, 2000);
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
     let tempArray: any = nowPlayingMovies;
-    fetchData.map((x: any) => tempArray.push(x));
-    const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
-    setTimeout(() => {
-      setNowPlayingMovies(uniqueArray);
-    }, 100);
+    if (pageNum !== 1) {
+      fetchData.map((x: any) => tempArray.push(x));
+      const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      setTimeout(() => {
+        setNowPlayingMovies(uniqueArray);
+      }, 100);
+    }
   }, [fetchData]);
 
+  const handleScroll = () => {
+    if (windowHeight + scrollTop === documentHeight) {
+      setPageNumber((page) => page + 1);
+    }
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (windowHeight + scrollTop === documentHeight) {
-        setPageNumber((test) => test + 1);
-      }
-    };
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   const onClickCellMovies = (c: movieInterface) => {
     dispatch(setSelectedMovieData(c));
@@ -85,7 +92,7 @@ const NowPlayingMovie: React.FC<NowPlayingMovieProps> = ({
             onClickMovie={onClickCellMovies}
           />
         ))}
-        </Grid>
+      </Grid>
     </Grid>
   );
 };

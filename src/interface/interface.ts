@@ -232,12 +232,12 @@ export interface PopularProps {
   totalDramaPages: number;
 }
 
-export interface NowPlayingMovieProps {
+export interface DisplayMovieProps {
   fetchData: movieInterface[];
   totalPages: number;
 }
 
-export interface NowPlayingDramaProps {
+export interface DisplayDramaProps {
   fetchData: popularDramaInterface[];
   totalPages: number;
 }
