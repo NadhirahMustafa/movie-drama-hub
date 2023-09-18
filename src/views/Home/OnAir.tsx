@@ -41,7 +41,6 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData, totalPages }) => {
     count.current++;
   }, [dispatch]);
 
-  console.log('onAirDramaList: ', onAirDramaList);
   useEffect(() => {
     let tempArray: any = onAirDramaList;
     if (pageNum !== 1) {
