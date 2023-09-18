@@ -5,8 +5,8 @@ import NavigationBar from "./views/NavigationBar";
 import Home from "./views/Home/Home";
 import MovieDetailsPage from "./views/Movies/MovieDetailsPage";
 import DramaDetailsPage from "./views/Drama/DramaDetailsPage";
-import MovieNowPlaying from "./views/Movies/MovieNowPlaying";
-import DramaNowPlaying from "./views/Drama/DramaNowPlaying";
+import NowPlayingMovie from "./views/Movies/NowPlayingMovie";
+import NowPlayingDrama from "./views/Drama/NowPlayingDrama";
 import { RouterConst } from "./constant/constants";
 import { HomeTxt } from "./constant/text";
 
@@ -24,10 +24,10 @@ const App: React.FC = () => {
           path={RouterConst.DRAMA_DETAILS}
           element={<DramaDetailsPage />}
         />
-        <Route path={RouterConst.MOVIE_NOW_PLAYING} element={<MovieNowPlaying />} />
-        <Route path={RouterConst.DRAMA_NOW_PLAYING} element={<DramaNowPlaying />} />
-        <Route path={RouterConst.MOVIE_TOP_RATED} element={<DramaNowPlaying />} />
-        <Route path={RouterConst.DRAMA_TOP_RATED} element={<DramaNowPlaying />} />
+        <Route path={RouterConst.MOVIE_NOW_PLAYING} element={<NowPlayingMovie />} />
+        <Route path={RouterConst.DRAMA_NOW_PLAYING} element={<NowPlayingDrama />} />
+        <Route path={RouterConst.MOVIE_TOP_RATED} element={<NowPlayingDrama />} />
+        <Route path={RouterConst.DRAMA_TOP_RATED} element={<NowPlayingDrama />} />
       </Routes>
       <Grid className="common--padding-top">
         <Grid className="home--footer">{HomeTxt.footer}</Grid>

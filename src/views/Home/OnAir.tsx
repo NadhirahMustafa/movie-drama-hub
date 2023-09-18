@@ -10,6 +10,7 @@ import ScrollBox from "../../components/ScrollBox";
 import PageTitle from "../../components/PageTitle";
 import PageContent from "../../components/PageContent";
 import LoadMoreButton from "../../components/LoadMoreButton";
+import { tempArrayFilter } from "../../constant/common";
 import { RouterConst } from "../../constant/constants";
 import { OnAirTxt } from "../../constant/text";
 import "../../styles/Views.scss";
@@ -24,6 +25,7 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData, totalPages }) => {
   );
   const isLoaded = onAirDramaList.length > 0;
   const count = useRef(0);
+
   const loadMoreData = () => {
     setTimeout(() => {
       dispatch(fetchOnAirData(pageNum));
@@ -42,11 +44,7 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData, totalPages }) => {
   useEffect(() => {
     let tempArray: any = onAirDramaList;
     fetchData.map((x: any) => tempArray.push(x));
-    tempArray = tempArray.filter(
-      (item: any, index: any, array: string | any[]) => {
-        return array.indexOf(item) === index;
-      }
-    );
+    tempArray = tempArray.filter(tempArrayFilter);
     setOnAirDramaList(tempArray);
   }, [fetchData]);
 
@@ -68,7 +66,9 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData, totalPages }) => {
             onClickPopularDrama={() => onClickCellDrama(row)}
           />
         ))}
-        {isLoaded && pageNum <= totalPages && <LoadMoreButton onClick={loadMoreData} />}
+        {isLoaded && pageNum <= totalPages && (
+          <LoadMoreButton onClick={loadMoreData} />
+        )}
       </ScrollBox>
     </PageContent>
   );

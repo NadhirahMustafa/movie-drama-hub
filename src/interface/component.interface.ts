@@ -35,3 +35,8 @@ export interface ButtonDataProps {
   onClickMovie?: (c: movieInterface) => void;
   onClickDrama?: (c: popularDramaInterface) => void;
 }
+
+export interface LoadMoreButtonProps {
+  onClick: () => void;
+}
+

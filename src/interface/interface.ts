@@ -232,9 +232,19 @@ export interface PopularProps {
   totalDramaPages: number;
 }
 
+export interface NowPlayingMovieProps {
+  fetchData: movieInterface[];
+  totalPages: number;
+}
+
+export interface NowPlayingDramaProps {
+  fetchData: popularDramaInterface[];
+  totalPages: number;
+}
+
 export interface FetchResponseAPI {
   page: number;
-  results: popularMoviesInterface[] | popularDramaInterface[];
+  results: movieInterface[] | popularMoviesInterface[] | popularDramaInterface[];
   total_pages: number;
   total_results: number;
 }

@@ -1,19 +1,19 @@
 import {
-  FETCH_ON_AIR_DATA_REQUEST,
-  FETCH_ON_AIR_DATA_SUCCESS,
-  FETCH_ON_AIR_DATA_FAILURE,
-} from "../actions/FetchOnAirDataAction";
+  FETCH_NOW_PLAYING_MOVIE_DATA_REQUEST,
+  FETCH_NOW_PLAYING_MOVIE_DATA_SUCCESS,
+  FETCH_NOW_PLAYING_MOVIE_DATA_FAILURE,
+} from "../actions/FetchNowPlayingMovieAction";
 import { fetchDataInitialState } from "../constant/initialize";
 
-const fetchOnAirDataReducer = (state = fetchDataInitialState, action: any) => {
+const fetchNowPlayingMovieDataReducer = (state = fetchDataInitialState, action: any) => {
   switch (action.type) {
-    case FETCH_ON_AIR_DATA_REQUEST:
+    case FETCH_NOW_PLAYING_MOVIE_DATA_REQUEST:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
-    case FETCH_ON_AIR_DATA_SUCCESS:
+    case FETCH_NOW_PLAYING_MOVIE_DATA_SUCCESS:
       return {
         ...state,
         data: action.payload,
@@ -21,7 +21,7 @@ const fetchOnAirDataReducer = (state = fetchDataInitialState, action: any) => {
         isLoading: false,
         page: state.page + 1,
       };
-    case FETCH_ON_AIR_DATA_FAILURE:
+    case FETCH_NOW_PLAYING_MOVIE_DATA_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -31,4 +31,4 @@ const fetchOnAirDataReducer = (state = fetchDataInitialState, action: any) => {
       return state;
   }
 };
-export default fetchOnAirDataReducer;
+export default fetchNowPlayingMovieDataReducer;

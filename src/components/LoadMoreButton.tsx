@@ -2,10 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "../styles/Component.scss";
-
-interface LoadMoreButtonProps {
-  onClick: () => void;
-}
+import { LoadMoreButtonProps } from "../interface/component.interface";
 
 const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({ onClick }) => {
   return (
