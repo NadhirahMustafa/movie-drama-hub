@@ -20,7 +20,7 @@ import PageTitle from "../../components/PageTitle";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import PageContent from "../../components/PageContent";
 import ShowType from "../../components/ShowType";
-import { tempArrayFilter } from "../../constant/common";
+import { uniqueArrayFilter } from "../../constant/common";
 import { RouterConst, ShowTypeConst } from "../../constant/constants";
 import { PopularTxt } from "../../constant/text";
 import "../../styles/Views.scss";
@@ -71,12 +71,12 @@ const Popular: React.FC<PopularProps> = ({
     if (showType === ShowTypeConst.MOVIE) {
       let tempArray: any = movieList;
       fetchMovieData.map((x: any) => tempArray.push(x));
-      tempArray = tempArray.filter(tempArrayFilter);
+      tempArray = tempArray.filter(uniqueArrayFilter);
       setMovieList(tempArray);
     } else if (showType === ShowTypeConst.DRAMA) {
       let tempArray: any = dramaList;
       fetchDramaData.map((x: any) => tempArray.push(x));
-      tempArray = tempArray.filter(tempArrayFilter);
+      tempArray = tempArray.filter(uniqueArrayFilter);
       setDramaList(tempArray);
     }
   }, [fetchMovieData, fetchDramaData, showType]);

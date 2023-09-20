@@ -53,7 +53,8 @@ const TopRatedMovie: React.FC<DisplayMovieProps> = ({
     let tempArray: any = topRatedMovie;
     if(pageNum !== 1){
       fetchData.map((x: any) => tempArray.push(x));
-      const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      let uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      uniqueArray = uniqueArray.filter((x: any) => x.adult===false);
       setTimeout(() => {
         setTopRatedMovie(uniqueArray);
       }, 100);

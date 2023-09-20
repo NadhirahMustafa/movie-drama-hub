@@ -57,7 +57,8 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
     let tempArray: any = nowPlayingDrama;
     if(pageNum !== 1) {
       fetchData.map((x: any) => tempArray.push(x));
-      const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      let uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      uniqueArray = uniqueArray.filter((x: any) => x.adult!==false);
       setTimeout(() => {
         setNowPlayingDrama(uniqueArray);
       }, 100);

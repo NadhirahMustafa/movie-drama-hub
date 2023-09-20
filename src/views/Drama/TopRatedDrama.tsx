@@ -53,7 +53,8 @@ const TopRatedDrama: React.FC<DisplayDramaProps> = ({
     let tempArray: any = topRatedDrama;
     if(pageNum !== 1){
       fetchData.map((x: any) => tempArray.push(x));
-      const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      let uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      uniqueArray = uniqueArray.filter((x: any) => x.adult!==false);
       setTimeout(() => {
         setTopRatedDrama(uniqueArray);
       }, 100);
