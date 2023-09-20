@@ -5,6 +5,8 @@ import {
   DramaCreditDetailsInterface,
   trendingInterface,
 } from "../interface/interface";
+import { ShowState, ViewState } from "../interface/redux.interface";
+import { ShowTypeConst, ViewTypeConst } from "./constants";
 
 export const MovieDetailsInit: MovieDetailsInterface = {
   adult: false,
@@ -113,4 +115,12 @@ export const fetchDataInitialState = {
   isLoading: false,
   error: null,
   page: 1,
+};
+
+export const viewTypeInitialState: ViewState = {
+  viewType: ViewTypeConst.GRID,
+};
+
+export const showTypeInitialState: ShowState = {
+  showType: ShowTypeConst.MOVIE,
 };

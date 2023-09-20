@@ -3,6 +3,9 @@ import { fetchDataInitialState } from "./initialize";
 export const FETCH_DATA_REQUEST = "FETCH_DATA_REQUEST";
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
 export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
+export const SET_SELECTED_DATA = "SET_SELECTED_DATA";
+export const SET_SHOW_TYPE = "SET_SHOW_TYPE";
+export const SET_VIEW_TYPE = "SET_VIEW_TYPE";
 
 export const fetchDataRequest = () => ({
   type: FETCH_DATA_REQUEST,
@@ -18,6 +21,11 @@ export const fetchDataFailure = (error: any) => ({
   type: FETCH_DATA_FAILURE,
   error,
 });
+
+export const selectedDataType = (selectedData: any) => ({
+  type: SET_SELECTED_DATA,
+  payload: selectedData,
+})
 
 export const dataReducer = (
     state = fetchDataInitialState,

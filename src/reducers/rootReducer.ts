@@ -1,7 +1,5 @@
 import { combineReducers } from "redux";
 import { selectedDataReducer } from "./SelectedDataReducer";
-import viewReducer from "./ViewTypeReducer";
-import showTypeReducer from "./ShowTypeReducer";
 import {
   fetchNowPlayingDramaDataReducer,
   fetchNowPlayingMovieDataReducer,
@@ -11,6 +9,7 @@ import {
   fetchTopRatedDramaDataReducer,
   fetchTopRatedMovieDataReducer,
 } from "./FetchDataReducer";
+import { showTypeReducer, viewReducer } from "./ComponentTypeReducer";
 
 const rootReducer = combineReducers({
   selectedData: selectedDataReducer,
