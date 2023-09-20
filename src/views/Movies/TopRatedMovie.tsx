@@ -6,7 +6,7 @@ import {
   DisplayMovieProps,
   movieInterface,
 } from "../../interface/interface";
-import { fetchTopRatedMovieData } from "../../actions/FetchTopRatedMovieAction";
+import { fetchTopRatedMovieData } from "../../actions/FetchDataAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
@@ -53,7 +53,8 @@ const TopRatedMovie: React.FC<DisplayMovieProps> = ({
     let tempArray: any = topRatedMovie;
     if(pageNum !== 1){
       fetchData.map((x: any) => tempArray.push(x));
-      const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      let uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      uniqueArray = uniqueArray.filter((x: any) => x.adult===false);
       setTimeout(() => {
         setTopRatedMovie(uniqueArray);
       }, 100);

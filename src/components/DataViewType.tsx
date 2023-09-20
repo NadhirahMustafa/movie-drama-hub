@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Grid, Button } from "@mui/material";
-import { setViewType } from "../actions/ViewTypeAction";
+import { setViewType } from "../actions/ComponentTypeAction";
 import { ViewTypeConst } from "../constant/constants";
 import { ViewTypeTxt } from "../constant/text";
 import "../styles/Component.scss";

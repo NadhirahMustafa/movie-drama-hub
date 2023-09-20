@@ -78,12 +78,14 @@ export interface languageInterface {
   iso_639_1: string;
   name: string;
 }
+
 export interface belongs_to_collection {
   id: number;
   name: string;
   poster_path: string;
   backdrop_path: string;
 }
+
 export interface MovieDetailsInterface {
   adult: boolean;
   backdrop_path: string;
@@ -160,10 +162,6 @@ export interface DetailsProps {
   selectedData: trendingInterface;
 }
 
-export interface PopularMoviesProps {
-  popularMovieList: popularMoviesInterface[];
-}
-
 export interface MovieCastDetailsInterface {
   adult: boolean;
   gender: number;
@@ -226,10 +224,14 @@ export interface OnAirProps {
 
 export interface PopularProps {
   showType: string;
+}
+
+export interface PopularMovieProps {
   fetchMovieData: popularMoviesInterface[];
+}
+
+export interface PopularDramaProps {
   fetchDramaData: popularDramaInterface[];
-  totalMoviePages: number;
-  totalDramaPages: number;
 }
 
 export interface DisplayMovieProps {
@@ -244,7 +246,10 @@ export interface DisplayDramaProps {
 
 export interface FetchResponseAPI {
   page: number;
-  results: movieInterface[] | popularMoviesInterface[] | popularDramaInterface[];
+  results:
+    | movieInterface[]
+    | popularMoviesInterface[]
+    | popularDramaInterface[];
   total_pages: number;
   total_results: number;
 }

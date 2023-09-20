@@ -6,7 +6,7 @@ import {
   DisplayDramaProps,
   popularDramaInterface,
 } from "../../interface/interface";
-import { fetchNowPlayingDramaData } from "../../actions/FetchNowPlayingDramaAction";
+import { fetchNowPlayingDramaData } from "../../actions/FetchDataAction";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
@@ -57,7 +57,8 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
     let tempArray: any = nowPlayingDrama;
     if(pageNum !== 1) {
       fetchData.map((x: any) => tempArray.push(x));
-      const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      let uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      uniqueArray = uniqueArray.filter((x: any) => x.adult!==false);
       setTimeout(() => {
         setNowPlayingDrama(uniqueArray);
       }, 100);

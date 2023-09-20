@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { DisplayMovieProps, movieInterface } from "../../interface/interface";
-import { fetchNowPlayingMovieData } from "../../actions/FetchNowPlayingMovieAction";
+import { fetchNowPlayingMovieData } from "../../actions/FetchDataAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
@@ -54,8 +54,9 @@ const NowPlayingMovie: React.FC<DisplayMovieProps> = ({
   useEffect(() => {
     let tempArray: any = nowPlayingMovies;
     if (pageNum !== 1) {
-      fetchData.map((x: any) => tempArray.push(x));
-      const uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      fetchData?.map((x: any) => tempArray.push(x));
+      let uniqueArray: any = tempArray.filter(uniqueArrayFilter);
+      uniqueArray = uniqueArray.filter((x: any) => x.adult===false);
       setTimeout(() => {
         setNowPlayingMovies(uniqueArray);
       }, 100);
@@ -83,7 +84,7 @@ const NowPlayingMovie: React.FC<DisplayMovieProps> = ({
   return (
     <Grid className="common--padding">
       <Grid className="now-playing--card-arr">
-        {nowPlayingMovies.map((item: movieInterface, index: any) => (
+        {nowPlayingMovies?.map((item: movieInterface, index: any) => (
           <ButtonData
             key={index}
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}

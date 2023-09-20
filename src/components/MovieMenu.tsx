@@ -36,7 +36,7 @@ export default function MovieMenu() {
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
-        className="nav--list"
+        className="menu--list"
       >
         <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_NOW_PLAYING}>{NavTxt.now_playing}</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_TOP_RATED}>{NavTxt.top_rated}</Link></MenuItem>
