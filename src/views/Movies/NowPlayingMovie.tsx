@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { DisplayMovieProps, movieInterface } from "../../interface/interface";
-import { fetchNowPlayingMovieData } from "../../actions/FetchNowPlayingMovieAction";
+import { fetchNowPlayingMovieData } from "../../actions/FetchDataAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";

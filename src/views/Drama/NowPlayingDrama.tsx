@@ -6,7 +6,7 @@ import {
   DisplayDramaProps,
   popularDramaInterface,
 } from "../../interface/interface";
-import { fetchNowPlayingDramaData } from "../../actions/FetchNowPlayingDramaAction";
+import { fetchNowPlayingDramaData } from "../../actions/FetchDataAction";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { OnAirProps, popularDramaInterface } from "../../interface/interface";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
-import { fetchOnAirData } from "../../actions/FetchOnAirDataAction";
+import { fetchOnAirData } from "../../actions/FetchDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import DataDisplay from "../../components/DataDisplay";
 import ScrollBox from "../../components/ScrollBox";

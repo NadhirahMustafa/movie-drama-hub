@@ -2,13 +2,15 @@ import { combineReducers } from "redux";
 import { selectedDataReducer } from "./SelectedDataReducer";
 import viewReducer from "./ViewTypeReducer";
 import showTypeReducer from "./ShowTypeReducer";
-import fetchOnAirDataReducer from "./FetchOnAirDataReducer";
-import fetchPopularMovieDataReducer from "./FetchPopularMovieReducer";
-import fetchPopularDramaDataReducer from "./FetchPopularDramaReducer";
-import fetchNowPlayingMovieDataReducer from "./FetchNowPlayingMovieReducer";
-import fetchNowPlayingDramaDataReducer from "./FetchNowPlayingDramaReducer";
-import fetchTopRatedMovieDataReducer from "./FetchTopRatedMovieReducer";
-import fetchTopRatedDramaDataReducer from "./FetchTopRatedDramaReducer";
+import {
+  fetchNowPlayingDramaDataReducer,
+  fetchNowPlayingMovieDataReducer,
+  fetchOnAirDataReducer,
+  fetchPopularDramaDataReducer,
+  fetchPopularMovieDataReducer,
+  fetchTopRatedDramaDataReducer,
+  fetchTopRatedMovieDataReducer,
+} from "./FetchDataReducer";
 
 const rootReducer = combineReducers({
   selectedData: selectedDataReducer,

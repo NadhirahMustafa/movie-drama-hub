@@ -6,7 +6,7 @@ import {
   DisplayMovieProps,
   movieInterface,
 } from "../../interface/interface";
-import { fetchTopRatedMovieData } from "../../actions/FetchTopRatedMovieAction";
+import { fetchTopRatedMovieData } from "../../actions/FetchDataAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
