@@ -41,7 +41,6 @@ export default function DramaMenu() {
       >
         <MenuItem onClick={handleClose}><Link to={RouterConst.DRAMA_NOW_PLAYING}>{NavTxt.now_playing}</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link to={RouterConst.DRAMA_TOP_RATED}>{NavTxt.top_rated}</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link to={RouterConst.DRAMA_UPCOMING}>{NavTxt.upcoming}</Link></MenuItem>
       </Menu>
     </div>
   );

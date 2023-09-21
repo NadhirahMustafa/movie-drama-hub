@@ -7,7 +7,6 @@ export const RouterConst = {
     MOVIE_TOP_RATED: '/movietoprated',
     DRAMA_TOP_RATED: '/dramatoprated',
     MOVIE_UPCOMING: '/movieupcoming',
-    DRAMA_UPCOMING: '/dramaupcoming',
 }
 export const ShowTypeConst = {
     MOVIE: 'Movies',
