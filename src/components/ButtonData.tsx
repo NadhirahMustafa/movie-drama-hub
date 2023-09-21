@@ -11,6 +11,7 @@ const ButtonData: React.FC<ButtonDataProps> = ({
   viewType,
   src,
   title,
+  children,
   dataMovie,
   dataDrama,
   onClickMovie,
@@ -56,6 +57,7 @@ const ButtonData: React.FC<ButtonDataProps> = ({
             />
           </Grid>
           <Grid className="common-component--color">{title}</Grid>
+          <Grid className="common-component--color button-data--small-font">{children}</Grid>
         </Grid>
       </Button>
     </Grid>

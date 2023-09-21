@@ -30,6 +30,7 @@ export interface ButtonDataProps {
   viewType: string;
   src: string;
   title: string;
+  children?: React.ReactNode;
   dataMovie?: movieInterface;
   dataDrama?: popularDramaInterface;
   onClickMovie?: (c: movieInterface) => void;

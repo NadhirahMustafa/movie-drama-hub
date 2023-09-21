@@ -8,7 +8,7 @@ import {
 } from "../../interface/interface";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
-import { fetchPopularMovieData } from "../../actions/FetchDataAction";
+import { fetchPopularMovieAction } from "../../actions/FetchDataAction";
 import DataDisplay from "../../components/DataDisplay";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import { uniqueArrayFilter } from "../../constant/common";
@@ -18,14 +18,14 @@ import "../../styles/Views.scss";
 const PopularMovie: React.FC<PopularMovieProps> = ({ fetchMovieData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [movieList, setMovieList] = useState<popularMoviesInterface[]>([]);
+  const [list, setList] = useState<popularMoviesInterface[]>([]);
   const [pageNumMovie, setPageNumMovie] = useState<number>(1);
-  const isMovieLoaded = movieList.length > 0;
+  const isMovieLoaded = list.length > 0;
   const count = useRef(0);
 
   const loadMoreMovieData = () => {
     setTimeout(() => {
-      dispatch(fetchPopularMovieData(pageNumMovie));
+      dispatch(fetchPopularMovieAction(pageNumMovie));
       setPageNumMovie(pageNumMovie + 1);
     }, 1000);
   };
@@ -33,17 +33,17 @@ const PopularMovie: React.FC<PopularMovieProps> = ({ fetchMovieData }) => {
   useEffect(() => {
     if (count.current !== 0) {
       setPageNumMovie(pageNumMovie + 1);
-      dispatch(fetchPopularMovieData(pageNumMovie));
+      dispatch(fetchPopularMovieAction(pageNumMovie));
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
-    let tempArray: any = movieList;
+    let tempArray: any = list;
     fetchMovieData.map((x: any) => tempArray.push(x));
     tempArray = tempArray.filter(uniqueArrayFilter);
     tempArray = tempArray.filter((x: any) => x.adult === false);
-    setMovieList(tempArray);
+    setList(tempArray);
   }, [fetchMovieData]);
 
   const onClickCellMovie = (c: popularMoviesInterface) => {
@@ -53,7 +53,7 @@ const PopularMovie: React.FC<PopularMovieProps> = ({ fetchMovieData }) => {
 
   return (
     <>
-      {movieList.map((row: popularMoviesInterface, index: number) => (
+      {list.map((row: popularMoviesInterface, index: number) => (
         <DataDisplay
           src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
           title={row.title}

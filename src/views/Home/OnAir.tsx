@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { OnAirProps, popularDramaInterface } from "../../interface/interface";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
-import { fetchOnAirData } from "../../actions/FetchDataAction";
+import { fetchOnAirDramaAction } from "../../actions/FetchDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import DataDisplay from "../../components/DataDisplay";
 import ScrollBox from "../../components/ScrollBox";
@@ -20,35 +20,33 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData, totalPages }) => {
   const navigate = useNavigate();
 
   const [pageNum, setPageNum] = useState<number>(1);
-  const [onAirList, setOnAirList] = useState<popularDramaInterface[]>(
-    []
-  );
-  const isLoaded = onAirList.length > 0;
+  const [list, setList] = useState<popularDramaInterface[]>([]);
+  const isLoaded = list.length > 0;
   const count = useRef(0);
 
   const loadMoreData = () => {
     setTimeout(() => {
-      dispatch(fetchOnAirData(pageNum));
+      dispatch(fetchOnAirDramaAction(pageNum));
       setPageNum(pageNum + 1);
     }, 1000);
   };
 
   useEffect(() => {
-      setOnAirList([]);
-      if (count.current !== 0) {
+    setList([]);
+    if (count.current !== 0) {
       setPageNum(pageNum + 1);
-      dispatch(fetchOnAirData(pageNum));
+      dispatch(fetchOnAirDramaAction(pageNum));
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
-    let tempArray: any = onAirList;
+    let tempArray: any = list;
     if (pageNum !== 1) {
       fetchData.map((x: any) => tempArray.push(x));
       tempArray = tempArray.filter(uniqueArrayFilter);
-      tempArray = tempArray.filter((x: any) => x.adult!==false);
-      setOnAirList(tempArray);
+      tempArray = tempArray.filter((x: any) => x.adult !== false);
+      setList(tempArray);
     }
   }, [fetchData]);
 
@@ -60,7 +58,7 @@ const OnAir: React.FC<OnAirProps> = ({ fetchData, totalPages }) => {
     <PageContent>
       <PageTitle title={OnAirTxt.title} />
       <ScrollBox>
-        {onAirList?.map((row: popularDramaInterface, index: number) => (
+        {list?.map((row: popularDramaInterface, index: number) => (
           <DataDisplay
             src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
             title={row.name}

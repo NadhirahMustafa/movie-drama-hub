@@ -1,8 +1,6 @@
-import React, {  } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import {
-  PopularProps,
-} from "../../interface/interface";
+import { PopularProps } from "../../interface/interface";
 import { RootState } from "../../reducers/RootReducer";
 import ScrollBox from "../../components/ScrollBox";
 import PageTitle from "../../components/PageTitle";
@@ -14,9 +12,7 @@ import { ShowTypeConst } from "../../constant/constants";
 import { PopularTxt } from "../../constant/text";
 import "../../styles/Views.scss";
 
-const Popular: React.FC<PopularProps> = ({
-  showType
-}) => {
+const Popular: React.FC<PopularProps> = ({ showType }) => {
   return (
     <PageContent>
       <PageTitle title={PopularTxt.title}>

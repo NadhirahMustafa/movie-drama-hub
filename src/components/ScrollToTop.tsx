@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import "../styles/Component.scss";
+import { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import "../styles/Component.scss";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);

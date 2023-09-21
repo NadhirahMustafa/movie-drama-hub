@@ -1,12 +1,13 @@
 import { Dispatch } from "redux";
 import {
-  getDramaOnAir,
+  getOnAirDrama,
   getNowPlayingDrama,
   getNowPlayingMovies,
   getPopularDrama,
   getPopularMovies,
   getTopRatedDrama,
   getTopRatedMovies,
+  getUpcomingMovies,
 } from "../services/api.service";
 import {
   fetchDataFailure,
@@ -14,7 +15,7 @@ import {
   fetchDataSuccess,
 } from "../constant/redux";
 
-export const fetchNowPlayingMovieData: any = (page: number) => {
+export const fetchNowPlayingMovieAction: any = (page: number) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchDataRequest());
     try {
@@ -26,7 +27,7 @@ export const fetchNowPlayingMovieData: any = (page: number) => {
   };
 };
 
-export const fetchNowPlayingDramaData: any = (page: number) => {
+export const fetchNowPlayingDramaAction: any = (page: number) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchDataRequest());
     try {
@@ -38,11 +39,11 @@ export const fetchNowPlayingDramaData: any = (page: number) => {
   };
 };
 
-export const fetchOnAirData: any = (page: number) => {
+export const fetchOnAirDramaAction: any = (page: number) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchDataRequest());
     try {
-      const data = await getDramaOnAir(page);
+      const data = await getOnAirDrama(page);
       dispatch(fetchDataSuccess(data.results, data.total_pages));
     } catch (error) {
       dispatch(fetchDataFailure(error));
@@ -50,7 +51,7 @@ export const fetchOnAirData: any = (page: number) => {
   };
 };
 
-export const fetchPopularDramaData: any = (page: number) => {
+export const fetchPopularDramaAction: any = (page: number) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchDataRequest());
     try {
@@ -62,7 +63,7 @@ export const fetchPopularDramaData: any = (page: number) => {
   };
 };
 
-export const fetchPopularMovieData: any = (page: number) => {
+export const fetchPopularMovieAction: any = (page: number) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchDataRequest());
     try {
@@ -74,7 +75,7 @@ export const fetchPopularMovieData: any = (page: number) => {
   };
 };
 
-export const fetchTopRatedDramaData: any = (page: number) => {
+export const fetchTopRatedDramaAction: any = (page: number) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchDataRequest());
     try {
@@ -86,11 +87,23 @@ export const fetchTopRatedDramaData: any = (page: number) => {
   };
 };
 
-export const fetchTopRatedMovieData: any = (page: number) => {
+export const fetchTopRatedMovieAction: any = (page: number) => {
   return async (dispatch: Dispatch) => {
     dispatch(fetchDataRequest());
     try {
       const data = await getTopRatedMovies(page);
+      dispatch(fetchDataSuccess(data.results, data.total_pages));
+    } catch (error) {
+      dispatch(fetchDataFailure(error));
+    }
+  };
+};
+
+export const fetchUpcomingMovieAction: any = (page: number) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(fetchDataRequest());
+    try {
+      const data = await getUpcomingMovies(page);
       dispatch(fetchDataSuccess(data.results, data.total_pages));
     } catch (error) {
       dispatch(fetchDataFailure(error));

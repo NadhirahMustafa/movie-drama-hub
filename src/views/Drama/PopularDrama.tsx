@@ -2,13 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import {
-  popularMoviesInterface,
   popularDramaInterface,
   PopularDramaProps,
 } from "../../interface/interface";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
-import { fetchPopularDramaData } from "../../actions/FetchDataAction";
+import { fetchPopularDramaAction } from "../../actions/FetchDataAction";
 import DataDisplay from "../../components/DataDisplay";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import { uniqueArrayFilter } from "../../constant/common";
@@ -18,14 +17,14 @@ import "../../styles/Views.scss";
 const PopularDrama: React.FC<PopularDramaProps> = ({ fetchDramaData }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [dramaList, setDramaList] = useState<popularDramaInterface[]>([]);
+  const [list, setList] = useState<popularDramaInterface[]>([]);
   const [pageNumDrama, setPageNumDrama] = useState<number>(1);
-  const isDramaLoaded = dramaList.length > 0;
+  const isDramaLoaded = list.length > 0;
   const count = useRef(0);
 
   const loadMoreDramaData = () => {
     setTimeout(() => {
-      dispatch(fetchPopularDramaData(pageNumDrama));
+      dispatch(fetchPopularDramaAction(pageNumDrama));
       setPageNumDrama(pageNumDrama + 1);
     }, 1000);
   };
@@ -33,17 +32,17 @@ const PopularDrama: React.FC<PopularDramaProps> = ({ fetchDramaData }) => {
   useEffect(() => {
     if (count.current !== 0) {
       setPageNumDrama(pageNumDrama + 1);
-      dispatch(fetchPopularDramaData(pageNumDrama));
+      dispatch(fetchPopularDramaAction(pageNumDrama));
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
-    let tempArray: any = dramaList;
+    let tempArray: any = list;
     fetchDramaData.map((x: any) => tempArray.push(x));
     tempArray = tempArray.filter(uniqueArrayFilter);
     tempArray = tempArray.filter((x: any) => x.adult !== false);
-    setDramaList(tempArray);
+    setList(tempArray);
   }, [fetchDramaData]);
 
   const onClickCellDrama = (c: popularDramaInterface) => {
@@ -53,7 +52,7 @@ const PopularDrama: React.FC<PopularDramaProps> = ({ fetchDramaData }) => {
 
   return (
     <>
-      {dramaList.map((row: popularDramaInterface, index: number) => (
+      {list.map((row: popularDramaInterface, index: number) => (
         <DataDisplay
           src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
           title={row.name}
