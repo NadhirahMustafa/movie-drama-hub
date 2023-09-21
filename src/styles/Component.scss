@@ -1,4 +1,4 @@
-.common-component { 
+.common-component {
   &--image-enlarged {
     transform: scale(1.2);
     transition: transform 0.3s ease;
@@ -30,6 +30,7 @@
     padding: 20px;
   }
 }
+
 .nav {
   &--bar {
     background-color: rgb(248, 92, 1);
@@ -68,6 +69,7 @@
     padding-top: 4px;
   }
 }
+
 .menu {
   &--title {
     color: #e8e6e3;
@@ -129,18 +131,38 @@
     display: flex;
     overflow-x: scroll;
     width: 100%;
-    text-align: center;    
+    text-align: center;
     padding-top: 20px;
   }
 }
 
-.button{
+.button {
   &--color {
     color: #ff6600;
     margin: 10px;
   }
   &--active {
     font-weight: 900;
+  }
+}
+
+.scroll-to-top {
+  &--position {
+    position: relative;
+  }
+  &--button {
+    position: fixed !important;
+    float: right !important;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px 20px;
+    height: 80px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  &--arrow {
+    color:rgb(248, 92, 1);
   }
 }
 

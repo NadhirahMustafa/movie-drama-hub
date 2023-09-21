@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import Trending from "./Trending";
 import Popular from "./Popular";
 import OnAir from "./OnAir";
+import ScrollToTop from "../../components/ScrollToTop";
 import { HomeTxt } from "../../constant/text";
 import "../../styles/Views.scss";
 
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
       <OnAir />
       <Trending />
       <Popular />
+      <ScrollToTop />
     </>
   );
 };

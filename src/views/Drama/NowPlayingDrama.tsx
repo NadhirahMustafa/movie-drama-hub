@@ -10,6 +10,7 @@ import { fetchNowPlayingDramaData } from "../../actions/FetchDataAction";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
+import ScrollToTop from "../../components/ScrollToTop";
 import {
   documentHeight,
   scrollTop,
@@ -96,6 +97,7 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
           />
         ))}
       </Grid>
+      <ScrollToTop />
     </Grid>
   );
 };

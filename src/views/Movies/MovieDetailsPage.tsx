@@ -19,6 +19,7 @@ import BackButton from "../../components/BackButton";
 import PageTitle from "../../components/PageTitle";
 import ScrollBox from "../../components/ScrollBox";
 import DataList from "../../components/DataList";
+import ScrollToTop from "../../components/ScrollToTop";
 import { CrewConst } from "../../constant/constants";
 import { MovieDetailsInit, MovieCreditInit } from "../../constant/initialize";
 import { CommonTxt, CommonDetailsTxt, MovieDetailsTxt } from "../../constant/text";
@@ -226,6 +227,7 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
 
         {credit.cast.length > 0 && renderCast}
       </Grid>
+      <ScrollToTop />
       <BackButton />
     </Grid>
   );

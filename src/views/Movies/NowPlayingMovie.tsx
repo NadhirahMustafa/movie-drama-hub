@@ -7,6 +7,7 @@ import { fetchNowPlayingMovieData } from "../../actions/FetchDataAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
+import ScrollToTop from "../../components/ScrollToTop";
 import {
   documentHeight,
   scrollTop,
@@ -94,6 +95,7 @@ const NowPlayingMovie: React.FC<DisplayMovieProps> = ({
           />
         ))}
       </Grid>
+      <ScrollToTop />
     </Grid>
   );
 };
