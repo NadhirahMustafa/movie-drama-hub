@@ -10,6 +10,7 @@ import { fetchTopRatedMovieData } from "../../actions/FetchDataAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
+import ScrollToTop from "../../components/ScrollToTop";
 import { documentHeight, scrollTop, uniqueArrayFilter, windowHeight } from "../../constant/common";
 import { RouterConst } from "../../constant/constants";
 import "../../styles/Views.scss";
@@ -93,6 +94,7 @@ const TopRatedMovie: React.FC<DisplayMovieProps> = ({
           />
         ))}
         </Grid>
+      <ScrollToTop />
     </Grid>
   );
 };

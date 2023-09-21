@@ -10,6 +10,7 @@ import { fetchTopRatedDramaData } from "../../actions/FetchDataAction";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
+import ScrollToTop from "../../components/ScrollToTop";
 import { documentHeight, scrollTop, uniqueArrayFilter, windowHeight } from "../../constant/common";
 import { RouterConst } from "../../constant/constants";
 import "../../styles/Views.scss";
@@ -93,6 +94,7 @@ const TopRatedDrama: React.FC<DisplayDramaProps> = ({
           />
         ))}
         </Grid>
+        <ScrollToTop />
     </Grid>
   );
 };

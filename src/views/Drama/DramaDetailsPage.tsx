@@ -19,6 +19,7 @@ import BackButton from "../../components/BackButton";
 import DataList from "../../components/DataList";
 import PageTitle from "../../components/PageTitle";
 import ScrollBox from "../../components/ScrollBox";
+import ScrollToTop from "../../components/ScrollToTop";
 import { CrewConst } from "../../constant/constants";
 import { DramaDetailsInit, DramaCreditInit } from "../../constant/initialize";
 import { CommonTxt, CommonDetailsTxt, DramaDetailsTxt } from "../../constant/text";
@@ -272,6 +273,7 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
 
         {credit.cast.length > 0 && renderCast}
       </Grid>
+      <ScrollToTop />
       <BackButton />
     </Grid>
   );
