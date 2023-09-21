@@ -17,7 +17,7 @@ const fetchHeader = {
   },
 };
 
-export const getDramaOnAir = (page: number) => {
+export const getOnAirDrama = (page: number) => {
   return new Promise<FetchResponseAPI>((resolve, reject) => {
     fetch(`https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${page}`, fetchHeader)
     .then((res) => res.json())
@@ -25,7 +25,6 @@ export const getDramaOnAir = (page: number) => {
     .catch((err) => reject(err));
   });
 };
-
 
 export const getTrending = () => {
   return new Promise<trendingInterface[]>((resolve, reject) => {
@@ -102,7 +101,19 @@ export const getTopRatedMovies = (page: number) => {
 export const getTopRatedDrama = (page: number) => {
   return new Promise<FetchResponseAPI>((resolve, reject) => {
     fetch(
-      `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page==${page}`,
+      `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getUpcomingMovies = (page: number) => {
+  return new Promise<FetchResponseAPI>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`,
       fetchHeader
     )
       .then((res) => res.json())
@@ -135,21 +146,21 @@ export const getMovieCreditDetails = (id: number) => {
   });
 };
 
-export const getDramaCreditDetails = (id: number) => {
-  return new Promise<DramaCreditDetailsInterface>((resolve, reject) => {
-    fetch(
-      `https://api.themoviedb.org/3/tv/${id}/credits?language=en-US`,
-      fetchHeader
-    )
+export const getDramaDetails = (id: number) => {
+  return new Promise<DramaDetailsInteface>((resolve, reject) => {
+    fetch(`https://api.themoviedb.org/3/tv/${id}?language=en-US`, fetchHeader)
       .then((res) => res.json())
       .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 };
 
-export const getDramaDetails = (id: number) => {
-  return new Promise<DramaDetailsInteface>((resolve, reject) => {
-    fetch(`https://api.themoviedb.org/3/tv/${id}?language=en-US`, fetchHeader)
+export const getDramaCreditDetails = (id: number) => {
+  return new Promise<DramaCreditDetailsInterface>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/tv/${id}/credits?language=en-US`,
+      fetchHeader
+    )
       .then((res) => res.json())
       .then((res) => resolve(res))
       .catch((err) => reject(err));

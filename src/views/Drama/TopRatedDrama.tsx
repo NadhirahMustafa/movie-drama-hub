@@ -6,12 +6,17 @@ import {
   DisplayDramaProps,
   popularDramaInterface,
 } from "../../interface/interface";
-import { fetchTopRatedDramaData } from "../../actions/FetchDataAction";
+import { fetchTopRatedDramaAction } from "../../actions/FetchDataAction";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
 import ScrollToTop from "../../components/ScrollToTop";
-import { documentHeight, scrollTop, uniqueArrayFilter, windowHeight } from "../../constant/common";
+import {
+  documentHeight,
+  scrollTop,
+  uniqueArrayFilter,
+  windowHeight,
+} from "../../constant/common";
 import { RouterConst } from "../../constant/constants";
 import "../../styles/Views.scss";
 
@@ -24,16 +29,16 @@ const TopRatedDrama: React.FC<DisplayDramaProps> = ({
 
   const [pageNum, setPageNum] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const [topRatedDrama, setTopRatedDrama] = useState<popularDramaInterface[]>(
+  const [list, setList] = useState<popularDramaInterface[]>(
     []
   );
   const count = useRef(0);
 
   useEffect(() => {
     const loadMoreData = () => {
-      if(pageNumber <= (totalPages)){
+      if (pageNumber <= totalPages) {
         setTimeout(() => {
-          dispatch(fetchTopRatedDramaData(pageNumber));
+          dispatch(fetchTopRatedDramaAction(pageNumber));
         }, 100);
       }
     };
@@ -44,25 +49,24 @@ const TopRatedDrama: React.FC<DisplayDramaProps> = ({
     if (count.current !== 0) {
       setPageNum(pageNum + 1);
       setTimeout(() => {
-        dispatch(fetchTopRatedDramaData(pageNum));
-      }, 2000)
+        dispatch(fetchTopRatedDramaAction(pageNum));
+      }, 2000);
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
-    let tempArray: any = topRatedDrama;
-    if(pageNum !== 1){
+    let tempArray: any = list;
+    if (pageNum !== 1) {
       fetchData.map((x: any) => tempArray.push(x));
       let uniqueArray: any = tempArray.filter(uniqueArrayFilter);
-      uniqueArray = uniqueArray.filter((x: any) => x.adult!==false);
+      uniqueArray = uniqueArray.filter((x: any) => x.adult !== false);
       setTimeout(() => {
-        setTopRatedDrama(uniqueArray);
+        setList(uniqueArray);
       }, 100);
     }
   }, [fetchData]);
 
-  
   const handleScroll = () => {
     if (windowHeight + scrollTop === documentHeight) {
       setPageNumber((page) => page + 1);
@@ -84,7 +88,7 @@ const TopRatedDrama: React.FC<DisplayDramaProps> = ({
   return (
     <Grid className="common--padding">
       <Grid className="now-playing--card-arr">
-        {topRatedDrama.map((item: popularDramaInterface, index: any) => (
+        {list.map((item: popularDramaInterface, index: any) => (
           <ButtonData
             key={index}
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
@@ -93,8 +97,8 @@ const TopRatedDrama: React.FC<DisplayDramaProps> = ({
             onClickDrama={onClickCellDramas}
           />
         ))}
-        </Grid>
-        <ScrollToTop />
+      </Grid>
+      <ScrollToTop />
     </Grid>
   );
 };

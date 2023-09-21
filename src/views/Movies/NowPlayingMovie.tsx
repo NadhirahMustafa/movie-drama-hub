@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { DisplayMovieProps, movieInterface } from "../../interface/interface";
-import { fetchNowPlayingMovieData } from "../../actions/FetchDataAction";
+import { fetchNowPlayingMovieAction } from "../../actions/FetchDataAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
@@ -26,16 +26,14 @@ const NowPlayingMovie: React.FC<DisplayMovieProps> = ({
 
   const [pageNum, setPageNum] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const [nowPlayingMovies, setNowPlayingMovies] = useState<movieInterface[]>(
-    []
-  );
+  const [list, setList] = useState<movieInterface[]>([]);
   const count = useRef(0);
 
   useEffect(() => {
     const loadMoreData = () => {
       if (pageNumber <= totalPages) {
         setTimeout(() => {
-          dispatch(fetchNowPlayingMovieData(pageNumber));
+          dispatch(fetchNowPlayingMovieAction(pageNumber));
         }, 100);
       }
     };
@@ -46,20 +44,20 @@ const NowPlayingMovie: React.FC<DisplayMovieProps> = ({
     if (count.current !== 0) {
       setPageNum(pageNum + 1);
       setTimeout(() => {
-        dispatch(fetchNowPlayingMovieData(pageNum));
+        dispatch(fetchNowPlayingMovieAction(pageNum));
       }, 2000);
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
-    let tempArray: any = nowPlayingMovies;
+    let tempArray: any = list;
     if (pageNum !== 1) {
       fetchData?.map((x: any) => tempArray.push(x));
       let uniqueArray: any = tempArray.filter(uniqueArrayFilter);
-      uniqueArray = uniqueArray.filter((x: any) => x.adult===false);
+      uniqueArray = uniqueArray.filter((x: any) => x.adult === false);
       setTimeout(() => {
-        setNowPlayingMovies(uniqueArray);
+        setList(uniqueArray);
       }, 100);
     }
   }, [fetchData]);
@@ -85,7 +83,7 @@ const NowPlayingMovie: React.FC<DisplayMovieProps> = ({
   return (
     <Grid className="common--padding">
       <Grid className="now-playing--card-arr">
-        {nowPlayingMovies?.map((item: movieInterface, index: any) => (
+        {list?.map((item: movieInterface, index: any) => (
           <ButtonData
             key={index}
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}

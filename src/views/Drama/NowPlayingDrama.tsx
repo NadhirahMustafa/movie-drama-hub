@@ -6,7 +6,7 @@ import {
   DisplayDramaProps,
   popularDramaInterface,
 } from "../../interface/interface";
-import { fetchNowPlayingDramaData } from "../../actions/FetchDataAction";
+import { fetchNowPlayingDramaAction } from "../../actions/FetchDataAction";
 import { setSelectedDramaData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
@@ -30,16 +30,14 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
   const [pageNum, setPageNum] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
 
-  const [nowPlayingDrama, setNowPlayingDrama] = useState<
-    popularDramaInterface[]
-  >([]);
+  const [list, setList] = useState<popularDramaInterface[]>([]);
   const count = useRef(0);
 
   useEffect(() => {
     const loadMoreData = () => {
       if (pageNumber <= totalPages) {
         setTimeout(() => {
-          dispatch(fetchNowPlayingDramaData(pageNumber));
+          dispatch(fetchNowPlayingDramaAction(pageNumber));
         }, 100);
       }
     };
@@ -49,23 +47,23 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
   useEffect(() => {
     if (count.current !== 0) {
       setPageNum(pageNum + 1);
-      dispatch(fetchNowPlayingDramaData(pageNum));
+      dispatch(fetchNowPlayingDramaAction(pageNum));
     }
     count.current++;
   }, [dispatch]);
 
   useEffect(() => {
-    let tempArray: any = nowPlayingDrama;
-    if(pageNum !== 1) {
+    let tempArray: any = list;
+    if (pageNum !== 1) {
       fetchData.map((x: any) => tempArray.push(x));
       let uniqueArray: any = tempArray.filter(uniqueArrayFilter);
-      uniqueArray = uniqueArray.filter((x: any) => x.adult!==false);
+      uniqueArray = uniqueArray.filter((x: any) => x.adult !== false);
       setTimeout(() => {
-        setNowPlayingDrama(uniqueArray);
+        setList(uniqueArray);
       }, 100);
     }
   }, [fetchData]);
-  
+
   const handleScroll = () => {
     if (windowHeight + scrollTop === documentHeight) {
       setPageNumber((page) => page + 1);
@@ -87,7 +85,7 @@ const NowPlayingDrama: React.FC<DisplayDramaProps> = ({
   return (
     <Grid className="common--padding">
       <Grid className="now-playing--card-arr">
-        {nowPlayingDrama.map((item: popularDramaInterface, index: any) => (
+        {list.map((item: popularDramaInterface, index: any) => (
           <ButtonData
             key={index}
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}

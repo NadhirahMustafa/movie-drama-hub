@@ -1,13 +1,14 @@
 import { combineReducers } from "redux";
 import { selectedDataReducer } from "./SelectedDataReducer";
 import {
-  fetchNowPlayingDramaDataReducer,
-  fetchNowPlayingMovieDataReducer,
-  fetchOnAirDataReducer,
-  fetchPopularDramaDataReducer,
-  fetchPopularMovieDataReducer,
-  fetchTopRatedDramaDataReducer,
-  fetchTopRatedMovieDataReducer,
+  fetchNowPlayingDramaReducer,
+  fetchNowPlayingMovieReducer,
+  fetchOnAirReducer,
+  fetchPopularDramaReducer,
+  fetchPopularMovieReducer,
+  fetchTopRatedDramaReducer,
+  fetchTopRatedMovieReducer,
+  fetchUpcomingMovieReducer,
 } from "./FetchDataReducer";
 import { showTypeReducer, viewReducer } from "./ComponentTypeReducer";
 
@@ -15,13 +16,14 @@ const rootReducer = combineReducers({
   selectedData: selectedDataReducer,
   viewType: viewReducer,
   showType: showTypeReducer,
-  fetchOnAirData: fetchOnAirDataReducer,
-  fetchPopularMovieData: fetchPopularMovieDataReducer,
-  fetchPopularDramaData: fetchPopularDramaDataReducer,
-  fetchNowPlayingMovieData: fetchNowPlayingMovieDataReducer,
-  fetchNowPlayingDramaData: fetchNowPlayingDramaDataReducer,
-  fetchTopRatedMovieData: fetchTopRatedMovieDataReducer,
-  fetchTopRatedDramaData: fetchTopRatedDramaDataReducer,
+  fetchOnAirData: fetchOnAirReducer,
+  fetchPopularMovieData: fetchPopularMovieReducer,
+  fetchPopularDramaData: fetchPopularDramaReducer,
+  fetchNowPlayingMovieData: fetchNowPlayingMovieReducer,
+  fetchNowPlayingDramaData: fetchNowPlayingDramaReducer,
+  fetchTopRatedMovieData: fetchTopRatedMovieReducer,
+  fetchTopRatedDramaData: fetchTopRatedDramaReducer,
+  fetchUpcomingMovieData: fetchUpcomingMovieReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

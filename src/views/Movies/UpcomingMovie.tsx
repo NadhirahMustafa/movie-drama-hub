@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { DisplayMovieProps, movieInterface } from "../../interface/interface";
-import { fetchTopRatedMovieAction } from "../../actions/FetchDataAction";
+import { fetchUpcomingMovieAction } from "../../actions/FetchDataAction";
 import { setSelectedMovieData } from "../../actions/SelectedDataAction";
 import { RootState } from "../../reducers/RootReducer";
 import ButtonData from "../../components/ButtonData";
@@ -17,7 +17,7 @@ import {
 import { RouterConst } from "../../constant/constants";
 import "../../styles/Views.scss";
 
-const TopRatedMovie: React.FC<DisplayMovieProps> = ({
+const UpcomingMovie: React.FC<DisplayMovieProps> = ({
   fetchData,
   totalPages,
 }) => {
@@ -33,7 +33,7 @@ const TopRatedMovie: React.FC<DisplayMovieProps> = ({
     const loadMoreData = () => {
       if (pageNumber <= totalPages) {
         setTimeout(() => {
-          dispatch(fetchTopRatedMovieAction(pageNumber));
+          dispatch(fetchUpcomingMovieAction(pageNumber));
         }, 100);
       }
     };
@@ -44,7 +44,7 @@ const TopRatedMovie: React.FC<DisplayMovieProps> = ({
     if (count.current !== 0) {
       setPageNum(pageNum + 1);
       setTimeout(() => {
-        dispatch(fetchTopRatedMovieAction(pageNum));
+        dispatch(fetchUpcomingMovieAction(pageNum));
       }, 2000);
     }
     count.current++;
@@ -90,6 +90,7 @@ const TopRatedMovie: React.FC<DisplayMovieProps> = ({
             title={item.title}
             dataMovie={item}
             onClickMovie={onClickCellMovies}
+            children={item.release_date}
           />
         ))}
       </Grid>
@@ -99,7 +100,7 @@ const TopRatedMovie: React.FC<DisplayMovieProps> = ({
 };
 
 const mapStateToProps = (state: RootState) => ({
-  fetchData: state.fetchTopRatedMovieData.data,
-  totalPages: state.fetchTopRatedMovieData.totalPages,
+  fetchData: state.fetchUpcomingMovieData.data,
+  totalPages: state.fetchUpcomingMovieData.totalPages,
 });
-export default connect(mapStateToProps)(TopRatedMovie);
+export default connect(mapStateToProps)(UpcomingMovie);

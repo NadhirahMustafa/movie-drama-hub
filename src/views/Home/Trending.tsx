@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { getTrending } from "../../services/api.service";
 import { trendingInterface } from "../../interface/interface";
 import { setSelectedData } from "../../actions/SelectedDataAction";
@@ -13,16 +13,15 @@ import { CommonTxt, TrendingTxt } from "../../constant/text";
 import "../../styles/Views.scss";
 
 const Trending: React.FC = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [trendingList, setTrendingList] = useState<trendingInterface[]>([]);
+  const [list, setList] = useState<trendingInterface[]>([]);
 
   const fetchTrendingList = async () => {
     let res = await getTrending();
     if (res) {
-      setTrendingList(res);
+      setList(res);
     } else {
       alert(CommonTxt.alertMessage);
     }
@@ -34,19 +33,18 @@ const Trending: React.FC = () => {
 
   const onClickCell = (c: trendingInterface) => {
     dispatch(setSelectedData(c));
-    if (c.media_type === MediaTypeConst.DRAMA){
+    if (c.media_type === MediaTypeConst.DRAMA) {
       navigate(RouterConst.DRAMA_DETAILS);
-
     } else {
       navigate(RouterConst.MOVIE_DETAILS);
-    }    
+    }
   };
 
   return (
     <PageContent>
       <PageTitle title={TrendingTxt.title} />
       <ScrollBox>
-        {trendingList.map((row: trendingInterface, index: number) => (
+        {list.map((row: trendingInterface, index: number) => (
           <DataDisplay
             src={`https://image.tmdb.org/t/p/original${row.poster_path}`}
             title={row.title || row.original_name}

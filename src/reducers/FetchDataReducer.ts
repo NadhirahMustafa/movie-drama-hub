@@ -1,9 +1,10 @@
 import { dataReducer } from "../constant/redux";
 
-export const fetchNowPlayingMovieDataReducer = dataReducer;
-export const fetchNowPlayingDramaDataReducer = dataReducer;
-export const fetchOnAirDataReducer = dataReducer;
-export const fetchPopularDramaDataReducer = dataReducer;
-export const fetchPopularMovieDataReducer = dataReducer;
-export const fetchTopRatedDramaDataReducer = dataReducer;
-export const fetchTopRatedMovieDataReducer = dataReducer;
+export const fetchNowPlayingMovieReducer = dataReducer;
+export const fetchNowPlayingDramaReducer = dataReducer;
+export const fetchOnAirReducer = dataReducer;
+export const fetchPopularDramaReducer = dataReducer;
+export const fetchPopularMovieReducer = dataReducer;
+export const fetchTopRatedDramaReducer = dataReducer;
+export const fetchTopRatedMovieReducer = dataReducer;
+export const fetchUpcomingMovieReducer = dataReducer;
