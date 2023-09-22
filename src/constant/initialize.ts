@@ -4,6 +4,8 @@ import {
   DramaDetailsInteface,
   DramaCreditDetailsInterface,
   trendingInterface,
+  ReviewInterface,
+  ReviewResultsInterface,
 } from "../interface/interface";
 import { ShowState, ViewState } from "../interface/redux.interface";
 import { ShowTypeConst, ViewTypeConst } from "./constants";
@@ -40,6 +42,29 @@ export const MovieCreditInit: MovieCreditDetailsInterface = {
   id: 0,
   cast: [],
   crew: [],
+};
+
+export const MovieReviewInit: ReviewInterface = {
+  id: 0,
+  page: 0,
+  results: [],
+  total_pages: 0,
+  total_results: 0,
+};
+
+export const MovieReviewResultsInit: ReviewResultsInterface = {
+  author: "",
+  author_details: {
+    name: "",
+    username: "",
+    avatar_path: "",
+    rating: 0,
+  },
+  content: "",
+  created_at: "",
+  id: "",
+  updated_at: "",
+  url: "",
 };
 
 export const DramaDetailsInit: DramaDetailsInteface = {
@@ -91,22 +116,22 @@ export const DramaCreditInit: DramaCreditDetailsInterface = {
 };
 
 export const SelectedDataInit: trendingInterface = {
-    adult: false,
-    backdrop_path: "",
-    genre_ids: [],
-    id: 0,
-    original_language: "",
-    original_name: "",
-    original_title: "",
-    overview: "",
-    popularity: 0,
-    poster_path: "",
-    release_date: "",
-    title: "",
-    video: false,
-    vote_average: 0,
-    vote_count: 0,
-    media_type: ''
+  adult: false,
+  backdrop_path: "",
+  genre_ids: [],
+  id: 0,
+  original_language: "",
+  original_name: "",
+  original_title: "",
+  overview: "",
+  popularity: 0,
+  poster_path: "",
+  release_date: "",
+  title: "",
+  video: false,
+  vote_average: 0,
+  vote_count: 0,
+  media_type: "",
 };
 
 export const fetchDataInitialState = {

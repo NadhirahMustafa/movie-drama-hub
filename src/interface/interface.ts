@@ -244,7 +244,7 @@ export interface DisplayDramaProps {
   totalPages: number;
 }
 
-export interface FetchResponseAPI {
+export interface FetchResponseAPIInterface {
   page: number;
   results:
     | movieInterface[]
@@ -252,4 +252,22 @@ export interface FetchResponseAPI {
     | popularDramaInterface[];
   total_pages: number;
   total_results: number;
+}
+
+export interface ReviewResultsInterface {
+  author: string;
+  author_details: {}
+  content: string;
+  created_at: string;
+  id: string;
+  updated_at: string;
+  url: string;
+}
+
+export interface ReviewInterface {
+  id: number;
+  page: number;
+  results: ReviewResultsInterface[];
+  total_pages: number;
+  total_results: number
 }

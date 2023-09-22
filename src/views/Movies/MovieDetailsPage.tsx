@@ -4,6 +4,7 @@ import { Grid } from "@mui/material";
 import {
   getMovieDetails,
   getMovieCreditDetails,
+  getMovieReviews,
 } from "../../services/api.service";
 import {
   DetailsProps,
@@ -13,6 +14,7 @@ import {
   MovieCreditDetailsInterface,
   CrewDetailsInterface,
   MovieCastDetailsInterface,
+  ReviewResultsInterface,
 } from "../../interface/interface";
 import { RootState } from "../../reducers/RootReducer";
 import BackButton from "../../components/BackButton";
@@ -20,9 +22,15 @@ import PageTitle from "../../components/PageTitle";
 import ScrollBox from "../../components/ScrollBox";
 import DataList from "../../components/DataList";
 import ScrollToTop from "../../components/ScrollToTop";
+import ReviewList from "../../components/ReviewList";
+import ContentBox from "../../components/ContentBox";
 import { CrewConst } from "../../constant/constants";
 import { MovieDetailsInit, MovieCreditInit } from "../../constant/initialize";
-import { CommonTxt, CommonDetailsTxt, MovieDetailsTxt } from "../../constant/text";
+import {
+  CommonTxt,
+  CommonDetailsTxt,
+  MovieDetailsTxt,
+} from "../../constant/text";
 import "../../styles/Views.scss";
 
 const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
@@ -30,6 +38,8 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     useState<MovieDetailsInterface>(MovieDetailsInit);
   const [credit, setCredit] =
     useState<MovieCreditDetailsInterface>(MovieCreditInit);
+
+  const [review, setReview] = useState<ReviewResultsInterface[]>([]);
 
   const fetchMovieDetails = async () => {
     let res = await getMovieDetails(selectedData.id);
@@ -49,9 +59,19 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
     }
   };
 
+  const fetchReview = async () => {
+    let res = await getMovieReviews(selectedData.id);
+    if (res) {
+      setReview(res.results);
+    } else {
+      alert(CommonTxt.alertMessage);
+    }
+  };
+
   useEffect(() => {
     fetchMovieDetails();
     fetchCreditDetails();
+    fetchReview();
   }, []);
 
   const backgroundStyle = {
@@ -186,23 +206,41 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
   const renderCast = (
     <Grid className="common--padding">
       <Grid className="common--padding">
-      <Grid className="common--padding">
-        <PageTitle title={CommonDetailsTxt.cast}></PageTitle>
-        <ScrollBox>
-          {credit.cast
-            ?.slice(0, 10)
-            .map((row: MovieCastDetailsInterface, index: number) => (
-              <DataList
-                src={`https://image.tmdb.org/t/p/original${row.profile_path}`}
-                title={row.name}
-                subtitle={row.character}
-                key={index}
-              />
-            ))}
-        </ScrollBox>
-      </Grid>
+        <Grid className="common--padding">
+          <PageTitle title={CommonDetailsTxt.cast}></PageTitle>
+          <ScrollBox>
+            {credit.cast
+              ?.slice(0, 10)
+              .map((row: MovieCastDetailsInterface, index: number) => (
+                <DataList
+                  src={`https://image.tmdb.org/t/p/original${row.profile_path}`}
+                  title={row.name}
+                  subtitle={row.character}
+                  key={index}
+                />
+              ))}
+          </ScrollBox>
+        </Grid>
       </Grid>
     </Grid>
+  );
+
+  const renderReview = (
+    <>
+      <PageTitle title="Review" />
+      <ContentBox>
+        {review.map((list: ReviewResultsInterface, index: number) => {
+          return (
+            <ReviewList
+              user={list.author}
+              date={new Date(list.updated_at).toLocaleDateString()}
+              review={list.content}
+              key={index}
+            />
+          );
+        })}
+      </ContentBox>
+    </>
   );
 
   return (
@@ -226,6 +264,7 @@ const MovieDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
         </Grid>
 
         {credit.cast.length > 0 && renderCast}
+        {review.length > 0 && renderReview}
       </Grid>
       <ScrollToTop />
       <BackButton />

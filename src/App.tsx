@@ -15,28 +15,43 @@ import { HomeTxt } from "./constant/text";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <NavigationBar />
-      <Routes>
-        <Route path={RouterConst.HOME} element={<Home />} />
-        <Route
-          path={RouterConst.MOVIE_DETAILS}
-          element={<MovieDetailsPage />}
-        />
-        <Route
-          path={RouterConst.DRAMA_DETAILS}
-          element={<DramaDetailsPage />}
-        />
-        <Route path={RouterConst.MOVIE_NOW_PLAYING} element={<NowPlayingMovie />} />
-        <Route path={RouterConst.DRAMA_NOW_PLAYING} element={<NowPlayingDrama />} />
-        <Route path={RouterConst.MOVIE_TOP_RATED} element={<TopRatedMovie />} />
-        <Route path={RouterConst.DRAMA_TOP_RATED} element={<TopRatedDrama />} />
-        <Route path={RouterConst.MOVIE_UPCOMING} element={<UpcomingMovie />} />
-      </Routes>
-      <Grid className="common--padding-top">
-        <Grid className="home--footer">{HomeTxt.footer}</Grid>
-      </Grid>
-    </Router>
+      <Router>
+        <NavigationBar />
+        <Routes>
+          <Route path={RouterConst.HOME} element={<Home />} />
+          <Route
+            path={RouterConst.MOVIE_DETAILS}
+            element={<MovieDetailsPage />}
+          />
+          <Route
+            path={RouterConst.DRAMA_DETAILS}
+            element={<DramaDetailsPage />}
+          />
+          <Route
+            path={RouterConst.MOVIE_NOW_PLAYING}
+            element={<NowPlayingMovie />}
+          />
+          <Route
+            path={RouterConst.DRAMA_NOW_PLAYING}
+            element={<NowPlayingDrama />}
+          />
+          <Route
+            path={RouterConst.MOVIE_TOP_RATED}
+            element={<TopRatedMovie />}
+          />
+          <Route
+            path={RouterConst.DRAMA_TOP_RATED}
+            element={<TopRatedDrama />}
+          />
+          <Route
+            path={RouterConst.MOVIE_UPCOMING}
+            element={<UpcomingMovie />}
+          />
+        </Routes>
+        <Grid className="common--padding-top">
+          <Grid className="home--footer">{HomeTxt.footer}</Grid>
+        </Grid>
+      </Router>
   );
 };
 
