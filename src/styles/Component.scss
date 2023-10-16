@@ -186,6 +186,24 @@
     border-radius: 50px;
   }
 }
+
+.scrollx-box {
+  &--content-border {
+    border: #ff6600 1px solid;
+    overflow-y: scroll;
+    height: 120vh;
+    width: auto;
+  }
+  &--content-border::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &--content-border::-webkit-scrollbar-thumb {
+    background-color: #ff9900;
+    border-radius: 50px;
+  }
+}
+
 .review {
   &--padding-bottom {
     padding-bottom: 10px;
