@@ -1,11 +1,11 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { NavTxt } from '../constant/text';
-import { Link } from 'react-router-dom';
-import { RouterConst } from '../constant/constants';
 import { Grid } from '@mui/material';
+import { NavTxt } from '../constant/text';
+import { RouterConst } from '../constant/constants';
 
 export default function MovieMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -41,6 +41,7 @@ export default function MovieMenu() {
         <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_NOW_PLAYING}>{NavTxt.now_playing}</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_TOP_RATED}>{NavTxt.top_rated}</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_UPCOMING}>{NavTxt.upcoming}</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_TRENDING}>{NavTxt.trending}</Link></MenuItem>
       </Menu>
     </div>
   );

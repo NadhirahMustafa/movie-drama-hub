@@ -123,6 +123,54 @@ export const getUpcomingMovies = (page: number) => {
   });
 };
 
+export const getTrendingMoviesDay = () => {
+  return new Promise<trendingInterface[]>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/trending/movie/day?language=en-US`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res.results))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getTrendingMoviesWeek = () => {
+  return new Promise<trendingInterface[]>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/trending/movie/week?language=en-US`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res.results))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getTrendingDramaDay = () => {
+  return new Promise<trendingInterface[]>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/trending/tv/day?language=en-US`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res.results))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getTrendingDramaWeek = () => {
+  return new Promise<trendingInterface[]>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/trending/tv/day?language=en-US`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res.results))
+      .catch((err) => reject(err));
+  });
+};
+
 export const getMovieDetails = (id: number) => {
   return new Promise<MovieDetailsInterface>((resolve, reject) => {
     fetch(

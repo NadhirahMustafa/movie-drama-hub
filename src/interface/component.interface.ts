@@ -52,3 +52,9 @@ export interface ButtonDataProps {
 export interface LoadMoreButtonProps {
   onClick: () => void;
 }
+
+export interface CommonButtonInterface {
+  title: string;
+  onClick: () => void;
+  className?: string;
+}

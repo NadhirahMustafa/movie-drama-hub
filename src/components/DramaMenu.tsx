@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Grid } from '@mui/material';
 import { NavTxt } from '../constant/text';
-import { Link } from 'react-router-dom';
 import { RouterConst } from '../constant/constants';
 import '../styles/Component.scss';
 
@@ -41,6 +41,7 @@ export default function DramaMenu() {
       >
         <MenuItem onClick={handleClose}><Link to={RouterConst.DRAMA_NOW_PLAYING}>{NavTxt.now_playing}</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link to={RouterConst.DRAMA_TOP_RATED}>{NavTxt.top_rated}</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link to={RouterConst.DRAMA_TRENDING}>{NavTxt.trending}</Link></MenuItem>
       </Menu>
     </div>
   );

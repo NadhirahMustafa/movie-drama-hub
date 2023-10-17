@@ -61,7 +61,6 @@ const DramaDetailsPage: React.FC<DetailsProps> = ({ selectedData }) => {
   const fetchReview = async () => {
     let res = await getDramaReviews(selectedData.id);
     if (res) {
-      console.log('res: ', JSON.stringify(res));
       setReview(res.results);
     } else {
       alert(CommonTxt.alertMessage);
