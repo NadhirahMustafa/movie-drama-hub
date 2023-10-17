@@ -3,6 +3,7 @@ export interface trendingInterface {
   backdrop_path: string;
   id: number;
   title: string;
+  name: string;
   original_name: string;
   original_language: string;
   original_title: string;
@@ -12,9 +13,11 @@ export interface trendingInterface {
   genre_ids: [];
   popularity: number;
   release_date: string;
+  first_air_date: string;
   video: boolean;
   vote_average: number;
   vote_count: number;
+  origin_country: [];
 }
 
 export interface popularMoviesInterface {
@@ -244,7 +247,7 @@ export interface DisplayDramaProps {
   totalPages: number;
 }
 
-export interface FetchResponseAPI {
+export interface FetchResponseAPIInterface {
   page: number;
   results:
     | movieInterface[]
@@ -252,4 +255,22 @@ export interface FetchResponseAPI {
     | popularDramaInterface[];
   total_pages: number;
   total_results: number;
+}
+
+export interface ReviewResultsInterface {
+  author: string;
+  author_details: {}
+  content: string;
+  created_at: string;
+  id: string;
+  updated_at: string;
+  url: string;
+}
+
+export interface ReviewInterface {
+  id: number;
+  page: number;
+  results: ReviewResultsInterface[];
+  total_pages: number;
+  total_results: number
 }

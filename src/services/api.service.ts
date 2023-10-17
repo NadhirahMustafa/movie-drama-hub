@@ -5,7 +5,8 @@ import {
   DramaDetailsInteface,
   MovieCreditDetailsInterface,
   DramaCreditDetailsInterface,
-  FetchResponseAPI,
+  FetchResponseAPIInterface,
+  ReviewInterface,
 } from "../interface/interface";
 
 const fetchHeader = {
@@ -18,7 +19,7 @@ const fetchHeader = {
 };
 
 export const getOnAirDrama = (page: number) => {
-  return new Promise<FetchResponseAPI>((resolve, reject) => {
+  return new Promise<FetchResponseAPIInterface>((resolve, reject) => {
     fetch(`https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${page}`, fetchHeader)
     .then((res) => res.json())
     .then((res) => resolve(res))
@@ -39,7 +40,7 @@ export const getTrending = () => {
 };
 
 export const getPopularMovies = (page: number) => {
-  return new Promise<FetchResponseAPI>((resolve, reject) => {
+  return new Promise<FetchResponseAPIInterface>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`,
       fetchHeader
@@ -51,7 +52,7 @@ export const getPopularMovies = (page: number) => {
 };
 
 export const getPopularDrama = (page: number) => {
-  return new Promise<FetchResponseAPI>((resolve, reject) => {
+  return new Promise<FetchResponseAPIInterface>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`,
       fetchHeader
@@ -63,7 +64,7 @@ export const getPopularDrama = (page: number) => {
 };
 
 export const getNowPlayingMovies = (page: number) => {
-  return new Promise<FetchResponseAPI>((resolve, reject) => {
+  return new Promise<FetchResponseAPIInterface>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`,
       fetchHeader
@@ -75,7 +76,7 @@ export const getNowPlayingMovies = (page: number) => {
 };
 
 export const getNowPlayingDrama = (page: number) => {
-  return new Promise<FetchResponseAPI>((resolve, reject) => {
+  return new Promise<FetchResponseAPIInterface>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=${page}`,
       fetchHeader
@@ -87,7 +88,7 @@ export const getNowPlayingDrama = (page: number) => {
 };
 
 export const getTopRatedMovies = (page: number) => {
-  return new Promise<FetchResponseAPI>((resolve, reject) => {
+  return new Promise<FetchResponseAPIInterface>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`,
       fetchHeader
@@ -99,7 +100,7 @@ export const getTopRatedMovies = (page: number) => {
 };
 
 export const getTopRatedDrama = (page: number) => {
-  return new Promise<FetchResponseAPI>((resolve, reject) => {
+  return new Promise<FetchResponseAPIInterface>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`,
       fetchHeader
@@ -111,13 +112,61 @@ export const getTopRatedDrama = (page: number) => {
 };
 
 export const getUpcomingMovies = (page: number) => {
-  return new Promise<FetchResponseAPI>((resolve, reject) => {
+  return new Promise<FetchResponseAPIInterface>((resolve, reject) => {
     fetch(
       `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`,
       fetchHeader
     )
       .then((res) => res.json())
       .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getTrendingMoviesDay = () => {
+  return new Promise<trendingInterface[]>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/trending/movie/day?language=en-US`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res.results))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getTrendingMoviesWeek = () => {
+  return new Promise<trendingInterface[]>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/trending/movie/week?language=en-US`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res.results))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getTrendingDramaDay = () => {
+  return new Promise<trendingInterface[]>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/trending/tv/day?language=en-US`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res.results))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getTrendingDramaWeek = () => {
+  return new Promise<trendingInterface[]>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/trending/tv/day?language=en-US`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res.results))
       .catch((err) => reject(err));
   });
 };
@@ -163,6 +212,30 @@ export const getDramaCreditDetails = (id: number) => {
     )
       .then((res) => res.json())
       .then((res) => resolve(res))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getMovieReviews = (id: number) => {
+  return new Promise<ReviewInterface>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US&page=1`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => {JSON.stringify(res); resolve(res)})
+      .catch((err) => reject(err));
+  });
+};
+
+export const getDramaReviews = (id: number) => {
+  return new Promise<ReviewInterface>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/tv/${id}/reviews?language=en-US&page=1`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => {JSON.stringify(res); resolve(res)})
       .catch((err) => reject(err));
   });
 };

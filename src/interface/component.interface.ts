@@ -1,4 +1,9 @@
-import { trendingInterface, popularMoviesInterface, popularDramaInterface, movieInterface } from "./interface";
+import {
+  trendingInterface,
+  popularMoviesInterface,
+  popularDramaInterface,
+  movieInterface,
+} from "./interface";
 
 export interface DataDisplayProps {
   src: string;
@@ -6,9 +11,9 @@ export interface DataDisplayProps {
   dataTrending?: trendingInterface;
   dataPopularMovie?: popularMoviesInterface;
   dataPopularDrama?: popularDramaInterface;
-  onClickTrending?: (c:trendingInterface) => void;
-  onClickPopularMovie?: (c:popularMoviesInterface) => void;
-  onClickPopularDrama?: (c:popularDramaInterface) => void;
+  onClickTrending?: (c: trendingInterface) => void;
+  onClickPopularMovie?: (c: popularMoviesInterface) => void;
+  onClickPopularDrama?: (c: popularDramaInterface) => void;
 }
 
 export interface DataListProps {
@@ -19,6 +24,13 @@ export interface DataListProps {
 
 export interface ComponentProps {
   children: React.ReactNode;
+}
+
+export interface ReviewListProps {
+  user: string;
+  date: string;
+  review: string;
+  key: number;
 }
 
 export interface PageTitleProps {
@@ -41,3 +53,8 @@ export interface LoadMoreButtonProps {
   onClick: () => void;
 }
 
+export interface CommonButtonInterface {
+  title: string;
+  onClick: () => void;
+  className?: string;
+}

@@ -11,16 +11,12 @@ const Home: React.FC = () => {
   return (
     <>
       <Grid className="home--header">
-        <Grid className="home--header-title">
-          {HomeTxt.title}
-        </Grid>
-        <Grid className="home--header-message">
-          {HomeTxt.header_message}
-        </Grid>
+        <Grid className="home--header-title">{HomeTxt.title}</Grid>
+        <Grid className="home--header-message">{HomeTxt.header_message}</Grid>
       </Grid>
-      <OnAir />
-      <Trending />
-      <Popular />
+        <OnAir />
+        <Trending />
+        <Popular />
       <ScrollToTop />
     </>
   );

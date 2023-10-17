@@ -10,33 +10,58 @@ import NowPlayingDrama from "./views/Drama/NowPlayingDrama";
 import TopRatedMovie from "./views/Movies/TopRatedMovie";
 import TopRatedDrama from "./views/Drama/TopRatedDrama";
 import UpcomingMovie from "./views/Movies/UpcomingMovie";
+import TrendingMovie from "./views/Movies/TrendingMovie";
+import TrendingDrama from "./views/Drama/TrendingDrama";
 import { RouterConst } from "./constant/constants";
 import { HomeTxt } from "./constant/text";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <NavigationBar />
-      <Routes>
-        <Route path={RouterConst.HOME} element={<Home />} />
-        <Route
-          path={RouterConst.MOVIE_DETAILS}
-          element={<MovieDetailsPage />}
-        />
-        <Route
-          path={RouterConst.DRAMA_DETAILS}
-          element={<DramaDetailsPage />}
-        />
-        <Route path={RouterConst.MOVIE_NOW_PLAYING} element={<NowPlayingMovie />} />
-        <Route path={RouterConst.DRAMA_NOW_PLAYING} element={<NowPlayingDrama />} />
-        <Route path={RouterConst.MOVIE_TOP_RATED} element={<TopRatedMovie />} />
-        <Route path={RouterConst.DRAMA_TOP_RATED} element={<TopRatedDrama />} />
-        <Route path={RouterConst.MOVIE_UPCOMING} element={<UpcomingMovie />} />
-      </Routes>
-      <Grid className="common--padding-top">
-        <Grid className="home--footer">{HomeTxt.footer}</Grid>
-      </Grid>
-    </Router>
+      <Router>
+        <NavigationBar />
+        <Routes>
+          <Route path={RouterConst.HOME} element={<Home />} />
+          <Route
+            path={RouterConst.MOVIE_DETAILS}
+            element={<MovieDetailsPage />}
+          />
+          <Route
+            path={RouterConst.DRAMA_DETAILS}
+            element={<DramaDetailsPage />}
+          />
+          <Route
+            path={RouterConst.MOVIE_NOW_PLAYING}
+            element={<NowPlayingMovie />}
+          />
+          <Route
+            path={RouterConst.DRAMA_NOW_PLAYING}
+            element={<NowPlayingDrama />}
+          />
+          <Route
+            path={RouterConst.MOVIE_TOP_RATED}
+            element={<TopRatedMovie />}
+          />
+          <Route
+            path={RouterConst.DRAMA_TOP_RATED}
+            element={<TopRatedDrama />}
+          />
+          <Route
+            path={RouterConst.MOVIE_UPCOMING}
+            element={<UpcomingMovie />}
+          />
+          <Route
+            path={RouterConst.MOVIE_TRENDING}
+            element={<TrendingMovie />}
+          />
+          <Route
+            path={RouterConst.DRAMA_TRENDING}
+            element={<TrendingDrama />}
+          />
+        </Routes>
+        <Grid className="common--padding-top">
+          <Grid className="home--footer">{HomeTxt.footer}</Grid>
+        </Grid>
+      </Router>
   );
 };
 
