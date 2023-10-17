@@ -9,6 +9,7 @@ import {
   fetchTopRatedDramaReducer,
   fetchTopRatedMovieReducer,
   fetchUpcomingMovieReducer,
+  fetchDiscoverMovieReducer
 } from "./FetchDataReducer";
 import { showTypeReducer, viewReducer } from "./ComponentTypeReducer";
 
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   fetchTopRatedMovieData: fetchTopRatedMovieReducer,
   fetchTopRatedDramaData: fetchTopRatedDramaReducer,
   fetchUpcomingMovieData: fetchUpcomingMovieReducer,
+  fetchDiscoverMovieData: fetchDiscoverMovieReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

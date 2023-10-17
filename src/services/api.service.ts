@@ -1,6 +1,5 @@
 import {
   trendingInterface,
-  movieInterface,
   MovieDetailsInterface,
   DramaDetailsInteface,
   MovieCreditDetailsInterface,
@@ -167,6 +166,18 @@ export const getTrendingDramaWeek = () => {
     )
       .then((res) => res.json())
       .then((res) => resolve(res.results))
+      .catch((err) => reject(err));
+  });
+};
+
+export const getDiscoverMovies = (page: number) => {
+  return new Promise<FetchResponseAPIInterface>((resolve, reject) => {
+    fetch(
+      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_keywords=batman+begins`,
+      fetchHeader
+    )
+      .then((res) => res.json())
+      .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 };

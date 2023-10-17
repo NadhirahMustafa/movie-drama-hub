@@ -12,6 +12,7 @@ import TopRatedDrama from "./views/Drama/TopRatedDrama";
 import UpcomingMovie from "./views/Movies/UpcomingMovie";
 import TrendingMovie from "./views/Movies/TrendingMovie";
 import TrendingDrama from "./views/Drama/TrendingDrama";
+import DiscoverMovie from "./views/Movies/DiscoverMovie";
 import { RouterConst } from "./constant/constants";
 import { HomeTxt } from "./constant/text";
 
@@ -56,6 +57,10 @@ const App: React.FC = () => {
           <Route
             path={RouterConst.DRAMA_TRENDING}
             element={<TrendingDrama />}
+          />
+          <Route
+            path={RouterConst.MOVIE_DISCOVER}
+            element={<DiscoverMovie />}
           />
         </Routes>
         <Grid className="common--padding-top">

@@ -8,6 +8,7 @@ import {
   getTopRatedDrama,
   getTopRatedMovies,
   getUpcomingMovies,
+  getDiscoverMovies,
 } from "../services/api.service";
 import {
   fetchDataFailure,
@@ -104,6 +105,18 @@ export const fetchUpcomingMovieAction: any = (page: number) => {
     dispatch(fetchDataRequest());
     try {
       const data = await getUpcomingMovies(page);
+      dispatch(fetchDataSuccess(data.results, data.total_pages));
+    } catch (error) {
+      dispatch(fetchDataFailure(error));
+    }
+  };
+};
+
+export const fetchDiscoverMovieAction: any = (page: number) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(fetchDataRequest());
+    try {
+      const data = await getDiscoverMovies(page);
       dispatch(fetchDataSuccess(data.results, data.total_pages));
     } catch (error) {
       dispatch(fetchDataFailure(error));

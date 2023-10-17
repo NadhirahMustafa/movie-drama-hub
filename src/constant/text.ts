@@ -10,7 +10,8 @@ export const NavTxt = {
     now_playing: 'Now Playing',
     top_rated: 'Top Rated',
     upcoming: 'Upcoming',
-    trending: 'Trending'
+    trending: 'Trending',
+    discover: 'Discover',
 };
 
 export const HomeTxt = {
@@ -71,4 +72,9 @@ export const ShowTypeTxt = {
 export const frequencyTypeTxt = {
     daily: 'Daily',
     weekly: 'Weekly',
+}
+
+export const searchTxt = {
+    search: 'Search',
+    reset: 'Reset',
 }

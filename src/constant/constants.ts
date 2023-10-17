@@ -9,6 +9,7 @@ export const RouterConst = {
     MOVIE_UPCOMING: '/movieupcoming',
     MOVIE_TRENDING: '/movietrending',
     DRAMA_TRENDING: '/dramatrending',
+    MOVIE_DISCOVER: '/moviediscover',
 }
 export const ShowTypeConst = {
     MOVIE: 'Movies',

@@ -8,3 +8,4 @@ export const fetchPopularMovieReducer = dataReducer;
 export const fetchTopRatedDramaReducer = dataReducer;
 export const fetchTopRatedMovieReducer = dataReducer;
 export const fetchUpcomingMovieReducer = dataReducer;
+export const fetchDiscoverMovieReducer = dataReducer;

@@ -42,6 +42,7 @@ export default function MovieMenu() {
         <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_TOP_RATED}>{NavTxt.top_rated}</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_UPCOMING}>{NavTxt.upcoming}</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_TRENDING}>{NavTxt.trending}</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link to={RouterConst.MOVIE_DISCOVER}>{NavTxt.discover}</Link></MenuItem>
       </Menu>
     </div>
   );

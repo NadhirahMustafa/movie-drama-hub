@@ -58,3 +58,9 @@ export interface CommonButtonInterface {
   onClick: () => void;
   className?: string;
 }
+
+export interface searchProps {
+  init: movieInterface[];
+  onSearch: (searchTerm: movieInterface[]) => void;
+  resetList: () => void;
+}
